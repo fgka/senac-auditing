@@ -1,0 +1,43 @@
+Needed fields:
+
+Name: "Tarefas"
+Path: "Pagina inicial" -> "Período" -> Discipline -> "Tarefas"
+
+Name: "Plano de Ensino"
+Path: "Tarefas" -> "Plano de Ensino"
+
+Name: "Relação de notas"
+Path: "Tarefas" -> "Relação de notas"
+
+Name: Course
+Path: "Plano de Ensino" -> "Curso:"
+
+Name: Unit
+Path "Plano de Ensino" -> "Disciplina:"
+
+Name: Academic
+Path: "Plano de Ensino" -> "Professor(a):"
+
+Name: Class
+Path: "Plano de Ensino" -> "Turma:"
+
+Name: Semester
+Path: "Plano de Ensino" -> "Período letivo:"
+
+Name: Essential skills
+Path: "Plano de Ensino" -> "3 - Competência Essencial"
+
+Name: Related skills
+Path: "Plano de Ensino" -> "4 - Elementos da Competência-Compentência Relacionada"
+
+Name: Required attitudes
+Path: "Plano de Ensino" -> "5 - Bases Tecnológicas"
+
+Name: Results evidences
+Path: "Plano de Ensino" -> "7 - Estratégia Avaliação Processo Ensino-Aprendizagem"
+
+Name: Activities
+Path: "Relação de notas" -> "Listagem de Conferência" -> X "Conceito" -> "Emitir"
+
+Name: Last day
+Path: "Tarefas" -> "Diário de classe" -> ??? 
