@@ -7,8 +7,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>audit</name>
-	<url>http://maven.apache.org</url>
+	<name>Senac audit form generator</name>
+	<url>http://github.com/fgka/senac-auditing</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,4 +42,17 @@
 		</pluginManagement>
 	</build>
 
+	<scm>
+		<url>https://github.com/fgka/senac-auditing.git</url>
+		<developerConnection>Gustavo Kuhn Andriotti</developerConnection>
+		<tag>senac,form,audit</tag>
+		<connection>https</connection>
+	</scm>
+	<issueManagement>
+		<url>https://github.com/fgka/senac-auditing/issues</url>
+		<system>Github Issues</system>
+	</issueManagement>
+	<organization>
+		<name>Operativus</name>
+	</organization>
 </project>
