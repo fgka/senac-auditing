@@ -1,0 +1,13 @@
+Third party componentes:
+
+Selenium
+URL: http://seleniumhq.org
+License URL: http://seleniumhq.org/about/license.jsp
+License URL: http://www.apache.org/licenses/LICENSE-2.0
+Type: Apache 2.0 License
+
+JUnit
+URL: http://www.junit.org
+License URL: https://github.com/KentBeck/junit/raw/master/LICENSE
+Type: Common Public License - v 1.0
+
