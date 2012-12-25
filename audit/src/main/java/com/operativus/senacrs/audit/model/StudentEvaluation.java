@@ -1,7 +1,8 @@
 package com.operativus.senacrs.audit.model;
 
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.operativus.senacrs.audit.exceptions.InvalidEvaluationType;
 import com.operativus.senacrs.audit.exceptions.MismatchingEvaluationType;
@@ -11,7 +12,7 @@ public class StudentEvaluation
 		AbstractSequenceStringFieldComparable {
 
 	private final String name;
-	private final Map<EvaluationActivity, EvaluationGrade> grades = new HashMap<EvaluationActivity, EvaluationGrade>();
+	private final Map<EvaluationActivity, EvaluationGrade> grades = new TreeMap<EvaluationActivity, EvaluationGrade>();
 	private EvaluationGrade finalGrade = null;
 
 	public StudentEvaluation(final int sequence, final String name) {
@@ -25,9 +26,9 @@ public class StudentEvaluation
 		return this.name;
 	}
 
-	public Map<EvaluationActivity, EvaluationGrade> getGrades() {
+	public Collection<EvaluationGrade> getGrades() {
 
-		return this.grades;
+		return this.grades.values();
 	}
 
 	public EvaluationGrade putGrade(final EvaluationActivity activity, final EvaluationGrade grade) {
