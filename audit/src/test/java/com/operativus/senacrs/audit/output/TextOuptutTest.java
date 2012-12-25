@@ -219,7 +219,7 @@ public class TextOuptutTest {
 		String[] resEvi = null;
 
 		relatedSkills = getProperty(prop, PropertyKey.RELATED_SKILLS);
-		requiredAttitudes = getProperty(prop, PropertyKey.RELATED_SKILLS);
+		requiredAttitudes = getProperty(prop, PropertyKey.REQUIRED_ATTITUDES);
 		resultsEvidences = getProperty(prop, PropertyKey.RESULTS_EVIDENCES);
 		relSkill = splitByPipe(relatedSkills);
 		reqAtt = splitByPipe(requiredAttitudes);
