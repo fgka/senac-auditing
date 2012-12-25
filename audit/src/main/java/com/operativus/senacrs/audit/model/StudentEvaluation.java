@@ -5,28 +5,23 @@ import java.util.Map;
 
 import com.operativus.senacrs.audit.exceptions.MismatchingEvaluationType;
 
-public class StudentEvaluation implements Comparable<StudentEvaluation>{
+public class StudentEvaluation
+		extends
+		AbstractSequenceStringFieldComparable {
 
-	private final int sequence;
 	private final String name;
 	private Map<EvaluationActivity, EvaluationGrade> grades = new HashMap<EvaluationActivity, EvaluationGrade>();
 	private EvaluationGrade finalGrade = null;
 
 	public StudentEvaluation(int sequence, String name) {
 
-		super();
-		this.sequence = sequence;
+		super(sequence);
 		this.name = name;
 	}
 
 	public String getName() {
 
 		return name;
-	}
-
-	public int getSequence() {
-
-		return sequence;
 	}
 
 	public Map<EvaluationActivity, EvaluationGrade> getGrades() {
@@ -54,9 +49,8 @@ public class StudentEvaluation implements Comparable<StudentEvaluation>{
 	}
 
 	@Override
-	public int compareTo(StudentEvaluation o) {
+	protected String getComparisonStringField() {
 
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getName();
 	}
 }
