@@ -67,4 +67,21 @@ public class StudentEvaluation
 
 		return this.getName();
 	}
+	
+	@Override
+	public String toString() {
+		
+		StringBuilder result = null;
+		
+		result = new StringBuilder();
+		result.append(super.toString());
+		result.append(":");
+		for (Map.Entry<EvaluationActivity, EvaluationGrade> e : this.grades.entrySet()) {
+			result.append("," + e.getKey().getName() + "=" + e.getValue().toString());
+		}
+		result.append(":");
+		result.append(this.finalGrade.toString());
+	
+		return result.toString();
+	}
 }
