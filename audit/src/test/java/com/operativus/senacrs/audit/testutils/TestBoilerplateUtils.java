@@ -1,12 +1,19 @@
 package com.operativus.senacrs.audit.testutils;
 
+import java.io.File;
 import java.util.Random;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class TestBoilerplateUtils {
 
-	private static final Random RAND = new Random(System.currentTimeMillis());
+	public static final String PWD = System.getProperty("user.dir");
+	public static final String TST_RESOURCES = PWD + File.separator 
+			+ "src" + File.separator
+			+ "test" + File.separator
+			+ "resources" + File.separator; 
+
+	public static final Random RAND = new Random(System.currentTimeMillis());
 	private static int MIN_RAND = 10;
 	private static int MAX_RAND = 100;
 
