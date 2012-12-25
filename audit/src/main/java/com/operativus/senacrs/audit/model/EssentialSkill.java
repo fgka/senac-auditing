@@ -2,21 +2,27 @@ package com.operativus.senacrs.audit.model;
 
 public class EssentialSkill {
 
-	private String skillDescription = null;
+	private String description = null;
 
-	public EssentialSkill(final String skillDescription) {
+	public EssentialSkill(final String description) {
 
 		super();
-		this.skillDescription = skillDescription;
+		this.description = description;
 	}
 
-	public String getSkillDescription() {
+	public String getDescription() {
 
-		return this.skillDescription;
+		return this.description;
 	}
 
-	public void setSkillDescription(final String skillDescription) {
+	public void setDescription(final String description) {
 
-		this.skillDescription = skillDescription;
+		this.description = description;
+	}
+	
+	@Override
+	public String toString() {
+	
+		return this.description;
 	}
 }
