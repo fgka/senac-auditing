@@ -2,26 +2,26 @@ package com.operativus.senacrs.audit.model;
 
 public class RelatedSkill {
 
-	private String skill = null;
+	private String description = null;
 	private String requiredAttitude = null;
 	private String resultsEvidence = null;
 
-	public RelatedSkill(final String skill, final String requiredAttitude, final String resultsEvidence) {
+	public RelatedSkill(final String description, final String requiredAttitude, final String resultsEvidence) {
 
 		super();
-		this.skill = skill;
+		this.description = description;
 		this.requiredAttitude = requiredAttitude;
 		this.resultsEvidence = resultsEvidence;
 	}
 
-	public String getSkill() {
+	public String getDescription() {
 
-		return this.skill;
+		return this.description;
 	}
 
-	public void setSkill(final String skill) {
+	public void setDescription(final String description) {
 
-		this.skill = skill;
+		this.description = description;
 	}
 
 	public String getRequiredAttitude() {
@@ -42,5 +42,11 @@ public class RelatedSkill {
 	public void setResultsEvidence(final String resultsEvidence) {
 
 		this.resultsEvidence = resultsEvidence;
+	}
+	
+	@Override
+	public String toString() {
+	
+		return this.description + ":" + this.requiredAttitude + ":" + this.resultsEvidence;
 	}
 }

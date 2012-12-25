@@ -72,5 +72,11 @@ public abstract class AbstractSequenceStringFieldComparable
 
 		return result;
 	}
+	
+	@Override
+	public String toString() {
+	
+		return this.sequence + ":" + this.getComparisonStringField();
+	}
 
 }

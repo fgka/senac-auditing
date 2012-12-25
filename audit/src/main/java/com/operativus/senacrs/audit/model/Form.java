@@ -61,4 +61,21 @@ public class Form {
 		this.notes = notes;
 	}
 
+	@Override
+	public String toString() {
+		
+		StringBuilder result = null;
+		String nl = System.getProperty("line.separator");
+		
+		result = new StringBuilder();
+		result.append(this.id.toString());
+		result.append(nl);
+		result.append(this.skillSet.toString());
+		result.append(nl);
+		result.append(this.evaluations.toString());
+		result.append(nl);
+		result.append(this.notes);
+	
+		return result.toString();
+	}
 }

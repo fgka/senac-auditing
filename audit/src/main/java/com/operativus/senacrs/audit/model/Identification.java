@@ -83,4 +83,9 @@ public class Identification {
 		this.lastDay = lastDay;
 	}
 
+	@Override
+	public String toString() {
+		
+		return this.academic + ":" + this.unit + ":" + this.course + ":" + this.classDesc + ":" + this.semester + ":" + this.lastDay;
+	}
 }

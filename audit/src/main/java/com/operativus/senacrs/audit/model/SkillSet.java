@@ -31,4 +31,18 @@ public class SkillSet {
 
 		return this.essential;
 	}
+	
+	@Override
+	public String toString() {
+		
+		StringBuilder result = null;
+		String nl = System.getProperty("line.separator");
+
+		result = new StringBuilder();
+		result.append(this.essential.toString());
+		result.append(nl);
+		result.append(this.skills.toString());
+	
+		return result.toString();
+	}
 }
