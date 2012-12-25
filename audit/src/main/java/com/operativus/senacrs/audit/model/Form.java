@@ -1,14 +1,15 @@
 package com.operativus.senacrs.audit.model;
 
-import java.util.LinkedList;
+import java.util.Collection;
 import java.util.List;
+import java.util.TreeSet;
 
 public class Form {
 
 	private Identification id;
 	private SkillSet skillSet;
-	private List<EvaluationActivity> activities = new LinkedList<EvaluationActivity>();
-	private List<StudentEvaluation> evaluations = new LinkedList<StudentEvaluation>();
+	private Collection<EvaluationActivity> activities = new TreeSet<EvaluationActivity>();
+	private Collection<StudentEvaluation> evaluations = new TreeSet<StudentEvaluation>();
 	private String notes;
 
 	public Identification getId() {
@@ -31,24 +32,26 @@ public class Form {
 		this.skillSet = skillSet;
 	}
 
-	public List<EvaluationActivity> getActivities() {
+	public Collection<EvaluationActivity> getActivities() {
 
 		return this.activities;
 	}
 
 	public void setActivities(final List<EvaluationActivity> activities) {
 
-		this.activities = activities;
+		this.activities.clear();
+		this.activities.addAll(activities);
 	}
 
-	public List<StudentEvaluation> getEvaluations() {
+	public Collection<StudentEvaluation> getEvaluations() {
 
 		return this.evaluations;
 	}
 
 	public void setEvaluations(final List<StudentEvaluation> evaluations) {
 
-		this.evaluations = evaluations;
+		this.evaluations.clear();
+		this.evaluations.addAll(evaluations);
 	}
 
 	public String getNotes() {
