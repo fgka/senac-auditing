@@ -2,7 +2,7 @@ package com.operativus.senacrs.audit.model;
 
 public class EssencialSkill {
 
-	private final String skillDescription;
+	private String skillDescription = null;
 
 	public EssencialSkill(final String skillDescription) {
 
@@ -10,8 +10,15 @@ public class EssencialSkill {
 		this.skillDescription = skillDescription;
 	}
 
+	
 	public String getSkillDescription() {
+	
+		return skillDescription;
+	}
 
-		return this.skillDescription;
+	
+	public void setSkillDescription(String skillDescription) {
+	
+		this.skillDescription = skillDescription;
 	}
 }

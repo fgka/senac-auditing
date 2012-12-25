@@ -2,11 +2,11 @@ package com.operativus.senacrs.audit.model;
 
 public class Identification {
 
-	private final String course;
-	private final String unit;
-	private final String academic;
-	private final String classDesc;
-	private final String semester;
+	private String course = null;
+	private String unit = null;
+	private String academic = null;
+	private String classDesc = null;
+	private String semester = null;
 
 	public Identification(final String course, final String unit, final String academic,
 			final String classDesc, final String semester) {
@@ -20,29 +20,63 @@ public class Identification {
 		this.semester = semester;
 	}
 
+	
 	public String getCourse() {
-
-		return this.course;
+	
+		return course;
 	}
 
+	
+	public void setCourse(String course) {
+	
+		this.course = course;
+	}
+
+	
 	public String getUnit() {
-
-		return this.unit;
+	
+		return unit;
 	}
 
+	
+	public void setUnit(String unit) {
+	
+		this.unit = unit;
+	}
+
+	
 	public String getAcademic() {
-
-		return this.academic;
+	
+		return academic;
 	}
 
+	
+	public void setAcademic(String academic) {
+	
+		this.academic = academic;
+	}
+
+	
 	public String getClassDesc() {
-
-		return this.classDesc;
+	
+		return classDesc;
 	}
 
+	
+	public void setClassDesc(String classDesc) {
+	
+		this.classDesc = classDesc;
+	}
+
+	
 	public String getSemester() {
-
-		return this.semester;
+	
+		return semester;
 	}
 
+	
+	public void setSemester(String semester) {
+	
+		this.semester = semester;
+	}
 }
