@@ -67,30 +67,35 @@ public class EvaluationActivity
 
 		result = this.getSequence() - o.getSequence();
 		if (result == 0) {
-			result = compareToSameSeq(o);
+			result = compareToSameSeqUsingStrField(o);
 		}
 
 		return result;
 	}
 
-	private int compareToSameSeq(EvaluationActivity o) {
+	private int compareToSameSeqUsingStrField(EvaluationActivity o) {
 
 		int result = 0;
 
 		if (this.name == null) {
-			result = compareToThisNameNull(o);
+			result = compareToThisStrFieldNull(o);
 		} else {
-			result = this.getName().compareTo(o.getName());
+			result = this.getComparisonStringField().compareTo(o.getComparisonStringField());
 		}
 
 		return result;
 	}
 
-	private int compareToThisNameNull(EvaluationActivity o) {
+	private String getComparisonStringField() {
+
+		return this.getName();
+	}		
+
+	private int compareToThisStrFieldNull(EvaluationActivity o) {
 
 		int result = 0;
 		
-		if (o.getName() == null) {
+		if (o.getComparisonStringField() == null) {
 			result = 0;
 		} else {
 			result = -1;
