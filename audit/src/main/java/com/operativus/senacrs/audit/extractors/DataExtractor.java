@@ -4,5 +4,5 @@ import com.operativus.senacrs.audit.model.Form;
 
 public interface DataExtractor {
 
-	Form extract(DataInput source);
+	Form extract();
 }
