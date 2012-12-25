@@ -1,6 +1,7 @@
 package com.operativus.senacrs.audit.model;
 
-import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -26,9 +27,16 @@ public class StudentEvaluation
 		return this.name;
 	}
 
-	public Collection<EvaluationGrade> getGrades() {
+	public List<EvaluationGrade> createAscendingGradesList() {
+		
+		List<EvaluationGrade> result = null;
+		
+		result = new LinkedList<EvaluationGrade>();
+		for (Map.Entry<EvaluationActivity, EvaluationGrade> e : this.grades.entrySet()) {
+			result.add(e.getValue());
+		}
 
-		return this.grades.values();
+		return result;
 	}
 
 	public EvaluationGrade putGrade(final EvaluationActivity activity, final EvaluationGrade grade) {
