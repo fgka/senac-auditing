@@ -75,16 +75,16 @@ public class TextOuptutTest {
 	private static final String INPUT_FILE = TestBoilerplateUtils.TST_RESOURCES 
 			+ "test_text_input.properties";
 	private static final String OUTPUT_FILE = TestBoilerplateUtils.TST_RESOURCES 
-			+ "test_text_output.properties";
+			+ "test_text_output.txt";
 
 	@Test
-	public void testBuildOutputNull() {
+	public void testPrintNull() {
 		
 		TextOuptut obj = null;
 		
 		obj = new TextOuptut();
 		try {
-			obj.buildOutput(null);
+			obj.print(null);
 			fail("null accepted");			
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
