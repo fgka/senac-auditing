@@ -7,7 +7,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public class TestBoilerplateUtils {
 	
-	private static Random RAND = new Random(System.currentTimeMillis());
+	private static final Random RAND = new Random(System.currentTimeMillis());
 	private static int MIN_RAND = 10;
 	private static int MAX_RAND = 100;
 	
@@ -67,5 +67,9 @@ public class TestBoilerplateUtils {
 		
 		return result;
 	}
-
+	
+	public static int randomInt(int max) {
+		
+		return RAND.nextInt(max);
+	}
 }

@@ -6,18 +6,18 @@ import org.junit.Test;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 
-public class EvaluationActivityTest {
+public class AbstractSequenceStringFieldComparableTest {
 	
 	@Test
 	public void testCompareToNull() {
 		
-		EvaluationActivity o1 = null;
+		AbstractSequenceStringFieldComparable o1 = null;
 		int result = 0;
 		boolean expected = false;
 		TestBoilerplateUtils.NumericComparisonToZero what = null;
 		String msg = null;
 		
-		o1 = getBaselineObject(0);
+		o1 = getBaselineObject();
 		result = o1.compareTo(null);
 		what = TestBoilerplateUtils.NumericComparisonToZero.HIGHER;
 		expected = TestBoilerplateUtils.compare(result, what);
@@ -25,15 +25,32 @@ public class EvaluationActivityTest {
 		Assert.assertTrue(msg, expected);
 	}
 
-	private EvaluationActivity getBaselineObject(int sequence) {
+	private AbstractSequenceStringFieldComparable getBaselineObject() {
 
-		return new EvaluationActivity(sequence, EvaluationType.SENAC_LEVEL, null, null);
+		return getBaselineObject(TestBoilerplateUtils.randomInt(100), TestBoilerplateUtils.randomString());
+	}
+
+	private AbstractSequenceStringFieldComparable getBaselineObject(int sequence) {
+
+		return getBaselineObject(sequence, TestBoilerplateUtils.randomString());
+	}
+
+	private AbstractSequenceStringFieldComparable getBaselineObject(int sequence, final String strValue) {
+
+		return new AbstractSequenceStringFieldComparable(sequence) {
+			
+			@Override
+			protected String getComparisonStringField() {
+			
+				return strValue;
+			}
+		};
 	}
 
 	@Test
 	public void testCompareToSelf() {
 		
-		EvaluationActivity o1 = null;
+		AbstractSequenceStringFieldComparable o1 = null;
 		int result = 0;
 		boolean expected = false;
 		TestBoilerplateUtils.NumericComparisonToZero what = null;
@@ -50,8 +67,8 @@ public class EvaluationActivityTest {
 	@Test
 	public void testCompareToHigherSeq() {
 		
-		EvaluationActivity o1 = null;
-		EvaluationActivity o2 = null;
+		AbstractSequenceStringFieldComparable o1 = null;
+		AbstractSequenceStringFieldComparable o2 = null;
 		int result = 0;
 		boolean expected = false;
 		TestBoilerplateUtils.NumericComparisonToZero what = null;
@@ -69,8 +86,8 @@ public class EvaluationActivityTest {
 	@Test
 	public void testCompareToLowerSeq() {
 		
-		EvaluationActivity o1 = null;
-		EvaluationActivity o2 = null;
+		AbstractSequenceStringFieldComparable o1 = null;
+		AbstractSequenceStringFieldComparable o2 = null;
 		int result = 0;
 		boolean expected = false;
 		TestBoilerplateUtils.NumericComparisonToZero what = null;
@@ -85,20 +102,49 @@ public class EvaluationActivityTest {
 		Assert.assertTrue(msg, expected);
 	}
 
+
 	@Test
-	public void testCompareToSameSeqDiffNames() {
+	public void testCompareToSameSeqDiffStrValues() {
 		
-		EvaluationActivity o1 = null;
-		EvaluationActivity o2 = null;
+		AbstractSequenceStringFieldComparable o1 = null;
+		AbstractSequenceStringFieldComparable o2 = null;
 		int result = 0;
 		int expected = 0;		
 		
 		o1 = getBaselineObject(0);
 		o2 = getBaselineObject(0);
-		o1.setName(TestBoilerplateUtils.randomString());
-		o2.setName(TestBoilerplateUtils.randomString());
 		result = o1.compareTo(o2);
-		expected = o1.getName().compareTo(o2.getName());
+		expected = o1.getComparisonStringField().compareTo(o2.getComparisonStringField());
+		Assert.assertEquals(expected, result);
+	}
+
+	@Test
+	public void testCompareToSameSeqThisNullStrValue() {
+		
+		AbstractSequenceStringFieldComparable o1 = null;
+		AbstractSequenceStringFieldComparable o2 = null;
+		int result = 0;
+		int expected = 0;		
+		
+		o1 = getBaselineObject(0, null);
+		o2 = getBaselineObject(0);
+		result = o1.compareTo(o2);
+		expected = -1;
+		Assert.assertEquals(expected, result);
+	}
+
+	@Test
+	public void testCompareToSameSeqOtherNullStrValue() {
+		
+		AbstractSequenceStringFieldComparable o1 = null;
+		AbstractSequenceStringFieldComparable o2 = null;
+		int result = 0;
+		int expected = 0;		
+		
+		o1 = getBaselineObject(0);
+		o2 = getBaselineObject(0, null);
+		result = o1.compareTo(o2);
+		expected = 1;
 		Assert.assertEquals(expected, result);
 	}
 	
