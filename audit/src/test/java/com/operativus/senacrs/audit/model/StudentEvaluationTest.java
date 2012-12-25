@@ -10,6 +10,40 @@ import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 public class StudentEvaluationTest {
 
 	@Test
+	public void testPutGradeMismatchNullGrade() {
+
+		StudentEvaluation obj = null;
+		EvaluationActivity activity = null;
+
+		obj = getBaseline();
+		activity = getEvalActivity(EvaluationType.SENAC_LEVEL);
+		try {
+			obj.putGrade(activity, null);
+			Assert.fail();
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+
+	}
+
+	@Test
+	public void testPutGradeMismatchNullActivity() {
+
+		StudentEvaluation obj = null;
+		EvaluationGrade grade = null;
+
+		obj = getBaseline();
+		grade = getEvalGrade(EvaluationType.SENAC_LEVEL);
+		try {
+			obj.putGrade(null, grade);
+			Assert.fail();
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+
+	}
+
+	@Test
 	public void testPutGradeMismatch() {
 
 		StudentEvaluation obj = null;
