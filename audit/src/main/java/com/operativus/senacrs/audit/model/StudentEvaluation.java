@@ -3,6 +3,8 @@ package com.operativus.senacrs.audit.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.operativus.senacrs.audit.exceptions.MismatchingEvaluationType;
+
 
 public class StudentEvaluation {
 
@@ -22,6 +24,10 @@ public class StudentEvaluation {
 	
 	public EvaluationGrade putGrade(EvaluationActivity activity, EvaluationGrade grade) {
 	
+		if (activity.getType() != grade.getType()) {
+			throw new MismatchingEvaluationType(activity, grade);
+		}
+		
 		return this.grades.put(activity, grade);
 	}
 	
