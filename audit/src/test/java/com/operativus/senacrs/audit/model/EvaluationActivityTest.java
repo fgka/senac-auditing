@@ -3,8 +3,11 @@ package com.operativus.senacrs.audit.model;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
+
 
 public class EvaluationActivityTest {
+	
 	@Test
 	public void testCompareToNull() {
 		
@@ -12,12 +15,14 @@ public class EvaluationActivityTest {
 		EvaluationActivity o2 = null;
 		int result = 0;
 		boolean expected = false;
+		TestBoilerplateUtils.NumericComparisonToZero what = null;
 		String msg = null;
 		
 		o1 = getBaselineObject(0);
 		result = o1.compareTo(o2);
-		expected = result > 0;
-		msg = errorMsg(result, expected);
+		what = TestBoilerplateUtils.NumericComparisonToZero.HIGHER;
+		expected = TestBoilerplateUtils.compare(result, what);
+		msg = TestBoilerplateUtils.errorNumericComparisonToZeroMsg(result, what);
 		Assert.assertTrue(msg, expected);
 	}
 
@@ -26,22 +31,20 @@ public class EvaluationActivityTest {
 		return new EvaluationActivity(sequence, EvaluationType.SENAC_LEVEL, null, null);
 	}
 
-	private String errorMsg(int result, boolean expected) {
-
-		return String.format("Returned: %s and expected %s", String.valueOf(result), String.valueOf(expected));
-	}
 	@Test
 	public void testCompareToSelf() {
 		
 		EvaluationActivity o1 = null;
 		int result = 0;
 		boolean expected = false;
+		TestBoilerplateUtils.NumericComparisonToZero what = null;
 		String msg = null;
 		
 		o1 = getBaselineObject(0);
 		result = o1.compareTo(o1);
-		expected = result == 0;
-		msg = errorMsg(result, expected);
+		what = TestBoilerplateUtils.NumericComparisonToZero.EQUAL;
+		expected = TestBoilerplateUtils.compare(result, what);
+		msg = TestBoilerplateUtils.errorNumericComparisonToZeroMsg(result, what);
 		Assert.assertTrue(msg, expected);
 	}
 
@@ -52,13 +55,15 @@ public class EvaluationActivityTest {
 		EvaluationActivity o2 = null;
 		int result = 0;
 		boolean expected = false;
+		TestBoilerplateUtils.NumericComparisonToZero what = null;
 		String msg = null;
 		
 		o1 = getBaselineObject(0);
 		o2 = getBaselineObject(1);
 		result = o1.compareTo(o2);
-		expected = result < 0;
-		msg = errorMsg(result, expected);
+		what = TestBoilerplateUtils.NumericComparisonToZero.LOWER;
+		expected = TestBoilerplateUtils.compare(result, what);
+		msg = TestBoilerplateUtils.errorNumericComparisonToZeroMsg(result, what);
 		Assert.assertTrue(msg, expected);
 	}
 
@@ -69,13 +74,15 @@ public class EvaluationActivityTest {
 		EvaluationActivity o2 = null;
 		int result = 0;
 		boolean expected = false;
+		TestBoilerplateUtils.NumericComparisonToZero what = null;
 		String msg = null;
 		
 		o1 = getBaselineObject(0);
 		o2 = getBaselineObject(-1);
 		result = o1.compareTo(o2);
-		expected = result > 0;
-		msg = errorMsg(result, expected);
+		what = TestBoilerplateUtils.NumericComparisonToZero.HIGHER;
+		expected = TestBoilerplateUtils.compare(result, what);
+		msg = TestBoilerplateUtils.errorNumericComparisonToZeroMsg(result, what);
 		Assert.assertTrue(msg, expected);
 	}
 
