@@ -50,7 +50,7 @@ public class EvaluationActivity
 	@Override
 	public String toString() {
 	
-		return this.name + ":" + this.description + " = " + this.type;
+		return super.toString() + ":" + this.description + " = " + this.type;
 	}
 
 }
