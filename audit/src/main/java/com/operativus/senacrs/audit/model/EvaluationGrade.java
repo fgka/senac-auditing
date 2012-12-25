@@ -6,5 +6,6 @@ public interface EvaluationGrade {
 
 	void fromString(String str);
 
+	@Override
 	String toString();
 }

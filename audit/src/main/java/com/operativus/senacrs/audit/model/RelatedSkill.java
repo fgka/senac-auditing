@@ -14,39 +14,33 @@ public class RelatedSkill {
 		this.resultsEvidence = resultsEvidence;
 	}
 
-	
 	public String getSkill() {
-	
-		return skill;
+
+		return this.skill;
 	}
 
-	
-	public void setSkill(String skill) {
-	
+	public void setSkill(final String skill) {
+
 		this.skill = skill;
 	}
 
-	
 	public String getRequiredAttitude() {
-	
-		return requiredAttitude;
+
+		return this.requiredAttitude;
 	}
 
-	
-	public void setRequiredAttitude(String requiredAttitude) {
-	
+	public void setRequiredAttitude(final String requiredAttitude) {
+
 		this.requiredAttitude = requiredAttitude;
 	}
 
-	
 	public String getResultsEvidence() {
-	
-		return resultsEvidence;
+
+		return this.resultsEvidence;
 	}
 
-	
-	public void setResultsEvidence(String resultsEvidence) {
-	
+	public void setResultsEvidence(final String resultsEvidence) {
+
 		this.resultsEvidence = resultsEvidence;
 	}
 }

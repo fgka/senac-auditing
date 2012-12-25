@@ -10,10 +10,10 @@ public class StudentEvaluation
 		AbstractSequenceStringFieldComparable {
 
 	private final String name;
-	private Map<EvaluationActivity, EvaluationGrade> grades = new HashMap<EvaluationActivity, EvaluationGrade>();
+	private final Map<EvaluationActivity, EvaluationGrade> grades = new HashMap<EvaluationActivity, EvaluationGrade>();
 	private EvaluationGrade finalGrade = null;
 
-	public StudentEvaluation(int sequence, String name) {
+	public StudentEvaluation(final int sequence, final String name) {
 
 		super(sequence);
 		this.name = name;
@@ -21,15 +21,15 @@ public class StudentEvaluation
 
 	public String getName() {
 
-		return name;
+		return this.name;
 	}
 
 	public Map<EvaluationActivity, EvaluationGrade> getGrades() {
 
-		return grades;
+		return this.grades;
 	}
 
-	public EvaluationGrade putGrade(EvaluationActivity activity, EvaluationGrade grade) {
+	public EvaluationGrade putGrade(final EvaluationActivity activity, final EvaluationGrade grade) {
 
 		if (activity.getType() != grade.getType()) {
 			throw new MismatchingEvaluationType(activity, grade);
@@ -40,10 +40,10 @@ public class StudentEvaluation
 
 	public EvaluationGrade getFinalGrade() {
 
-		return finalGrade;
+		return this.finalGrade;
 	}
 
-	public void setFinalGrade(EvaluationGrade finalGrade) {
+	public void setFinalGrade(final EvaluationGrade finalGrade) {
 
 		this.finalGrade = finalGrade;
 	}

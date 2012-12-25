@@ -6,9 +6,9 @@ import java.util.List;
 public class SkillSet {
 
 	private final EssentialSkill essential;
-	private List<RelatedSkill> skills = new LinkedList<RelatedSkill>();
+	private final List<RelatedSkill> skills = new LinkedList<RelatedSkill>();
 
-	public SkillSet(EssentialSkill essential) {
+	public SkillSet(final EssentialSkill essential) {
 
 		super();
 		this.essential = essential;
@@ -16,10 +16,10 @@ public class SkillSet {
 
 	public List<RelatedSkill> getSkills() {
 
-		return skills;
+		return this.skills;
 	}
 
-	public void addRelatedSkill(RelatedSkill skill) {
+	public void addRelatedSkill(final RelatedSkill skill) {
 
 		if (skill == null) {
 			throw new IllegalArgumentException();
@@ -29,6 +29,6 @@ public class SkillSet {
 
 	public EssentialSkill getEssential() {
 
-		return essential;
+		return this.essential;
 	}
 }

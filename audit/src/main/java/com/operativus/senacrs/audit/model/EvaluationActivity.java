@@ -1,13 +1,14 @@
 package com.operativus.senacrs.audit.model;
 
-public class EvaluationActivity extends 
-AbstractSequenceStringFieldComparable {
+public class EvaluationActivity
+		extends
+		AbstractSequenceStringFieldComparable {
 
 	private final EvaluationType type;
 	String name = null;
 	private String description = null;
 
-	public EvaluationActivity(int sequence, EvaluationType type, String name, String description) {
+	public EvaluationActivity(final int sequence, final EvaluationType type, final String name, final String description) {
 
 		super(sequence);
 		this.type = type;
@@ -17,25 +18,25 @@ AbstractSequenceStringFieldComparable {
 
 	public EvaluationType getType() {
 
-		return type;
+		return this.type;
 	}
 
 	public String getName() {
 
-		return name;
+		return this.name;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 
 		this.name = name;
 	}
 
 	public String getDescription() {
 
-		return description;
+		return this.description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 
 		this.description = description;
 	}

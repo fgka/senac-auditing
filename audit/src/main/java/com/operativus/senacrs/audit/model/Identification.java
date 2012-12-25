@@ -25,60 +25,60 @@ public class Identification {
 
 	public String getCourse() {
 
-		return course;
+		return this.course;
 	}
 
-	public void setCourse(String course) {
+	public void setCourse(final String course) {
 
 		this.course = course;
 	}
 
 	public String getUnit() {
 
-		return unit;
+		return this.unit;
 	}
 
-	public void setUnit(String unit) {
+	public void setUnit(final String unit) {
 
 		this.unit = unit;
 	}
 
 	public String getAcademic() {
 
-		return academic;
+		return this.academic;
 	}
 
-	public void setAcademic(String academic) {
+	public void setAcademic(final String academic) {
 
 		this.academic = academic;
 	}
 
 	public String getClassDesc() {
 
-		return classDesc;
+		return this.classDesc;
 	}
 
-	public void setClassDesc(String classDesc) {
+	public void setClassDesc(final String classDesc) {
 
 		this.classDesc = classDesc;
 	}
 
 	public String getSemester() {
 
-		return semester;
+		return this.semester;
 	}
 
-	public void setSemester(String semester) {
+	public void setSemester(final String semester) {
 
 		this.semester = semester;
 	}
 
 	public Date getLastDay() {
 
-		return lastDay;
+		return this.lastDay;
 	}
 
-	public void setLastDay(Date lastDay) {
+	public void setLastDay(final Date lastDay) {
 
 		this.lastDay = lastDay;
 	}

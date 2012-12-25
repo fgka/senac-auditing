@@ -10,15 +10,13 @@ public class EssentialSkill {
 		this.skillDescription = skillDescription;
 	}
 
-	
 	public String getSkillDescription() {
-	
-		return skillDescription;
+
+		return this.skillDescription;
 	}
 
-	
-	public void setSkillDescription(String skillDescription) {
-	
+	public void setSkillDescription(final String skillDescription) {
+
 		this.skillDescription = skillDescription;
 	}
 }
