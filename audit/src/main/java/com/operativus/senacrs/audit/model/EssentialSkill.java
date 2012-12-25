@@ -1,10 +1,10 @@
 package com.operativus.senacrs.audit.model;
 
-public class EssencialSkill {
+public class EssentialSkill {
 
 	private String skillDescription = null;
 
-	public EssencialSkill(final String skillDescription) {
+	public EssentialSkill(final String skillDescription) {
 
 		super();
 		this.skillDescription = skillDescription;
