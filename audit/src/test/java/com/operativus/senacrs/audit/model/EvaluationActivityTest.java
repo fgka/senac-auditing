@@ -31,9 +31,7 @@ public class EvaluationActivityTest {
 
 	private EvaluationActivity getBaselineObject(int sequence) {
 
-		EvaluationActivity o1;
-		o1 = new EvaluationActivity(0, EvaluationType.SENAC_LEVEL, null, null);
-		return o1;
+		return new EvaluationActivity(sequence, EvaluationType.SENAC_LEVEL, null, null);
 	}
 
 	private String errorMsg(int result, boolean expected) {
