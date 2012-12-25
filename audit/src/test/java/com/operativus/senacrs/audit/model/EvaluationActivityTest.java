@@ -12,14 +12,13 @@ public class EvaluationActivityTest {
 	public void testCompareToNull() {
 		
 		EvaluationActivity o1 = null;
-		EvaluationActivity o2 = null;
 		int result = 0;
 		boolean expected = false;
 		TestBoilerplateUtils.NumericComparisonToZero what = null;
 		String msg = null;
 		
 		o1 = getBaselineObject(0);
-		result = o1.compareTo(o2);
+		result = o1.compareTo(null);
 		what = TestBoilerplateUtils.NumericComparisonToZero.HIGHER;
 		expected = TestBoilerplateUtils.compare(result, what);
 		msg = TestBoilerplateUtils.errorNumericComparisonToZeroMsg(result, what);
