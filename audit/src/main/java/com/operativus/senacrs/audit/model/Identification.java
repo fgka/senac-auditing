@@ -1,8 +1,12 @@
 package com.operativus.senacrs.audit.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Identification {
+
+	private static final String PROPERTIES_DATE_FORMAT_STR_DD_MM_YYYY = "dd/MM/yyyy";
+	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(PROPERTIES_DATE_FORMAT_STR_DD_MM_YYYY);
 
 	private String course = null;
 	private String unit = null;
@@ -82,10 +86,15 @@ public class Identification {
 
 		this.lastDay = lastDay;
 	}
+	
+	public String lastDayToString() {
+		
+		return DATE_FORMATTER.format(this.lastDay);
+	}
 
 	@Override
 	public String toString() {
 		
-		return this.academic + ":" + this.unit + ":" + this.course + ":" + this.classDesc + ":" + this.semester + ":" + this.lastDay;
+		return this.academic + ":" + this.unit + ":" + this.course + ":" + this.classDesc + ":" + this.semester + ":" + this.lastDayToString();
 	}
 }
