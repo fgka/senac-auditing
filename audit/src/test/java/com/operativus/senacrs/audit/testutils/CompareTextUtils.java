@@ -51,7 +51,7 @@ public class CompareTextUtils {
 
 		String msg = null;
 		
-		msg = "Reading " + String.valueOf(lineNumber);
+		msg = "Reading line " + String.valueOf(lineNumber);
 		Assert.assertEquals(msg, lines[0], lines[1]);
 	}
 }
