@@ -1,18 +1,10 @@
 package com.operativus.senacrs.audit.model;
 
-import java.util.Random;
-
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
 
 public class EvaluationActivityTest {
-	
-	private static Random RAND = new Random(System.currentTimeMillis());
-	private static int MIN_RAND = 10;
-	private static int MAX_RAND = 100;
-	
 	@Test
 	public void testCompareToNull() {
 		
@@ -97,22 +89,11 @@ public class EvaluationActivityTest {
 		
 		o1 = getBaselineObject(0);
 		o2 = getBaselineObject(0);
-		o1.setName(randomString());
-		o2.setName(randomString());
+		o1.setName(TestBoilerplateUtils.randomString());
+		o2.setName(TestBoilerplateUtils.randomString());
 		result = o1.compareTo(o2);
 		expected = o1.getName().compareTo(o2.getName());
 		Assert.assertEquals(expected, result);
-	}
-	
-	private String randomString() {
-		
-		String result = null;
-		int amount = 0;
-		
-		amount = MIN_RAND + RAND.nextInt(MAX_RAND - MIN_RAND);
-		result = RandomStringUtils.random(amount);
-		
-		return result;
 	}
 	
 }
