@@ -20,11 +20,13 @@ public class EvaluationActivityTest {
 		EvaluationActivity o2 = null;
 		int result = 0;
 		boolean expected = false;
+		String msg = null;
 		
 		o1 = getBaselineObject(0);
 		result = o1.compareTo(o2);
 		expected = result > 0;
-		Assert.assertTrue(expected);
+		msg = errorMsg(result, expected);
+		Assert.assertTrue(msg, expected);
 	}
 
 	private EvaluationActivity getBaselineObject(int sequence) {
@@ -34,17 +36,23 @@ public class EvaluationActivityTest {
 		return o1;
 	}
 
+	private String errorMsg(int result, boolean expected) {
+
+		return String.format("Returned: %s and expected %s", String.valueOf(result), String.valueOf(expected));
+	}
 	@Test
 	public void testCompareToSelf() {
 		
 		EvaluationActivity o1 = null;
 		int result = 0;
 		boolean expected = false;
+		String msg = null;
 		
 		o1 = getBaselineObject(0);
 		result = o1.compareTo(o1);
 		expected = result == 0;
-		Assert.assertTrue(expected);
+		msg = errorMsg(result, expected);
+		Assert.assertTrue(msg, expected);
 	}
 
 	@Test
@@ -54,12 +62,14 @@ public class EvaluationActivityTest {
 		EvaluationActivity o2 = null;
 		int result = 0;
 		boolean expected = false;
+		String msg = null;
 		
 		o1 = getBaselineObject(0);
 		o2 = getBaselineObject(1);
 		result = o1.compareTo(o2);
 		expected = result < 0;
-		Assert.assertTrue(expected);
+		msg = errorMsg(result, expected);
+		Assert.assertTrue(msg, expected);
 	}
 
 	@Test
@@ -69,12 +79,14 @@ public class EvaluationActivityTest {
 		EvaluationActivity o2 = null;
 		int result = 0;
 		boolean expected = false;
+		String msg = null;
 		
 		o1 = getBaselineObject(0);
 		o2 = getBaselineObject(-1);
 		result = o1.compareTo(o2);
-		expected = result < 0;
-		Assert.assertTrue(expected);
+		expected = result > 0;
+		msg = errorMsg(result, expected);
+		Assert.assertTrue(msg, expected);
 	}
 
 	@Test
