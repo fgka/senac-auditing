@@ -10,22 +10,20 @@ import com.operativus.senacrs.audit.model.Form;
 import com.operativus.senacrs.audit.model.RelatedSkill;
 import com.operativus.senacrs.audit.model.StudentEvaluation;
 
-
 public class TextOuptut
 		implements FormOutput {
-	
+
 	private static final String NL = System.getProperty("line.separator");
-	
+
 	private static enum RelatedSkillField {
 		DESCRIPTION,
 		REQUIRED_ATTITUDE,
-		RESULTS_EVIDENCE,
-		;
+		RESULTS_EVIDENCE, ;
 	}
 
 	@Override
-	public void print(Form input) {
-		
+	public void print(final Form input) {
+
 		StringBuilder builder = null;
 		String output = null;
 
@@ -36,106 +34,108 @@ public class TextOuptut
 		output = builder.toString();
 		System.out.println(output);
 	}
-	
-	protected StringBuilder buildOutput(Form input) {
-		
+
+	protected StringBuilder buildOutput(final Form input) {
+
 		StringBuilder result = null;
-					
+
 		result = new StringBuilder();
-		buildFirstBlock(result, input);
+		this.buildFirstBlock(result, input);
 		result.append(NL);
 		result.append(NL);
-		buildSecondBlock(result, input);
+		this.buildSecondBlock(result, input);
 		result.append(NL);
 
 		return result;
 	}
 
-	private void buildFirstBlock(StringBuilder builder, Form input) {
+	private void buildFirstBlock(final StringBuilder builder, final Form input) {
 
-		buildCourse(builder, input);
+		this.buildCourse(builder, input);
 		builder.append(NL);
-		buildUnit(builder, input);		
+		this.buildUnit(builder, input);
 		builder.append(NL);
-		buildAcademic(builder, input);		
+		this.buildAcademic(builder, input);
 		builder.append(NL);
-		buildClass(builder, input);		
+		this.buildClass(builder, input);
 		builder.append(NL);
-		buildSemester(builder, input);		
+		this.buildSemester(builder, input);
 	}
 
-	private void buildCourse(StringBuilder builder, Form input) {
-	
+	private void buildCourse(final StringBuilder builder, final Form input) {
+
 		builder.append(input.getId().getCourse());
 	}
 
-	private void buildUnit(StringBuilder builder, Form input) {
+	private void buildUnit(final StringBuilder builder, final Form input) {
 
 		builder.append(input.getId().getUnit());
 	}
 
-	private void buildAcademic(StringBuilder builder, Form input) {
+	private void buildAcademic(final StringBuilder builder, final Form input) {
 
 		builder.append(input.getId().getAcademic());
 	}
 
-	private void buildClass(StringBuilder builder, Form input) {
+	private void buildClass(final StringBuilder builder, final Form input) {
 
 		builder.append(input.getId().getClassDesc());
 	}
 
-	private void buildSemester(StringBuilder builder, Form input) {
+	private void buildSemester(final StringBuilder builder, final Form input) {
 
 		builder.append(input.getId().getSemester());
 	}
 
-	private void buildSecondBlock(StringBuilder builder, Form input) {
-		
-		buildEssentialSkill(builder, input);
+	private void buildSecondBlock(final StringBuilder builder, final Form input) {
+
+		this.buildEssentialSkill(builder, input);
 		builder.append(NL);
-		buildRelatedSkills(builder, input);
+		this.buildRelatedSkills(builder, input);
 		builder.append(NL);
-		buildRequiredAttitudes(builder, input);
+		this.buildRequiredAttitudes(builder, input);
 		builder.append(NL);
-		buildResultEvidences(builder, input);
+		this.buildResultEvidences(builder, input);
 		builder.append(NL);
-		buildActivities(builder, input);
+		this.buildActivities(builder, input);
 		builder.append(NL);
-		buildStudents(builder, input);
+		this.buildStudents(builder, input);
 		builder.append(NL);
-		buildNotes(builder, input);
+		this.buildNotes(builder, input);
 		builder.append(NL);
-		buildLastDay(builder, input);
+		this.buildLastDay(builder, input);
 		builder.append(NL);
-		buildAcademic(builder, input);
+		this.buildAcademic(builder, input);
 	}
 
-	private void buildEssentialSkill(StringBuilder builder, Form input) {
+	private void buildEssentialSkill(final StringBuilder builder, final Form input) {
 
 		builder.append(input.getSkillSet().getEssential().getDescription());
 	}
 
-	private void buildRelatedSkills(StringBuilder builder, Form input) {
-		
-		buildRelatedSkills(builder, input.getSkillSet().getSkills(), RelatedSkillField.DESCRIPTION);
+	private void buildRelatedSkills(final StringBuilder builder, final Form input) {
+
+		this.buildRelatedSkills(builder, input.getSkillSet().getSkills(), RelatedSkillField.DESCRIPTION);
 	}
 
-	private void buildRelatedSkills(StringBuilder builder, List<RelatedSkill> skills, RelatedSkillField field) {
-		
+	private void buildRelatedSkills(final StringBuilder builder, final List<RelatedSkill> skills,
+			final RelatedSkillField field) {
+
 		Iterator<RelatedSkill> iter = null;
 
 		iter = skills.iterator();
 		if (iter.hasNext()) {
-			buildRelatedSkill(builder, iter, field);
+			this.buildRelatedSkill(builder, iter, field);
 			while (iter.hasNext()) {
 				builder.append(", ");
-				buildRelatedSkill(builder, iter, field);
+				this.buildRelatedSkill(builder, iter, field);
 			}
 		}
 	}
 
-	private void buildRelatedSkill(StringBuilder builder, Iterator<RelatedSkill> iter, RelatedSkillField field) {
-		
+	private void buildRelatedSkill(final StringBuilder builder, final Iterator<RelatedSkill> iter,
+			final RelatedSkillField field) {
+
 		String value = null;
 		RelatedSkill skill = null;
 
@@ -156,36 +156,36 @@ public class TextOuptut
 		builder.append(value);
 	}
 
-	private void buildRequiredAttitudes(StringBuilder builder, Form input) {
-		
-		buildRelatedSkills(builder, input.getSkillSet().getSkills(), RelatedSkillField.REQUIRED_ATTITUDE);
+	private void buildRequiredAttitudes(final StringBuilder builder, final Form input) {
+
+		this.buildRelatedSkills(builder, input.getSkillSet().getSkills(), RelatedSkillField.REQUIRED_ATTITUDE);
 	}
 
-	private void buildResultEvidences(StringBuilder builder, Form input) {
+	private void buildResultEvidences(final StringBuilder builder, final Form input) {
 
-		buildRelatedSkills(builder, input.getSkillSet().getSkills(), RelatedSkillField.RESULTS_EVIDENCE);
+		this.buildRelatedSkills(builder, input.getSkillSet().getSkills(), RelatedSkillField.RESULTS_EVIDENCE);
 	}
 
-	private void buildActivities(StringBuilder builder, Form input) {
+	private void buildActivities(final StringBuilder builder, final Form input) {
 
-		buildActivities(builder, input.getActivities());		
+		this.buildActivities(builder, input.getActivities());
 	}
 
-	private void buildActivities(StringBuilder builder, Collection<EvaluationActivity> activities) {
+	private void buildActivities(final StringBuilder builder, final Collection<EvaluationActivity> activities) {
 
 		Iterator<EvaluationActivity> iter = null;
-		
+
 		iter = activities.iterator();
 		if (iter.hasNext()) {
-			buildActivity(builder, iter.next());
+			this.buildActivity(builder, iter.next());
 			while (iter.hasNext()) {
 				builder.append(", ");
-				buildActivity(builder, iter.next());
+				this.buildActivity(builder, iter.next());
 			}
 		}
 	}
 
-	private void buildActivity(StringBuilder builder, EvaluationActivity activity) {
+	private void buildActivity(final StringBuilder builder, final EvaluationActivity activity) {
 
 		builder.append(activity.getName());
 		builder.append("(");
@@ -193,61 +193,60 @@ public class TextOuptut
 		builder.append(")");
 	}
 
-	private void buildStudents(StringBuilder builder, Form input) {
+	private void buildStudents(final StringBuilder builder, final Form input) {
 
-		buildStudents(builder, input.getEvaluations());		
+		this.buildStudents(builder, input.getEvaluations());
 	}
 
-	private void buildStudents(StringBuilder builder, Collection<StudentEvaluation> evaluations) {
+	private void buildStudents(final StringBuilder builder, final Collection<StudentEvaluation> evaluations) {
 
 		Iterator<StudentEvaluation> iter = null;
-		
+
 		iter = evaluations.iterator();
 		if (iter.hasNext()) {
-			buidEvaluation(builder, iter.next());
+			this.buidEvaluation(builder, iter.next());
 			while (iter.hasNext()) {
 				builder.append(", ");
-				buidEvaluation(builder, iter.next());
+				this.buidEvaluation(builder, iter.next());
 			}
 		}
 	}
 
-	private void buidEvaluation(StringBuilder builder, StudentEvaluation eval) {
-		
+	private void buidEvaluation(final StringBuilder builder, final StudentEvaluation eval) {
+
 		builder.append(eval.getName());
 		builder.append("(");
-		buildGrades(builder, eval.createAscendingGradesList());
+		this.buildGrades(builder, eval.createAscendingGradesList());
 		builder.append(")=");
 		builder.append(eval.getFinalGrade().toString());
 	}
 
-	private void buildGrades(StringBuilder builder, List<EvaluationGrade> grades) {
+	private void buildGrades(final StringBuilder builder, final List<EvaluationGrade> grades) {
 
 		Iterator<EvaluationGrade> iter = null;
-		
+
 		iter = grades.iterator();
 		if (iter.hasNext()) {
-			buildGrade(builder, iter.next());
+			this.buildGrade(builder, iter.next());
 			while (iter.hasNext()) {
 				builder.append(",");
-				buildGrade(builder, iter.next());				
+				this.buildGrade(builder, iter.next());
 			}
 		}
 	}
 
-	private void buildGrade(StringBuilder builder, EvaluationGrade grade) {
+	private void buildGrade(final StringBuilder builder, final EvaluationGrade grade) {
 
 		builder.append(grade.toString());
 	}
 
-	private void buildNotes(StringBuilder builder, Form input) {
+	private void buildNotes(final StringBuilder builder, final Form input) {
 
-		builder.append(input.getNotes());		
+		builder.append(input.getNotes());
 	}
 
-	private void buildLastDay(StringBuilder builder, Form input) {
+	private void buildLastDay(final StringBuilder builder, final Form input) {
 
-		builder.append(input.getId().toStringLastDay());		
+		builder.append(input.getId().toStringLastDay());
 	}
 }
-

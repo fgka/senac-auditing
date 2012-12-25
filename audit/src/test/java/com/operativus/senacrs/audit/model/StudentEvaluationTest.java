@@ -15,8 +15,8 @@ public class StudentEvaluationTest {
 		StudentEvaluation obj = null;
 		EvaluationActivity activity = null;
 
-		obj = getBaseline();
-		activity = getEvalActivity(EvaluationType.SENAC_LEVEL);
+		obj = this.getBaseline();
+		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
 		try {
 			obj.putGrade(activity, null);
 			Assert.fail();
@@ -32,8 +32,8 @@ public class StudentEvaluationTest {
 		StudentEvaluation obj = null;
 		EvaluationGrade grade = null;
 
-		obj = getBaseline();
-		grade = getEvalGrade(EvaluationType.SENAC_LEVEL);
+		obj = this.getBaseline();
+		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
 		try {
 			obj.putGrade(null, grade);
 			Assert.fail();
@@ -50,9 +50,9 @@ public class StudentEvaluationTest {
 		EvaluationActivity activity = null;
 		EvaluationGrade grade = null;
 
-		obj = getBaseline();
-		activity = getEvalActivity(EvaluationType.SENAC_LEVEL);
-		grade = getEvalGrade(EvaluationType.NUMERIC);
+		obj = this.getBaseline();
+		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
+		grade = this.getEvalGrade(EvaluationType.NUMERIC);
 		try {
 			obj.putGrade(activity, grade);
 			Assert.fail();
@@ -67,7 +67,7 @@ public class StudentEvaluationTest {
 		return new StudentEvaluation(TestBoilerplateUtils.randomInt(100), TestBoilerplateUtils.randomString());
 	}
 
-	private EvaluationActivity getEvalActivity(EvaluationType type) {
+	private EvaluationActivity getEvalActivity(final EvaluationType type) {
 
 		return new EvaluationActivity(0, type, null, null);
 	}
@@ -83,7 +83,7 @@ public class StudentEvaluationTest {
 			}
 
 			@Override
-			public void fromString(String str) {
+			public void fromString(final String str) {
 
 			}
 		};
@@ -96,9 +96,9 @@ public class StudentEvaluationTest {
 		EvaluationActivity activity = null;
 		EvaluationGrade grade = null;
 
-		obj = getBaseline();
-		activity = getEvalActivity(EvaluationType.SENAC_LEVEL);
-		grade = getEvalGrade(EvaluationType.INVALID);
+		obj = this.getBaseline();
+		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
+		grade = this.getEvalGrade(EvaluationType.INVALID);
 		try {
 			obj.putGrade(activity, grade);
 			Assert.fail();
@@ -115,9 +115,9 @@ public class StudentEvaluationTest {
 		EvaluationActivity activity = null;
 		EvaluationGrade grade = null;
 
-		obj = getBaseline();
-		activity = getEvalActivity(EvaluationType.INVALID);
-		grade = getEvalGrade(EvaluationType.SENAC_LEVEL);
+		obj = this.getBaseline();
+		activity = this.getEvalActivity(EvaluationType.INVALID);
+		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
 		try {
 			obj.putGrade(activity, grade);
 			Assert.fail();
@@ -135,9 +135,9 @@ public class StudentEvaluationTest {
 		EvaluationGrade grade = null;
 		EvaluationGrade result = null;
 
-		obj = getBaseline();
-		activity = getEvalActivity(EvaluationType.SENAC_LEVEL);
-		grade = getEvalGrade(EvaluationType.SENAC_LEVEL);
+		obj = this.getBaseline();
+		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
+		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
 		result = obj.putGrade(activity, grade);
 		Assert.assertNull(result);
 	}
@@ -151,11 +151,11 @@ public class StudentEvaluationTest {
 		EvaluationGrade grade = null;
 		EvaluationGrade result = null;
 
-		obj = getBaseline();
-		activity = getEvalActivity(EvaluationType.SENAC_LEVEL);
-		expected = getEvalGrade(EvaluationType.SENAC_LEVEL);
+		obj = this.getBaseline();
+		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
+		expected = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
 		result = obj.putGrade(activity, expected);
-		grade = getEvalGrade(EvaluationType.SENAC_LEVEL);
+		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
 		result = obj.putGrade(activity, grade);
 		Assert.assertEquals(expected, result);
 		Assert.assertNotEquals(grade, result);

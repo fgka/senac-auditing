@@ -28,9 +28,9 @@ public class StudentEvaluation
 	}
 
 	public List<EvaluationGrade> createAscendingGradesList() {
-		
+
 		List<EvaluationGrade> result = null;
-		
+
 		result = new LinkedList<EvaluationGrade>();
 		for (Map.Entry<EvaluationActivity, EvaluationGrade> e : this.grades.entrySet()) {
 			result.add(e.getValue());
@@ -41,7 +41,6 @@ public class StudentEvaluation
 
 	public EvaluationGrade putGrade(final EvaluationActivity activity, final EvaluationGrade grade) {
 
-		
 		if (activity == null) {
 			throw new IllegalArgumentException();
 		}
@@ -76,12 +75,12 @@ public class StudentEvaluation
 
 		return this.getName();
 	}
-	
+
 	@Override
 	public String toString() {
-		
+
 		StringBuilder result = null;
-		
+
 		result = new StringBuilder();
 		result.append(super.toString());
 		result.append(":");
@@ -90,7 +89,7 @@ public class StudentEvaluation
 		}
 		result.append(":");
 		result.append(this.finalGrade.toString());
-	
+
 		return result.toString();
 	}
 }

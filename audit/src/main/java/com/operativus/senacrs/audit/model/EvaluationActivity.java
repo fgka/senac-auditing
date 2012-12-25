@@ -46,10 +46,10 @@ public class EvaluationActivity
 
 		return this.getName();
 	}
-	
+
 	@Override
 	public String toString() {
-	
+
 		return super.toString() + ":" + this.description + " = " + this.type;
 	}
 

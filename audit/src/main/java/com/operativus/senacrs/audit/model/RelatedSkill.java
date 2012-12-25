@@ -43,10 +43,10 @@ public class RelatedSkill {
 
 		this.resultsEvidence = resultsEvidence;
 	}
-	
+
 	@Override
 	public String toString() {
-	
+
 		return this.description + ":" + this.requiredAttitude + ":" + this.resultsEvidence;
 	}
 }

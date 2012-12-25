@@ -1,6 +1,5 @@
 package com.operativus.senacrs.audit.exceptions;
 
-
 @SuppressWarnings("serial")
 public class InvalidEvaluationType
 		extends IllegalArgumentException {

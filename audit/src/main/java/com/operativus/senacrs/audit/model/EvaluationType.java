@@ -4,6 +4,5 @@ public enum EvaluationType {
 
 	SENAC_LEVEL,
 	NUMERIC,
-	INVALID,
-	;
+	INVALID, ;
 }

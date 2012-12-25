@@ -19,10 +19,10 @@ public class EssentialSkill {
 
 		this.description = description;
 	}
-	
+
 	@Override
 	public String toString() {
-	
+
 		return this.description;
 	}
 }

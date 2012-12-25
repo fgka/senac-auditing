@@ -8,8 +8,8 @@ public class Form {
 
 	private Identification id;
 	private SkillSet skillSet;
-	private Collection<EvaluationActivity> activities = new TreeSet<EvaluationActivity>();
-	private Collection<StudentEvaluation> evaluations = new TreeSet<StudentEvaluation>();
+	private final Collection<EvaluationActivity> activities = new TreeSet<EvaluationActivity>();
+	private final Collection<StudentEvaluation> evaluations = new TreeSet<StudentEvaluation>();
 	private String notes;
 
 	public Identification getId() {
@@ -66,10 +66,10 @@ public class Form {
 
 	@Override
 	public String toString() {
-		
+
 		StringBuilder result = null;
 		String nl = System.getProperty("line.separator");
-		
+
 		result = new StringBuilder();
 		result.append(this.id.toString());
 		result.append(nl);
@@ -78,7 +78,7 @@ public class Form {
 		result.append(this.evaluations.toString());
 		result.append(nl);
 		result.append(this.notes);
-	
+
 		return result.toString();
 	}
 }

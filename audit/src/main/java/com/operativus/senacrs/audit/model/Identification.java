@@ -86,15 +86,16 @@ public class Identification {
 
 		this.lastDay = lastDay;
 	}
-	
+
 	public String toStringLastDay() {
-		
+
 		return DATE_FORMATTER.format(this.lastDay);
 	}
 
 	@Override
 	public String toString() {
-		
-		return this.academic + ":" + this.unit + ":" + this.course + ":" + this.classDesc + ":" + this.semester + ":" + this.toStringLastDay();
+
+		return this.academic + ":" + this.unit + ":" + this.course + ":" + this.classDesc + ":" + this.semester + ":"
+				+ this.toStringLastDay();
 	}
 }
