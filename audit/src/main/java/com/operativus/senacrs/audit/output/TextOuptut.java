@@ -1,14 +1,8 @@
 package com.operativus.senacrs.audit.output;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-
-import com.operativus.senacrs.audit.model.EvaluationGrade;
 import com.operativus.senacrs.audit.model.Form;
 import com.operativus.senacrs.audit.model.Identification;
 import com.operativus.senacrs.audit.model.SkillSet;
-import com.operativus.senacrs.audit.model.StudentEvaluation;
 
 public class TextOuptut
 		implements FormOutput {
@@ -20,6 +14,7 @@ public class TextOuptut
 	private TextOutputIdentification idTextOut = TextOutputIdentification.getInstance();
 	private TextOutputSkillSet skillTextOut = TextOutputSkillSet.getInstance();
 	private TextOutputCollectionEvaluationActivity activitiesTextOut = TextOutputCollectionEvaluationActivity.getInstance();
+	private TextOutputCollectionStudentEvaluation evalsTextOut = TextOutputCollectionStudentEvaluation.getInstance();
 
 	private TextOuptut() {
 		
@@ -87,59 +82,13 @@ public class TextOuptut
 		builder.append(NL);
 		this.activitiesTextOut.buildActivities(builder, input.getActivities());
 		builder.append(NL);
-		this.buildStudents(builder, input);
+		this.evalsTextOut.buildStudents(builder, input.getEvaluations());
 		builder.append(NL);
 		this.buildNotes(builder, input);
 		builder.append(NL);
 		this.idTextOut.buildLastDay(builder, id);
 		builder.append(NL);
 		this.idTextOut.buildAcademic(builder, id);
-	}
-	private void buildStudents(final StringBuilder builder, final Form input) {
-
-		this.buildStudents(builder, input.getEvaluations());
-	}
-
-	private void buildStudents(final StringBuilder builder, final Collection<StudentEvaluation> evaluations) {
-
-		Iterator<StudentEvaluation> iter = null;
-
-		iter = evaluations.iterator();
-		if (iter.hasNext()) {
-			this.buidEvaluation(builder, iter.next());
-			while (iter.hasNext()) {
-				builder.append(", ");
-				this.buidEvaluation(builder, iter.next());
-			}
-		}
-	}
-
-	private void buidEvaluation(final StringBuilder builder, final StudentEvaluation eval) {
-
-		builder.append(eval.getName());
-		builder.append("(");
-		this.buildGrades(builder, eval.createAscendingGradesList());
-		builder.append(")=");
-		builder.append(eval.getFinalGrade().toString());
-	}
-
-	private void buildGrades(final StringBuilder builder, final List<EvaluationGrade> grades) {
-
-		Iterator<EvaluationGrade> iter = null;
-
-		iter = grades.iterator();
-		if (iter.hasNext()) {
-			this.buildGrade(builder, iter.next());
-			while (iter.hasNext()) {
-				builder.append(",");
-				this.buildGrade(builder, iter.next());
-			}
-		}
-	}
-
-	private void buildGrade(final StringBuilder builder, final EvaluationGrade grade) {
-
-		builder.append(grade.toString());
 	}
 
 	private void buildNotes(final StringBuilder builder, final Form input) {
