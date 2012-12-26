@@ -1,8 +1,9 @@
-package com.operativus.senacrs.audit.output;
+package com.operativus.senacrs.audit.output.text;
 
 import com.operativus.senacrs.audit.model.Form;
 import com.operativus.senacrs.audit.model.Identification;
 import com.operativus.senacrs.audit.model.SkillSet;
+import com.operativus.senacrs.audit.output.FormOutput;
 
 public class TextOuptut
 		implements FormOutput {

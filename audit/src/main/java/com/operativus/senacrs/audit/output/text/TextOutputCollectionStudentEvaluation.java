@@ -1,4 +1,4 @@
-package com.operativus.senacrs.audit.output;
+package com.operativus.senacrs.audit.output.text;
 
 import java.util.Collection;
 import java.util.Iterator;

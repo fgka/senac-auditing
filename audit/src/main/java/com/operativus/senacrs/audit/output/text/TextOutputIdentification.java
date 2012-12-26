@@ -1,4 +1,4 @@
-package com.operativus.senacrs.audit.output;
+package com.operativus.senacrs.audit.output.text;
 
 import com.operativus.senacrs.audit.model.Identification;
 

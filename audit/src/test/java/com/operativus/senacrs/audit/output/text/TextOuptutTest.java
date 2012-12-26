@@ -1,4 +1,4 @@
-package com.operativus.senacrs.audit.output;
+package com.operativus.senacrs.audit.output.text;
 
 import static org.junit.Assert.fail;
 
@@ -28,6 +28,7 @@ import com.operativus.senacrs.audit.model.Identification;
 import com.operativus.senacrs.audit.model.RelatedSkill;
 import com.operativus.senacrs.audit.model.SkillSet;
 import com.operativus.senacrs.audit.model.StudentEvaluation;
+import com.operativus.senacrs.audit.output.text.TextOuptut;
 import com.operativus.senacrs.audit.testutils.CompareTextUtils;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
