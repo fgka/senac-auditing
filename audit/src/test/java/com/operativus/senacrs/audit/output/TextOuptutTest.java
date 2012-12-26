@@ -80,7 +80,7 @@ public class TextOuptutTest {
 
 		TextOuptut obj = null;
 
-		obj = new TextOuptut();
+		obj = TextOuptut.getInstance();
 		try {
 			obj.print(null);
 			fail("null accepted");
@@ -96,7 +96,7 @@ public class TextOuptutTest {
 		Form form = null;
 		StringBuilder result = null;
 
-		obj = new TextOuptut();
+		obj = TextOuptut.getInstance();
 		form = this.readForm(INPUT_FILE);
 		result = obj.buildOutput(form);
 		Assert.assertNotNull(result);

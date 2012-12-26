@@ -7,11 +7,14 @@ import java.util.List;
 import com.operativus.senacrs.audit.model.EvaluationActivity;
 import com.operativus.senacrs.audit.model.EvaluationGrade;
 import com.operativus.senacrs.audit.model.Form;
+import com.operativus.senacrs.audit.model.Identification;
 import com.operativus.senacrs.audit.model.RelatedSkill;
 import com.operativus.senacrs.audit.model.StudentEvaluation;
 
 public class TextOuptut
 		implements FormOutput {
+	
+	private static final TextOuptut instance = new TextOuptut();
 
 	private static final String NL = System.getProperty("line.separator");
 
@@ -20,7 +23,14 @@ public class TextOuptut
 		REQUIRED_ATTITUDE,
 		RESULTS_EVIDENCE, ;
 	}
+	
+	private TextOutputIdentification idTextOut = TextOutputIdentification.getInstance();
 
+	private TextOuptut() {
+		
+		super();
+	}
+	
 	@Override
 	public void print(final Form input) {
 
@@ -50,41 +60,19 @@ public class TextOuptut
 	}
 
 	private void buildFirstBlock(final StringBuilder builder, final Form input) {
+		
+		Identification id = null;
 
-		this.buildCourse(builder, input);
+		id = input.getId();
+		this.idTextOut.buildCourse(builder, id);
 		builder.append(NL);
-		this.buildUnit(builder, input);
+		this.idTextOut.buildUnit(builder, id);
 		builder.append(NL);
-		this.buildAcademic(builder, input);
+		this.idTextOut.buildAcademic(builder, id);
 		builder.append(NL);
-		this.buildClass(builder, input);
+		this.idTextOut.buildClass(builder, id);
 		builder.append(NL);
-		this.buildSemester(builder, input);
-	}
-
-	private void buildCourse(final StringBuilder builder, final Form input) {
-
-		builder.append(input.getId().getCourse());
-	}
-
-	private void buildUnit(final StringBuilder builder, final Form input) {
-
-		builder.append(input.getId().getUnit());
-	}
-
-	private void buildAcademic(final StringBuilder builder, final Form input) {
-
-		builder.append(input.getId().getAcademic());
-	}
-
-	private void buildClass(final StringBuilder builder, final Form input) {
-
-		builder.append(input.getId().getClassDesc());
-	}
-
-	private void buildSemester(final StringBuilder builder, final Form input) {
-
-		builder.append(input.getId().getSemester());
+		this.idTextOut.buildSemester(builder, id);
 	}
 
 	private void buildSecondBlock(final StringBuilder builder, final Form input) {
@@ -105,7 +93,7 @@ public class TextOuptut
 		builder.append(NL);
 		this.buildLastDay(builder, input);
 		builder.append(NL);
-		this.buildAcademic(builder, input);
+		this.idTextOut.buildAcademic(builder, input.getId());
 	}
 
 	private void buildEssentialSkill(final StringBuilder builder, final Form input) {
@@ -248,5 +236,11 @@ public class TextOuptut
 	private void buildLastDay(final StringBuilder builder, final Form input) {
 
 		builder.append(input.getId().toStringLastDay());
+	}
+	
+	
+	public static TextOuptut getInstance() {
+
+		return instance;
 	}
 }

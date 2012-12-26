@@ -1,0 +1,59 @@
+package com.operativus.senacrs.audit.output;
+
+import com.operativus.senacrs.audit.model.Identification;
+
+
+public class TextOutputIdentification {
+	
+	private static final TextOutputIdentification instance = new TextOutputIdentification();
+	
+	private TextOutputIdentification() {
+		
+		super();
+	}
+
+	public void buildCourse(final StringBuilder builder, final Identification input) {
+
+		checkArguments(builder, input);
+		builder.append(input.getCourse());
+	}
+
+	public void checkArguments(final StringBuilder builder, final Identification input) {
+
+		if (builder == null) {
+			throw new IllegalArgumentException();
+		}
+		if (input == null) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	public void buildUnit(final StringBuilder builder, final Identification input) {
+
+		checkArguments(builder, input);
+		builder.append(input.getUnit());
+	}
+
+	public void buildAcademic(final StringBuilder builder, final Identification input) {
+
+		checkArguments(builder, input);
+		builder.append(input.getAcademic());
+	}
+
+	public void buildClass(final StringBuilder builder, final Identification input) {
+
+		checkArguments(builder, input);
+		builder.append(input.getClassDesc());
+	}
+
+	public void buildSemester(final StringBuilder builder, final Identification input) {
+
+		checkArguments(builder, input);
+		builder.append(input.getSemester());
+	}	
+	
+	public static TextOutputIdentification getInstance() {
+
+		return instance;
+	}
+}
