@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import com.operativus.senacrs.audit.model.EvaluationActivity;
 import com.operativus.senacrs.audit.model.EvaluationGrade;
 import com.operativus.senacrs.audit.model.Form;
 import com.operativus.senacrs.audit.model.Identification;
@@ -20,6 +19,7 @@ public class TextOuptut
 
 	private TextOutputIdentification idTextOut = TextOutputIdentification.getInstance();
 	private TextOutputSkillSet skillTextOut = TextOutputSkillSet.getInstance();
+	private TextOutputCollectionEvaluationActivity activitiesTextOut = TextOutputCollectionEvaluationActivity.getInstance();
 
 	private TextOuptut() {
 		
@@ -73,8 +73,10 @@ public class TextOuptut
 	private void buildSecondBlock(final StringBuilder builder, final Form input) {
 
 		SkillSet skillSet = null;
+		Identification id = null;
 		
 		skillSet = input.getSkillSet();
+		id = input.getId();
 		this.skillTextOut.buildEssentialSkill(builder, skillSet);
 		builder.append(NL);
 		this.skillTextOut.buildRelatedSkills(builder, skillSet);
@@ -83,44 +85,16 @@ public class TextOuptut
 		builder.append(NL);
 		this.skillTextOut.buildResultEvidences(builder, skillSet);
 		builder.append(NL);
-		this.buildActivities(builder, input);
+		this.activitiesTextOut.buildActivities(builder, input.getActivities());
 		builder.append(NL);
 		this.buildStudents(builder, input);
 		builder.append(NL);
 		this.buildNotes(builder, input);
 		builder.append(NL);
-		this.buildLastDay(builder, input);
+		this.idTextOut.buildLastDay(builder, id);
 		builder.append(NL);
-		this.idTextOut.buildAcademic(builder, input.getId());
+		this.idTextOut.buildAcademic(builder, id);
 	}
-
-	private void buildActivities(final StringBuilder builder, final Form input) {
-
-		this.buildActivities(builder, input.getActivities());
-	}
-
-	private void buildActivities(final StringBuilder builder, final Collection<EvaluationActivity> activities) {
-
-		Iterator<EvaluationActivity> iter = null;
-
-		iter = activities.iterator();
-		if (iter.hasNext()) {
-			this.buildActivity(builder, iter.next());
-			while (iter.hasNext()) {
-				builder.append(", ");
-				this.buildActivity(builder, iter.next());
-			}
-		}
-	}
-
-	private void buildActivity(final StringBuilder builder, final EvaluationActivity activity) {
-
-		builder.append(activity.getName());
-		builder.append("(");
-		builder.append(activity.getDescription());
-		builder.append(")");
-	}
-
 	private void buildStudents(final StringBuilder builder, final Form input) {
 
 		this.buildStudents(builder, input.getEvaluations());
@@ -171,13 +145,7 @@ public class TextOuptut
 	private void buildNotes(final StringBuilder builder, final Form input) {
 
 		builder.append(input.getNotes());
-	}
-
-	private void buildLastDay(final StringBuilder builder, final Form input) {
-
-		builder.append(input.getId().toStringLastDay());
-	}
-	
+	}	
 	
 	public static TextOuptut getInstance() {
 

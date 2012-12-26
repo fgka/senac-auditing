@@ -51,6 +51,12 @@ public class TextOutputIdentification {
 		checkArguments(builder, input);
 		builder.append(input.getSemester());
 	}	
+
+	public void buildLastDay(final StringBuilder builder, final Identification input) {
+
+		checkArguments(builder, input);
+		builder.append(input.toStringLastDay());
+	}
 	
 	public static TextOutputIdentification getInstance() {
 
