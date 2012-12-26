@@ -8,7 +8,7 @@ import com.operativus.senacrs.audit.model.EvaluationActivity;
 import com.operativus.senacrs.audit.model.EvaluationGrade;
 import com.operativus.senacrs.audit.model.Form;
 import com.operativus.senacrs.audit.model.Identification;
-import com.operativus.senacrs.audit.model.RelatedSkill;
+import com.operativus.senacrs.audit.model.SkillSet;
 import com.operativus.senacrs.audit.model.StudentEvaluation;
 
 public class TextOuptut
@@ -18,13 +18,8 @@ public class TextOuptut
 
 	private static final String NL = System.getProperty("line.separator");
 
-	private static enum RelatedSkillField {
-		DESCRIPTION,
-		REQUIRED_ATTITUDE,
-		RESULTS_EVIDENCE, ;
-	}
-	
 	private TextOutputIdentification idTextOut = TextOutputIdentification.getInstance();
+	private TextOutputSkillSet skillTextOut = TextOutputSkillSet.getInstance();
 
 	private TextOuptut() {
 		
@@ -77,13 +72,16 @@ public class TextOuptut
 
 	private void buildSecondBlock(final StringBuilder builder, final Form input) {
 
-		this.buildEssentialSkill(builder, input);
+		SkillSet skillSet = null;
+		
+		skillSet = input.getSkillSet();
+		this.skillTextOut.buildEssentialSkill(builder, skillSet);
 		builder.append(NL);
-		this.buildRelatedSkills(builder, input);
+		this.skillTextOut.buildRelatedSkills(builder, skillSet);
 		builder.append(NL);
-		this.buildRequiredAttitudes(builder, input);
+		this.skillTextOut.buildRequiredAttitudes(builder, skillSet);
 		builder.append(NL);
-		this.buildResultEvidences(builder, input);
+		this.skillTextOut.buildResultEvidences(builder, skillSet);
 		builder.append(NL);
 		this.buildActivities(builder, input);
 		builder.append(NL);
@@ -94,64 +92,6 @@ public class TextOuptut
 		this.buildLastDay(builder, input);
 		builder.append(NL);
 		this.idTextOut.buildAcademic(builder, input.getId());
-	}
-
-	private void buildEssentialSkill(final StringBuilder builder, final Form input) {
-
-		builder.append(input.getSkillSet().getEssential().getDescription());
-	}
-
-	private void buildRelatedSkills(final StringBuilder builder, final Form input) {
-
-		this.buildRelatedSkills(builder, input.getSkillSet().getSkills(), RelatedSkillField.DESCRIPTION);
-	}
-
-	private void buildRelatedSkills(final StringBuilder builder, final List<RelatedSkill> skills,
-			final RelatedSkillField field) {
-
-		Iterator<RelatedSkill> iter = null;
-
-		iter = skills.iterator();
-		if (iter.hasNext()) {
-			this.buildRelatedSkill(builder, iter, field);
-			while (iter.hasNext()) {
-				builder.append(", ");
-				this.buildRelatedSkill(builder, iter, field);
-			}
-		}
-	}
-
-	private void buildRelatedSkill(final StringBuilder builder, final Iterator<RelatedSkill> iter,
-			final RelatedSkillField field) {
-
-		String value = null;
-		RelatedSkill skill = null;
-
-		skill = iter.next();
-		switch (field) {
-		case DESCRIPTION:
-			value = skill.getDescription();
-			break;
-		case REQUIRED_ATTITUDE:
-			value = skill.getRequiredAttitude();
-			break;
-		case RESULTS_EVIDENCE:
-			value = skill.getResultsEvidence();
-			break;
-		default:
-			throw new IllegalArgumentException(String.valueOf(field));
-		}
-		builder.append(value);
-	}
-
-	private void buildRequiredAttitudes(final StringBuilder builder, final Form input) {
-
-		this.buildRelatedSkills(builder, input.getSkillSet().getSkills(), RelatedSkillField.REQUIRED_ATTITUDE);
-	}
-
-	private void buildResultEvidences(final StringBuilder builder, final Form input) {
-
-		this.buildRelatedSkills(builder, input.getSkillSet().getSkills(), RelatedSkillField.RESULTS_EVIDENCE);
 	}
 
 	private void buildActivities(final StringBuilder builder, final Form input) {
