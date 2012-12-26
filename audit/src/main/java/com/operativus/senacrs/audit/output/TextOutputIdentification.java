@@ -18,7 +18,7 @@ public class TextOutputIdentification {
 		builder.append(input.getCourse());
 	}
 
-	public void checkArguments(final StringBuilder builder, final Identification input) {
+	private void checkArguments(final StringBuilder builder, final Identification input) {
 
 		if (builder == null) {
 			throw new IllegalArgumentException();
