@@ -3,7 +3,7 @@ package com.operativus.senacrs.audit.model.form;
 public abstract class AbstractSequenceStringFieldComparable
 		implements Comparable<AbstractSequenceStringFieldComparable> {
 
-	protected final int sequence;
+	private final int sequence;
 
 	public AbstractSequenceStringFieldComparable(final int sequence) {
 

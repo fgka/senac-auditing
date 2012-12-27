@@ -6,7 +6,7 @@ import java.util.Iterator;
 import com.operativus.senacrs.audit.model.form.EvaluationActivity;
 
 
-public class TextOutputCollectionEvaluationActivity {
+public final class TextOutputCollectionEvaluationActivity {
 	
 	private static final String DESCRIPTION_SUFFIX_SEP_PARENS = ")";
 	private static final String DESCRIPTION_PREFIX_SEP_PARENS = "(";

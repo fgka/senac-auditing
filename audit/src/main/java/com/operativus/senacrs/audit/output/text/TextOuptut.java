@@ -5,7 +5,7 @@ import com.operativus.senacrs.audit.model.form.Identification;
 import com.operativus.senacrs.audit.model.form.SkillSet;
 import com.operativus.senacrs.audit.output.FormOutput;
 
-public class TextOuptut
+public final class TextOuptut
 		implements FormOutput {
 	
 	private static final TextOuptut instance = new TextOuptut();

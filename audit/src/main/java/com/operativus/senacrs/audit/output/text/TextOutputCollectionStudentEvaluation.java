@@ -8,7 +8,7 @@ import com.operativus.senacrs.audit.model.form.EvaluationGrade;
 import com.operativus.senacrs.audit.model.form.StudentEvaluation;
 
 
-public class TextOutputCollectionStudentEvaluation {
+public final class TextOutputCollectionStudentEvaluation {
 	
 	private static final String GRADES_PREFIX_SEP_PARENS = "(";
 	private static final String GRADES_SUFFIX_SEP_PARENS_EQUALS = ")=";

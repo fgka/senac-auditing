@@ -5,7 +5,7 @@ public class EvaluationActivity
 		AbstractSequenceStringFieldComparable {
 
 	private final EvaluationType type;
-	String name = null;
+	private String name = null;
 	private String description = null;
 
 	public EvaluationActivity(final int sequence, final EvaluationType type, final String name, final String description) {

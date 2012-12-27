@@ -3,7 +3,7 @@ package com.operativus.senacrs.audit.output.text;
 import com.operativus.senacrs.audit.model.form.Identification;
 
 
-public class TextOutputIdentification {
+public final class TextOutputIdentification {
 	
 	private static final TextOutputIdentification instance = new TextOutputIdentification();
 	

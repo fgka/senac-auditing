@@ -7,7 +7,7 @@ import com.operativus.senacrs.audit.model.form.RelatedSkill;
 import com.operativus.senacrs.audit.model.form.SkillSet;
 
 
-public class TextOutputSkillSet {
+public final class TextOutputSkillSet {
 	
 	private static final String FIELD_SEP_COMMA_SPACE = ", ";
 	private static final TextOutputSkillSet instance = new TextOutputSkillSet();

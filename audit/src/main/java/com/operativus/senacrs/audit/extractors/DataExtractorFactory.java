@@ -3,7 +3,7 @@ package com.operativus.senacrs.audit.extractors;
 import java.io.File;
 import java.net.URL;
 
-public class DataExtractorFactory {
+public final class DataExtractorFactory {
 
 	private static final DataExtractorFactory instance = new DataExtractorFactory();
 
