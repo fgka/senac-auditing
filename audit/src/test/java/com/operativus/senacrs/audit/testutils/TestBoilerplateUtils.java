@@ -65,10 +65,22 @@ public class TestBoilerplateUtils {
 	public static String randomString() {
 
 		String result = null;
-		int amount = 0;
+		
+		result = RandomStringUtils.random(getAmount());
 
-		amount = MIN_RAND + RAND.nextInt(MAX_RAND - MIN_RAND);
-		result = RandomStringUtils.random(amount);
+		return result;
+	}
+
+	private static int getAmount() {
+
+		return MIN_RAND + RAND.nextInt(MAX_RAND - MIN_RAND);
+	}
+
+	public static String randomAlphanumericString() {
+
+		String result = null;
+		
+		result = RandomStringUtils.randomAlphanumeric(getAmount());
 
 		return result;
 	}
