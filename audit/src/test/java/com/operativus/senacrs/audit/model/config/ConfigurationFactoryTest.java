@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.operativus.senacrs.audit.exceptions.MissingMinimalConfigurationEntry;
+import com.operativus.senacrs.audit.model.config.ConfigurationFactory.ConfigKey;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 
@@ -102,6 +103,7 @@ public class ConfigurationFactoryTest {
 	public void testCreateConfigurationNoBaseUrl() throws IOException {
 		
 		Configuration template = null;
+		boolean check = false;
 		
 		template = createRandomConfiguration();
 		template.setBaseUrl(null);
@@ -110,14 +112,25 @@ public class ConfigurationFactoryTest {
 			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
 			Assert.fail();
 		} catch (MissingMinimalConfigurationEntry e) {
-			Assert.assertTrue(true);			
+			check = containsFileAndField(e, ConfigKey.BASE_URL);
+			Assert.assertTrue(check);			
 		}
+	}
+
+	private boolean containsFileAndField(MissingMinimalConfigurationEntry e, ConfigKey key) {
+		
+		String msg = null;
+		
+		msg = e.getLocalizedMessage();
+	
+		return msg.contains(key.getKey()) && msg.contains(this.tempFile.getName());
 	}
 
 	@Test
 	public void testCreateConfigurationNoVersion() throws IOException {
 		
 		Configuration template = null;
+		boolean check = false;
 		
 		template = createRandomConfiguration();
 		template.setVersion(null);
@@ -126,7 +139,8 @@ public class ConfigurationFactoryTest {
 			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
 			Assert.fail();
 		} catch (MissingMinimalConfigurationEntry e) {
-			Assert.assertTrue(true);			
+			check = containsFileAndField(e, ConfigKey.VERSION);
+			Assert.assertTrue(check);			
 		}
 	}
 
@@ -134,6 +148,7 @@ public class ConfigurationFactoryTest {
 	public void testCreateConfigurationNoUsername() throws IOException {
 		
 		Configuration template = null;
+		boolean check = false;
 		
 		template = createRandomConfiguration();
 		template.setUsername(null);
@@ -142,7 +157,8 @@ public class ConfigurationFactoryTest {
 			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
 			Assert.fail();
 		} catch (MissingMinimalConfigurationEntry e) {
-			Assert.assertTrue(true);			
+			check = containsFileAndField(e, ConfigKey.USERNAME);
+			Assert.assertTrue(check);			
 		}
 	}
 
