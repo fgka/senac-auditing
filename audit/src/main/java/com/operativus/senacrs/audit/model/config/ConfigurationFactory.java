@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import com.operativus.senacrs.audit.exceptions.MissingMinimalConfigurationEntry;
+
 
 public final class ConfigurationFactory {
 
@@ -50,6 +52,7 @@ public final class ConfigurationFactory {
 		
 		props = getProperties(filename);
 		result = read(props);
+		checkMinimalNonNullValeus(filename, result);
 		
 		return result;
 	}
@@ -82,9 +85,9 @@ public final class ConfigurationFactory {
 
 		String value = null;
 		
-		value = props.getProperty(key.getKey());
+		value = props.getProperty(key.getKey());		
 		switch (key) {
-		case BASE_URL:
+		case BASE_URL:			
 			result.setBaseUrl(value);
 			break;
 		case PASSWORD:	
@@ -99,5 +102,23 @@ public final class ConfigurationFactory {
 		default:
 			throw new IllegalArgumentException(String.valueOf(key)); 
 		}		
+	}
+
+	private static void checkMinimalNonNullValeus(String filename, Configuration result) {
+	
+		if (!isValueOk(result.getBaseUrl())) {
+			throw new MissingMinimalConfigurationEntry(filename, ConfigKey.BASE_URL.getKey());
+		}
+		if (!isValueOk(result.getUsername())) {
+			throw new MissingMinimalConfigurationEntry(filename, ConfigKey.USERNAME.getKey());
+		}
+		if (!isValueOk(result.getVersion())) {
+			throw new MissingMinimalConfigurationEntry(filename, ConfigKey.VERSION.getKey());
+		}		
+	}
+
+	private static boolean isValueOk(String value) {
+		
+		return value != null && !value.isEmpty();
 	}
 }
