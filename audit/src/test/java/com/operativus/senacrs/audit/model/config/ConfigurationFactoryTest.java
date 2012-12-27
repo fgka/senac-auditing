@@ -62,6 +62,8 @@ public class ConfigurationFactoryTest {
 		for (ConfigurationFactory.ConfigKey k : ConfigurationFactory.ConfigKey.values()) {
 			putLine(writer, k, obj);
 		}
+		writer.flush();
+		writer.close();
 	}	
 	
 	private void putLine(BufferedWriter writer, ConfigurationFactory.ConfigKey key, Configuration obj) throws IOException {
