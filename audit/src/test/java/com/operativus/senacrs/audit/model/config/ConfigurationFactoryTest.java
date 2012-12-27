@@ -46,10 +46,10 @@ public class ConfigurationFactoryTest {
 		Configuration result = null;
 		
 		result = new Configuration();
-		result.setBaseUrl(TestBoilerplateUtils.randomString());
-		result.setVersion(TestBoilerplateUtils.randomString());
-		result.setUsername(TestBoilerplateUtils.randomString());
-		result.setPassword(TestBoilerplateUtils.randomString());
+		result.setBaseUrl(TestBoilerplateUtils.randomAlphanumericString());
+		result.setVersion(TestBoilerplateUtils.randomAlphanumericString());
+		result.setUsername(TestBoilerplateUtils.randomAlphanumericString());
+		result.setPassword(TestBoilerplateUtils.randomAlphanumericString());
 
 		return result;
 	}
