@@ -1,4 +1,4 @@
-package com.operativus.senacrs.audit.model;
+package com.operativus.senacrs.audit.model.form;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -3,8 +3,8 @@ package com.operativus.senacrs.audit.output.text;
 import java.util.Iterator;
 import java.util.List;
 
-import com.operativus.senacrs.audit.model.RelatedSkill;
-import com.operativus.senacrs.audit.model.SkillSet;
+import com.operativus.senacrs.audit.model.form.RelatedSkill;
+import com.operativus.senacrs.audit.model.form.SkillSet;
 
 
 public class TextOutputSkillSet {

@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import com.operativus.senacrs.audit.model.EvaluationGrade;
-import com.operativus.senacrs.audit.model.StudentEvaluation;
+import com.operativus.senacrs.audit.model.form.EvaluationGrade;
+import com.operativus.senacrs.audit.model.form.StudentEvaluation;
 
 
 public class TextOutputCollectionStudentEvaluation {

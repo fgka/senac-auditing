@@ -1,6 +1,6 @@
 package com.operativus.senacrs.audit.output.text;
 
-import com.operativus.senacrs.audit.model.Identification;
+import com.operativus.senacrs.audit.model.form.Identification;
 
 
 public class TextOutputIdentification {

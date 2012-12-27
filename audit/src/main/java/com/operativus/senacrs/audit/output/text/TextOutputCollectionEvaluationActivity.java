@@ -3,7 +3,7 @@ package com.operativus.senacrs.audit.output.text;
 import java.util.Collection;
 import java.util.Iterator;
 
-import com.operativus.senacrs.audit.model.EvaluationActivity;
+import com.operativus.senacrs.audit.model.form.EvaluationActivity;
 
 
 public class TextOutputCollectionEvaluationActivity {

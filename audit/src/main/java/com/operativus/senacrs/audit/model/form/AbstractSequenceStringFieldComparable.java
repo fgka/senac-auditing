@@ -1,4 +1,4 @@
-package com.operativus.senacrs.audit.model;
+package com.operativus.senacrs.audit.model.form;
 
 public abstract class AbstractSequenceStringFieldComparable
 		implements Comparable<AbstractSequenceStringFieldComparable> {
