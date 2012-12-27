@@ -54,7 +54,7 @@ public class StudentEvaluation
 			throw new InvalidEvaluationType();
 		}
 		if (activity.getType() != grade.getType()) {
-			throw new MismatchingEvaluationType(activity, grade);
+			throw new MismatchingEvaluationType(activity.getType(), grade.getType());
 		}
 
 		return this.grades.put(activity, grade);
