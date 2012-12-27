@@ -46,7 +46,7 @@ public class MessagesCentralTest {
 					return TestBoilerplateUtils.randomString();
 				}
 			};
-			MessagesCentral.getInstance().getMessage(key);
+			MessagesCentral.getMessage(key);
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
 		}
@@ -61,8 +61,8 @@ public class MessagesCentralTest {
 
 		try {
 			arg = TestBoilerplateUtils.randomString();
-			MessagesCentral.getInstance().addMessagesFile(INPUT_FILE);
-			result = MessagesCentral.getInstance().getMessage(TestMessagesEnum.TEST_MESSAGE, arg);
+			MessagesCentral.addMessagesFile(INPUT_FILE);
+			result = MessagesCentral.getMessage(TestMessagesEnum.TEST_MESSAGE, arg);
 			Assert.assertNotNull(result);
 			check = result.contains(arg);
 			Assert.assertTrue(check);
@@ -77,8 +77,8 @@ public class MessagesCentralTest {
 		boolean result = false;
 
 		try {
-			MessagesCentral.getInstance().addMessagesFile(INPUT_FILE);
-			result = MessagesCentral.getInstance().hasKey(TestMessagesEnum.TEST_MESSAGE);
+			MessagesCentral.addMessagesFile(INPUT_FILE);
+			result = MessagesCentral.hasKey(TestMessagesEnum.TEST_MESSAGE);
 			Assert.assertTrue(result);
 		} catch (IOException e) {
 			Assert.fail(e.getLocalizedMessage());
@@ -89,7 +89,7 @@ public class MessagesCentralTest {
 	public void testHasKeyNull() {
 		
 		try {
-			MessagesCentral.getInstance().hasKey(null);
+			MessagesCentral.hasKey(null);
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
 		}
@@ -109,7 +109,7 @@ public class MessagesCentralTest {
 					return null;
 				}
 			};
-			MessagesCentral.getInstance().hasKey(key);
+			MessagesCentral.hasKey(key);
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
 		}

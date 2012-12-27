@@ -19,7 +19,7 @@ public class MismatchingEvaluationType
 		Messages key = null;
 		
 		key = ExceptionMessagesEnum.EVAL_TYPE_MISMATCH;
-		result = MessagesCentral.getInstance().getMessage(key, activityType, gradeType);
+		result = MessagesCentral.getMessage(key, activityType, gradeType);
 		
 		return result;
 	}

@@ -6,6 +6,7 @@ import com.operativus.senacrs.audit.messages.Messages;
 public enum ExceptionMessagesEnum implements Messages {
 	
 	EVAL_TYPE_MISMATCH("exception.eval.type.mismatch"),
+	NULL_ARGUMENT("exception.null.argument"),
 	;
 	
 	private final String key;

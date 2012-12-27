@@ -12,15 +12,24 @@ public final class MessagesCentral {
 	
 	private static final String NULL_ARGUMENT_KEY = "Null argument [key]";
 	private static final String NULL_KEY_VALUE = "Key is valid, but its value is null";
-	private static final MessagesCentral instance = new MessagesCentral();
-	private final Properties properties = new Properties();
+	private static final Properties properties = new Properties();	
+	private static final String[] LIST_FILES = new String[] {
+		"messages_ui.properties",
+		"messages.properties",
+	};
 	
-	private MessagesCentral() {
-		
-		super();
+	static {
+		for (String filename : LIST_FILES) {
+			try {
+				properties.load(MessagesCentral.class.getResourceAsStream("/" + filename));
+			} catch (IOException e) {
+				//TODO
+				e.printStackTrace();
+			}
+		}
 	}
 	
-	public String getMessage(Messages key, Object... arguments) {
+	public static String getMessage(Messages key, Object... arguments) {
 		
 		String result = null;
 		String keyValue = null;
@@ -30,13 +39,13 @@ public final class MessagesCentral {
 		if (!hasKey(key)) {
 			throw new IllegalArgumentException("Informed key [" + keyValue + "] does not exists");
 		}
-		tmpl = this.properties.getProperty(keyValue);
+		tmpl = properties.getProperty(keyValue);
 		result = MessageFormat.format(tmpl, arguments);
 		
 		return result;
 	}
 	
-	private String getKeyValue(Messages key) {
+	private static String getKeyValue(Messages key) {
 	
 		String result;
 		
@@ -51,27 +60,22 @@ public final class MessagesCentral {
 		return result;
 	}
 
-	public void addMessagesFile(String filename) throws IOException {
+	public static void addMessagesFile(String filename) throws IOException {
 
 		InputStream in = null;
 		
 		in = new FileInputStream(new File(filename));
-		this.properties.load(in);
+		properties.load(in);
 	}
 	
-	public boolean hasKey(Messages key) {
+	public static boolean hasKey(Messages key) {
 		
 		boolean result = false;
 		String keyStr = null;
 		
 		keyStr = getKeyValue(key);
-		result = this.properties.containsKey(keyStr);
+		result = properties.containsKey(keyStr);
 		
 		return result;
-	}
-
-	public static MessagesCentral getInstance() {
-
-		return instance;
 	}
 }
