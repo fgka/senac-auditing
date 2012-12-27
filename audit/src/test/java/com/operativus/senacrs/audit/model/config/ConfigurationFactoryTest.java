@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.operativus.senacrs.audit.exceptions.MissingMinimalConfigurationEntry;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 
@@ -70,28 +71,92 @@ public class ConfigurationFactoryTest {
 		
 		switch (key) {
 		case BASE_URL:
-			putLine(writer, key, obj.getBaseUrl());
+			putNonNullValueLine(writer, key, obj.getBaseUrl());
 			break;
 		case PASSWORD:
-			putLine(writer, key, obj.getPassword());			
+			putNonNullValueLine(writer, key, obj.getPassword());			
 			break;
 		case USERNAME:
-			putLine(writer, key, obj.getUsername());
+			putNonNullValueLine(writer, key, obj.getUsername());
 			break;
 		case VERSION:
-			putLine(writer, key, obj.getVersion());
+			putNonNullValueLine(writer, key, obj.getVersion());
 			break;
 		default:
 			throw new IllegalArgumentException(String.valueOf(key));
 		}
 	}
 
-	private void putLine(BufferedWriter writer, ConfigurationFactory.ConfigKey key, Object value) throws IOException {
+	private void putNonNullValueLine(BufferedWriter writer, ConfigurationFactory.ConfigKey key, Object value) throws IOException {
 		
 		String line = null;
 		
-		line = key.getKey() + " = " + String.valueOf(value);
-		writer.write(line);
-		writer.newLine();		
+		if (value != null) {
+			line = key.getKey() + " = " + String.valueOf(value);
+			writer.write(line);
+			writer.newLine();
+		}
+	}
+
+	@Test
+	public void testCreateConfigurationNoBaseUrl() throws IOException {
+		
+		Configuration template = null;
+		
+		template = createRandomConfiguration();
+		template.setBaseUrl(null);
+		putToFile(template);
+		try {
+			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
+			Assert.fail();
+		} catch (MissingMinimalConfigurationEntry e) {
+			Assert.assertTrue(true);			
+		}
+	}
+
+	@Test
+	public void testCreateConfigurationNoVersion() throws IOException {
+		
+		Configuration template = null;
+		
+		template = createRandomConfiguration();
+		template.setVersion(null);
+		putToFile(template);
+		try {
+			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
+			Assert.fail();
+		} catch (MissingMinimalConfigurationEntry e) {
+			Assert.assertTrue(true);			
+		}
+	}
+
+	@Test
+	public void testCreateConfigurationNoUsername() throws IOException {
+		
+		Configuration template = null;
+		
+		template = createRandomConfiguration();
+		template.setUsername(null);
+		putToFile(template);
+		try {
+			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
+			Assert.fail();
+		} catch (MissingMinimalConfigurationEntry e) {
+			Assert.assertTrue(true);			
+		}
+	}
+
+	@Test
+	public void testCreateConfigurationNoPassword() throws IOException {
+		
+		Configuration template = null;
+		Configuration result = null;
+		
+		template = createRandomConfiguration();
+		template.setPassword(null);
+		putToFile(template);
+		result = ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
+		Assert.assertEquals(template, result);
+		Assert.assertNull(result.getPassword());
 	}
 }
