@@ -24,8 +24,11 @@ public class WebDataExtractor
 	@Override
 	public Form extract() {
 
-		// TODO Auto-generated method stub
-		return null;
+		Form result = null;
+		
+		result = new Form();
+
+		return result;
 	}
 
 }
