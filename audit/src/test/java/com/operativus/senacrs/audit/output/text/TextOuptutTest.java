@@ -69,8 +69,7 @@ public class TextOuptutTest {
 		}
 	}
 
-	private static EvaluationType DEFAULT_TYPE = EvaluationType.SENAC_LEVEL;
-
+	private static final EvaluationType DEFAULT_TYPE = EvaluationType.SENAC_LEVEL;
 	private static final String INPUT_FILE = TestBoilerplateUtils.TST_RESOURCES
 			+ "test_text_input.properties";
 	private static final String OUTPUT_FILE = TestBoilerplateUtils.TST_RESOURCES
