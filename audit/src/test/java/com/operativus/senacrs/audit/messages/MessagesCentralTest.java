@@ -12,7 +12,10 @@ public class MessagesCentralTest {
 	
 	private static enum TestMessagesEnum implements Messages {
 		
-		TEST_MESSAGE("test.message");
+		TEST_MESSAGE("test.message"),
+		TEST_MESSAGES_PROPERTIES("test.messages.properties"),
+		TEST_MESSAGES_UI_PROPERTIES("test.messages_ui.properties"),
+		;
 		
 		private final String key;
 		
@@ -31,6 +34,11 @@ public class MessagesCentralTest {
 
 	private static final String INPUT_FILE = TestBoilerplateUtils.TST_RESOURCES
 			+ "test_messages.properties";
+	private static final String TEST_MESSAGE = "Just a test message not really used outside testing";
+	private static final Messages[] PRE_LOADED_KEYS = new Messages[] {
+		TestMessagesEnum.TEST_MESSAGES_PROPERTIES,
+		TestMessagesEnum.TEST_MESSAGES_UI_PROPERTIES,
+	};
 
 	@Test
 	public void testGetMessageNonExistent() {
@@ -68,6 +76,17 @@ public class MessagesCentralTest {
 			Assert.assertTrue(check);
 		} catch (IOException e) {
 			Assert.fail(e.getLocalizedMessage());
+		}
+	}
+
+	@Test
+	public void testGetMessagePreLoaded() {
+		
+		String result = null;
+
+		for (Messages k : PRE_LOADED_KEYS) {
+			result = MessagesCentral.getMessage(k);				
+			Assert.assertEquals(TEST_MESSAGE, result);
 		}
 	}
 
