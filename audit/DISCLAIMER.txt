@@ -1,0 +1,5 @@
+For security reasons my original Selenium scripts and HTML samples are not part of the repository.
+The main issue is not exposing the server to unwanted attention and therefore I comply with anonymity.
+
+If I mistakenly left any sensitive information open I kindly ask for you to disclose it and inform me.
+ 

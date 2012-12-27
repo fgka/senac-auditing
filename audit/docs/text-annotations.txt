@@ -1,0 +1,8 @@
+Below are the place holders to be put on a configuration file.
+
+@BASE_URL@
+@VERSION@
+@USERNAME@
+@PASSWORD@
+@YEAR@
+@DISCIPLINE_NAME@
