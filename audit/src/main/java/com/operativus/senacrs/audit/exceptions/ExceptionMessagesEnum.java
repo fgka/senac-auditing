@@ -7,6 +7,7 @@ public enum ExceptionMessagesEnum implements Messages {
 	
 	EVAL_TYPE_MISMATCH("exception.eval.type.mismatch"),
 	NULL_ARGUMENT("exception.null.argument"),
+	MISSING_MINIMAL_CONFIG_ENTRY("exception.missing.config.entry"),
 	;
 	
 	private final String key;
