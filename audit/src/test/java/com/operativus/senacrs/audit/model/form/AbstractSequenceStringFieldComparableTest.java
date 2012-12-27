@@ -3,7 +3,6 @@ package com.operativus.senacrs.audit.model.form;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.operativus.senacrs.audit.model.form.AbstractSequenceStringFieldComparable;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class AbstractSequenceStringFieldComparableTest {

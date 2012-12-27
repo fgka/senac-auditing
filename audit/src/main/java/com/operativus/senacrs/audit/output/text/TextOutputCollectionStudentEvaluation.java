@@ -7,17 +7,16 @@ import java.util.List;
 import com.operativus.senacrs.audit.model.form.EvaluationGrade;
 import com.operativus.senacrs.audit.model.form.StudentEvaluation;
 
-
 public final class TextOutputCollectionStudentEvaluation {
-	
+
 	private static final String GRADES_PREFIX_SEP_PARENS = "(";
 	private static final String GRADES_SUFFIX_SEP_PARENS_EQUALS = ")=";
 	private static final String FIELD_SEP_COMMA_SPACE = ", ";
 	private static final String FIELD_SEP_COMMA = ",";
 	private static final TextOutputCollectionStudentEvaluation instance = new TextOutputCollectionStudentEvaluation();
-	
+
 	private TextOutputCollectionStudentEvaluation() {
-		
+
 		super();
 	}
 
@@ -26,7 +25,7 @@ public final class TextOutputCollectionStudentEvaluation {
 		Iterator<StudentEvaluation> iter = null;
 		StudentEvaluation eval = null;
 
-		checkArguments(builder, input);
+		this.checkArguments(builder, input);
 		iter = input.iterator();
 		if (iter.hasNext()) {
 			eval = iter.next();
@@ -77,7 +76,6 @@ public final class TextOutputCollectionStudentEvaluation {
 		builder.append(grade.toString());
 	}
 
-	
 	public static TextOutputCollectionStudentEvaluation getInstance() {
 
 		return instance;

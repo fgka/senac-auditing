@@ -6,12 +6,11 @@ import java.util.List;
 import com.operativus.senacrs.audit.model.form.RelatedSkill;
 import com.operativus.senacrs.audit.model.form.SkillSet;
 
-
 public final class TextOutputSkillSet {
-	
+
 	private static final String FIELD_SEP_COMMA_SPACE = ", ";
 	private static final TextOutputSkillSet instance = new TextOutputSkillSet();
-	
+
 	private static enum RelatedSkillField {
 		DESCRIPTION,
 		REQUIRED_ATTITUDE,
@@ -19,13 +18,13 @@ public final class TextOutputSkillSet {
 	}
 
 	private TextOutputSkillSet() {
-		
+
 		super();
 	}
 
 	public void buildEssentialSkill(final StringBuilder builder, final SkillSet input) {
 
-		checkArguments(builder, input);
+		this.checkArguments(builder, input);
 		builder.append(input.getEssential().getDescription());
 	}
 
@@ -41,7 +40,7 @@ public final class TextOutputSkillSet {
 
 	public void buildRelatedSkills(final StringBuilder builder, final SkillSet input) {
 
-		checkArguments(builder, input);
+		this.checkArguments(builder, input);
 		this.buildRelatedSkills(builder, input.getSkills(), RelatedSkillField.DESCRIPTION);
 	}
 
@@ -86,16 +85,16 @@ public final class TextOutputSkillSet {
 
 	public void buildRequiredAttitudes(final StringBuilder builder, final SkillSet input) {
 
-		checkArguments(builder, input);
+		this.checkArguments(builder, input);
 		this.buildRelatedSkills(builder, input.getSkills(), RelatedSkillField.REQUIRED_ATTITUDE);
 	}
 
 	public void buildResultEvidences(final StringBuilder builder, final SkillSet input) {
 
-		checkArguments(builder, input);
+		this.checkArguments(builder, input);
 		this.buildRelatedSkills(builder, input.getSkills(), RelatedSkillField.RESULTS_EVIDENCE);
 	}
-	
+
 	public static TextOutputSkillSet getInstance() {
 
 		return instance;

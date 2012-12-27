@@ -5,12 +5,11 @@ import org.junit.Test;
 
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
-
 public class ExceptionFactoryTest {
 
 	@Test
 	public void testGetNullArgumentExceptionNull() {
-		
+
 		try {
 			ExceptionFactory.getInstance().getNullArgumentException(null);
 			Assert.fail();
@@ -21,7 +20,7 @@ public class ExceptionFactoryTest {
 
 	@Test
 	public void testGetNullArgumentException() {
-		
+
 		IllegalArgumentException result = null;
 		String arg = null;
 		String msg = null;

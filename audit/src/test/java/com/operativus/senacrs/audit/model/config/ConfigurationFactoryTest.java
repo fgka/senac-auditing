@@ -14,15 +14,14 @@ import com.operativus.senacrs.audit.exceptions.MissingMinimalConfigurationEntry;
 import com.operativus.senacrs.audit.model.config.ConfigurationFactory.ConfigKey;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
-
 public class ConfigurationFactoryTest {
 
 	private File tempFile = null;
-	
+
 	@Before
 	public void setUp() throws Exception {
 
-		tempFile = File.createTempFile("config", null);
+		this.tempFile = File.createTempFile("config", null);
 	}
 
 	@After
@@ -33,20 +32,20 @@ public class ConfigurationFactoryTest {
 
 	@Test
 	public void testCreateConfigurationString() throws IOException {
-		
+
 		Configuration result = null;
 		Configuration expected = null;
-		
-		expected = createRandomConfiguration();
-		putToFile(expected);
+
+		expected = this.createRandomConfiguration();
+		this.putToFile(expected);
 		result = ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
 		Assert.assertEquals(expected, result);
 	}
 
 	private Configuration createRandomConfiguration() {
-		
+
 		Configuration result = null;
-		
+
 		result = new Configuration();
 		result.setBaseUrl(TestBoilerplateUtils.randomAlphanumericString());
 		result.setVersion(TestBoilerplateUtils.randomAlphanumericString());
@@ -56,42 +55,44 @@ public class ConfigurationFactoryTest {
 		return result;
 	}
 
-	private void putToFile(Configuration obj) throws IOException {
+	private void putToFile(final Configuration obj) throws IOException {
 
 		BufferedWriter writer = null;
-		
-		writer = new BufferedWriter(new FileWriter(tempFile));
+
+		writer = new BufferedWriter(new FileWriter(this.tempFile));
 		for (ConfigurationFactory.ConfigKey k : ConfigurationFactory.ConfigKey.values()) {
-			putLine(writer, k, obj);
+			this.putLine(writer, k, obj);
 		}
 		writer.flush();
 		writer.close();
-	}	
-	
-	private void putLine(BufferedWriter writer, ConfigurationFactory.ConfigKey key, Configuration obj) throws IOException {
-		
+	}
+
+	private void putLine(final BufferedWriter writer, final ConfigurationFactory.ConfigKey key, final Configuration obj)
+			throws IOException {
+
 		switch (key) {
 		case BASE_URL:
-			putNonNullValueLine(writer, key, obj.getBaseUrl());
+			this.putNonNullValueLine(writer, key, obj.getBaseUrl());
 			break;
 		case PASSWORD:
-			putNonNullValueLine(writer, key, obj.getPassword());			
+			this.putNonNullValueLine(writer, key, obj.getPassword());
 			break;
 		case USERNAME:
-			putNonNullValueLine(writer, key, obj.getUsername());
+			this.putNonNullValueLine(writer, key, obj.getUsername());
 			break;
 		case VERSION:
-			putNonNullValueLine(writer, key, obj.getVersion());
+			this.putNonNullValueLine(writer, key, obj.getVersion());
 			break;
 		default:
 			throw new IllegalArgumentException(String.valueOf(key));
 		}
 	}
 
-	private void putNonNullValueLine(BufferedWriter writer, ConfigurationFactory.ConfigKey key, Object value) throws IOException {
-		
+	private void putNonNullValueLine(final BufferedWriter writer, final ConfigurationFactory.ConfigKey key,
+			final Object value) throws IOException {
+
 		String line = null;
-		
+
 		if (value != null) {
 			line = key.getKey() + " = " + String.valueOf(value);
 			writer.write(line);
@@ -101,76 +102,76 @@ public class ConfigurationFactoryTest {
 
 	@Test
 	public void testCreateConfigurationNoBaseUrl() throws IOException {
-		
+
 		Configuration template = null;
 		boolean check = false;
-		
-		template = createRandomConfiguration();
+
+		template = this.createRandomConfiguration();
 		template.setBaseUrl(null);
-		putToFile(template);
+		this.putToFile(template);
 		try {
 			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
 			Assert.fail();
 		} catch (MissingMinimalConfigurationEntry e) {
-			check = containsFileAndField(e, ConfigKey.BASE_URL);
-			Assert.assertTrue(check);			
+			check = this.containsFileAndField(e, ConfigKey.BASE_URL);
+			Assert.assertTrue(check);
 		}
 	}
 
-	private boolean containsFileAndField(MissingMinimalConfigurationEntry e, ConfigKey key) {
-		
+	private boolean containsFileAndField(final MissingMinimalConfigurationEntry e, final ConfigKey key) {
+
 		String msg = null;
-		
+
 		msg = e.getLocalizedMessage();
-	
+
 		return msg.contains(key.getKey()) && msg.contains(this.tempFile.getName());
 	}
 
 	@Test
 	public void testCreateConfigurationNoVersion() throws IOException {
-		
+
 		Configuration template = null;
 		boolean check = false;
-		
-		template = createRandomConfiguration();
+
+		template = this.createRandomConfiguration();
 		template.setVersion(null);
-		putToFile(template);
+		this.putToFile(template);
 		try {
 			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
 			Assert.fail();
 		} catch (MissingMinimalConfigurationEntry e) {
-			check = containsFileAndField(e, ConfigKey.VERSION);
-			Assert.assertTrue(check);			
+			check = this.containsFileAndField(e, ConfigKey.VERSION);
+			Assert.assertTrue(check);
 		}
 	}
 
 	@Test
 	public void testCreateConfigurationNoUsername() throws IOException {
-		
+
 		Configuration template = null;
 		boolean check = false;
-		
-		template = createRandomConfiguration();
+
+		template = this.createRandomConfiguration();
 		template.setUsername(null);
-		putToFile(template);
+		this.putToFile(template);
 		try {
 			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
 			Assert.fail();
 		} catch (MissingMinimalConfigurationEntry e) {
-			check = containsFileAndField(e, ConfigKey.USERNAME);
-			Assert.assertTrue(check);			
+			check = this.containsFileAndField(e, ConfigKey.USERNAME);
+			Assert.assertTrue(check);
 		}
 	}
 
 	@Test
 	public void testCreateConfigurationNoPassword() throws IOException {
-		
+
 		Configuration template = null;
 		Configuration result = null;
-		
-		template = createRandomConfiguration();
+
+		template = this.createRandomConfiguration();
 		template.setPassword(null);
-		putToFile(template);
+		this.putToFile(template);
 		result = ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
 		Assert.assertEquals(template, result);
 		Assert.assertNull(result.getPassword());

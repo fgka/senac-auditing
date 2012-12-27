@@ -5,16 +5,15 @@ import java.util.Iterator;
 
 import com.operativus.senacrs.audit.model.form.EvaluationActivity;
 
-
 public final class TextOutputCollectionEvaluationActivity {
-	
+
 	private static final String DESCRIPTION_SUFFIX_SEP_PARENS = ")";
 	private static final String DESCRIPTION_PREFIX_SEP_PARENS = "(";
 	private static final String FIELD_SEP_COMMA_SPACE = ", ";
 	private static final TextOutputCollectionEvaluationActivity instance = new TextOutputCollectionEvaluationActivity();
-	
+
 	private TextOutputCollectionEvaluationActivity() {
-		
+
 		super();
 	}
 
@@ -22,7 +21,7 @@ public final class TextOutputCollectionEvaluationActivity {
 
 		Iterator<EvaluationActivity> iter = null;
 
-		checkArguments(builder, input);
+		this.checkArguments(builder, input);
 		iter = input.iterator();
 		if (iter.hasNext()) {
 			this.buildActivity(builder, iter.next());

@@ -5,10 +5,6 @@ import org.junit.Test;
 
 import com.operativus.senacrs.audit.exceptions.InvalidEvaluationType;
 import com.operativus.senacrs.audit.exceptions.MismatchingEvaluationType;
-import com.operativus.senacrs.audit.model.form.EvaluationActivity;
-import com.operativus.senacrs.audit.model.form.EvaluationGrade;
-import com.operativus.senacrs.audit.model.form.EvaluationType;
-import com.operativus.senacrs.audit.model.form.StudentEvaluation;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class StudentEvaluationTest {

@@ -12,7 +12,7 @@ public final class DataExtractorFactory {
 		super();
 	}
 
-	public DataExtractor createExtractorForPropertiesFile(File file) {
+	public DataExtractor createExtractorForPropertiesFile(final File file) {
 
 		DataExtractor result = null;
 
@@ -21,7 +21,7 @@ public final class DataExtractorFactory {
 		return result;
 	}
 
-	public DataExtractor createExtractorForUrl(URL url) {
+	public DataExtractor createExtractorForUrl(final URL url) {
 
 		DataExtractor result = null;
 

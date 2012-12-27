@@ -7,21 +7,23 @@ import com.operativus.senacrs.audit.output.FormOutput;
 
 public final class TextOuptut
 		implements FormOutput {
-	
+
 	private static final TextOuptut instance = new TextOuptut();
 
 	private static final String NL = System.getProperty("line.separator");
 
-	private TextOutputIdentification idTextOut = TextOutputIdentification.getInstance();
-	private TextOutputSkillSet skillTextOut = TextOutputSkillSet.getInstance();
-	private TextOutputCollectionEvaluationActivity activitiesTextOut = TextOutputCollectionEvaluationActivity.getInstance();
-	private TextOutputCollectionStudentEvaluation evalsTextOut = TextOutputCollectionStudentEvaluation.getInstance();
+	private final TextOutputIdentification idTextOut = TextOutputIdentification.getInstance();
+	private final TextOutputSkillSet skillTextOut = TextOutputSkillSet.getInstance();
+	private final TextOutputCollectionEvaluationActivity activitiesTextOut = TextOutputCollectionEvaluationActivity
+			.getInstance();
+	private final TextOutputCollectionStudentEvaluation evalsTextOut = TextOutputCollectionStudentEvaluation
+			.getInstance();
 
 	private TextOuptut() {
-		
+
 		super();
 	}
-	
+
 	@Override
 	public void print(final Form input) {
 
@@ -51,7 +53,7 @@ public final class TextOuptut
 	}
 
 	private void buildFirstBlock(final StringBuilder builder, final Form input) {
-		
+
 		Identification id = null;
 
 		id = input.getId();
@@ -70,7 +72,7 @@ public final class TextOuptut
 
 		SkillSet skillSet = null;
 		Identification id = null;
-		
+
 		skillSet = input.getSkillSet();
 		id = input.getId();
 		this.skillTextOut.buildEssentialSkill(builder, skillSet);
@@ -95,8 +97,8 @@ public final class TextOuptut
 	private void buildNotes(final StringBuilder builder, final Form input) {
 
 		builder.append(input.getNotes());
-	}	
-	
+	}
+
 	public static TextOuptut getInstance() {
 
 		return instance;

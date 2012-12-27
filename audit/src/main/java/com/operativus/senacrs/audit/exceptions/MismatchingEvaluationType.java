@@ -7,24 +7,25 @@ import com.operativus.senacrs.audit.model.form.EvaluationType;
 @SuppressWarnings("serial")
 public class MismatchingEvaluationType
 		extends IllegalArgumentException {
-		
-	public MismatchingEvaluationType(EvaluationType activityType, EvaluationType gradeType) {
-		
+
+	public MismatchingEvaluationType(final EvaluationType activityType, final EvaluationType gradeType) {
+
 		super(getMessage(activityType, gradeType));
 	}
-	
-	private static String getMessage(EvaluationType activityType, EvaluationType gradeType) {
-		
+
+	private static String getMessage(final EvaluationType activityType, final EvaluationType gradeType) {
+
 		String result = null;
 		Messages key = null;
-		
+
 		key = ExceptionMessagesEnum.EVAL_TYPE_MISMATCH;
 		result = MessagesCentral.getMessage(key, activityType, gradeType);
-		
+
 		return result;
 	}
 
-	public MismatchingEvaluationType(Throwable cause, EvaluationType activityType, EvaluationType gradeType) {
+	public MismatchingEvaluationType(final Throwable cause, final EvaluationType activityType,
+			final EvaluationType gradeType) {
 
 		super(getMessage(activityType, gradeType), cause);
 	}

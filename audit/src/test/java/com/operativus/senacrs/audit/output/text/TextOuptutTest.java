@@ -28,7 +28,6 @@ import com.operativus.senacrs.audit.model.form.Identification;
 import com.operativus.senacrs.audit.model.form.RelatedSkill;
 import com.operativus.senacrs.audit.model.form.SkillSet;
 import com.operativus.senacrs.audit.model.form.StudentEvaluation;
-import com.operativus.senacrs.audit.output.text.TextOuptut;
 import com.operativus.senacrs.audit.testutils.CompareTextUtils;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 

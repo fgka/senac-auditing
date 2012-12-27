@@ -65,7 +65,7 @@ public class TestBoilerplateUtils {
 	public static String randomString() {
 
 		String result = null;
-		
+
 		result = RandomStringUtils.random(getAmount());
 
 		return result;
@@ -79,7 +79,7 @@ public class TestBoilerplateUtils {
 	public static String randomAlphanumericString() {
 
 		String result = null;
-		
+
 		result = RandomStringUtils.randomAlphanumeric(getAmount());
 
 		return result;
