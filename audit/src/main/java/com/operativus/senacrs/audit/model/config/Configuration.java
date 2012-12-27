@@ -1,8 +1,10 @@
 package com.operativus.senacrs.audit.model.config;
 
 
+
 public class Configuration {
 
+	private static final String SEP_PIPE = "|";
 	private String baseUrl = null;
 	private String version = null;
 	private String username = null;
@@ -107,5 +109,23 @@ public class Configuration {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
 		
+		StringBuilder result = null;
+		
+		result = new StringBuilder();
+		result.append(this.getClass().getSimpleName());
+		result.append(SEP_PIPE);
+		result.append(this.baseUrl);
+		result.append(SEP_PIPE);
+		result.append(this.version);
+		result.append(SEP_PIPE);
+		result.append(this.username);
+		result.append(SEP_PIPE);
+		result.append(this.password);
+	
+		return result.toString();
+	}
 }
