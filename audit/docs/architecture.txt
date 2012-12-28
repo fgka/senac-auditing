@@ -1,0 +1,50 @@
+Some architectural notes and broad package distribution:
+
+- Data or algorithm based?
+Neither and both. The report generation is, obviously, data based. In this case
+the From class is key to understand it.
+
+- How does it collect data?
+Basically through page navigation on the system. It is modeled as a graph (not
+a multigraph though and this is key) and for having all necessary data there is
+a minimal amount of nodes (pages) to be visited.
+
+- Is it a shortest-path approach?
+No it is, actually, a traveling salesman problem (TSP).
+
+- Why is it a TSP?
+Because for more than one discipline/course you have a node (page) checklist to
+visit and you would like to do it as quick as possible, so welcome to an 
+NP-hard problem and good luck.
+
+- How did you solved this TSP?
+I didn't, this is why the paths are given in an external file, although I put 
+an effort to choose the best approach that I could think of. To be fair, I 
+would need to take into account the wait time for each transition (weighted 
+edges by time consumed for reaching/generating a given node/page) and optimize
+for speed and not transitions. Thus, rendering the problem an Euclidean/Metric 
+TSP. But if found a more efficient path, please let me know and a lot of good
+luck with it :-)
+
+- What is the specific graph modeling adopted?
+Simple directed graph. Meaning that there is only one (or none) edge connecting 
+two given nodes and no loops are allowed, which would be a browser refresh 
+request.
+
+Data models:
+com.operativus.senacrs.audit.model
+
+Audit form model:
+com.operativus.senacrs.audit.model.form
+
+Sort of i18n (actually messages externalization):
+com.operativus.senacrs.audit.messages
+
+Audit form final format:
+com.operativus.senacrs.audit.output
+
+Exceptions:
+com.operativus.senacrs.audit.exceptions
+
+Data collection for form generation:
+com.operativus.senacrs.audit.extractors
