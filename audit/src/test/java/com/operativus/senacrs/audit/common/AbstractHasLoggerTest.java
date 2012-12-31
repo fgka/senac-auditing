@@ -18,9 +18,13 @@ public class AbstractHasLoggerTest {
 	public void tearDown() throws Exception {
 
 	}
+	
+	public static class MyHasLogger extends AbstractHasLogger {
+		
+	}
 
 	@Test
-	public void testGetLogger() {
+	public void testGetLoggerNonNull() {
 
 		HasLogger obj = null;
 		Logger result = null;
@@ -35,4 +39,15 @@ public class AbstractHasLoggerTest {
 		return new AbstractHasLogger(){};
 	}
 
+
+	@Test
+	public void testGetLoggerClassName() {
+
+		HasLogger obj = null;
+		Logger result = null;
+		
+		obj = new MyHasLogger();
+		result = obj.getLogger();
+		Assert.assertEquals(MyHasLogger.class.getName(), result.getName());
+	}
 }
