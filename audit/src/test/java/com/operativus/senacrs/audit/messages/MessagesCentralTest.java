@@ -1,7 +1,5 @@
 package com.operativus.senacrs.audit.messages;
 
-import java.io.IOException;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,7 +9,6 @@ public class MessagesCentralTest {
 
 	private static enum TestMessagesEnum implements PropertyKey {
 
-		TEST_MESSAGE("test.message"),
 		TEST_MESSAGES_PROPERTIES("test.messages.properties"),
 		TEST_MESSAGES_UI_PROPERTIES("test.messages_ui.properties"), ;
 
@@ -30,8 +27,6 @@ public class MessagesCentralTest {
 
 	}
 
-	private static final String INPUT_FILE = TestBoilerplateUtils.TST_RESOURCES
-			+ "test_messages.properties";
 	private static final String TEST_MESSAGE = "Just a test message not really used outside testing";
 	private static final PropertyKey[] PRE_LOADED_KEYS = new PropertyKey[] {
 			TestMessagesEnum.TEST_MESSAGES_PROPERTIES,
@@ -59,25 +54,6 @@ public class MessagesCentralTest {
 	}
 
 	@Test
-	public void testGetMessage() {
-
-		String result = null;
-		String arg = null;
-		boolean check = false;
-
-		try {
-			arg = TestBoilerplateUtils.randomString();
-			MessagesCentral.addMessagesFile(INPUT_FILE);
-			result = MessagesCentral.getMessage(TestMessagesEnum.TEST_MESSAGE, arg);
-			Assert.assertNotNull(result);
-			check = result.contains(arg);
-			Assert.assertTrue(check);
-		} catch (IOException e) {
-			Assert.fail(e.getLocalizedMessage());
-		}
-	}
-
-	@Test
 	public void testGetMessagePreLoaded() {
 
 		String result = null;
@@ -85,50 +61,6 @@ public class MessagesCentralTest {
 		for (PropertyKey k : PRE_LOADED_KEYS) {
 			result = MessagesCentral.getMessage(k);
 			Assert.assertEquals(TEST_MESSAGE, result);
-		}
-	}
-
-	@Test
-	public void testAddMessagesFile() {
-
-		boolean result = false;
-
-		try {
-			MessagesCentral.addMessagesFile(INPUT_FILE);
-			result = MessagesCentral.hasKey(TestMessagesEnum.TEST_MESSAGE);
-			Assert.assertTrue(result);
-		} catch (IOException e) {
-			Assert.fail(e.getLocalizedMessage());
-		}
-	}
-
-	@Test
-	public void testHasKeyNull() {
-
-		try {
-			MessagesCentral.hasKey(null);
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
-	}
-
-	@Test
-	public void testHasKeyNullValue() {
-
-		PropertyKey key = null;
-
-		try {
-			key = new PropertyKey() {
-
-				@Override
-				public String getKey() {
-
-					return null;
-				}
-			};
-			MessagesCentral.hasKey(key);
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
 		}
 	}
 }
