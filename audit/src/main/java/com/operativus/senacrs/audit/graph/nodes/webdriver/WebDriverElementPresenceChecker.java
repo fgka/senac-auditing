@@ -3,9 +3,15 @@ package com.operativus.senacrs.audit.graph.nodes.webdriver;
 import org.openqa.selenium.WebDriver;
 
 
-public interface WebDriverElementPresenceChecker {
+public class WebDriverElementPresenceChecker {
 
-	String[] getXPathToCheck();
+	public String[] getXPathToCheck() {
+		
+		return null;
+	};
 	
-	boolean hasAll(WebDriver driver);
+	public boolean hasAll(WebDriver driver) {
+		
+		return false;
+	}
 }
