@@ -1,26 +1,19 @@
 package com.operativus.senacrs.audit.common;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 
 public class AbstractHasLoggerTest {
-
-	@Before
-	public void setUp() throws Exception {
-
-	}
-
-	@After
-	public void tearDown() throws Exception {
-
-	}
 	
-	public static class MyHasLogger extends AbstractHasLogger {
-		
+	public class MyHasLogger extends AbstractHasLogger {
+				
+		public MyHasLogger() {
+
+			super();
+		}		
 	}
 
 	@Test
@@ -29,16 +22,11 @@ public class AbstractHasLoggerTest {
 		HasLogger obj = null;
 		Logger result = null;
 		
-		obj = createHasLogger();
+		LogManager.getLogger(this.getClass());
+		obj = new AbstractHasLogger(){};
 		result = obj.getLogger();
 		Assert.assertNotNull(result);
 	}
-
-	private AbstractHasLogger createHasLogger() {
-
-		return new AbstractHasLogger(){};
-	}
-
 
 	@Test
 	public void testGetLoggerClassName() {
@@ -49,5 +37,16 @@ public class AbstractHasLoggerTest {
 		obj = new MyHasLogger();
 		result = obj.getLogger();
 		Assert.assertEquals(MyHasLogger.class.getName(), result.getName());
+	}
+
+	@Test
+	public void testGetLoggerAnnonymousClassName() {
+
+		HasLogger obj = null;
+		Logger result = null;
+		
+		obj = new AbstractHasLogger(){};
+		result = obj.getLogger();
+		Assert.assertEquals(obj.getClass().getName(), result.getName());
 	}
 }
