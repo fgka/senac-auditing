@@ -1,6 +1,6 @@
 package com.operativus.senacrs.audit.extractors.webdriver;
 
-import com.operativus.senacrs.audit.exceptions.ExceptionFactory;
+import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 import com.operativus.senacrs.audit.extractors.DataExtractor;
 import com.operativus.senacrs.audit.model.config.Configuration;
 import com.operativus.senacrs.audit.model.form.Form;
@@ -16,7 +16,7 @@ public class WebDataExtractor
 		super();
 		
 		if (config == null) {
-			throw ExceptionFactory.getInstance().getNullArgumentException("config");
+			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("config");
 		}
 		this.config = config;
 	}

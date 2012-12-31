@@ -2,11 +2,11 @@ package com.operativus.senacrs.audit.exceptions;
 
 import com.operativus.senacrs.audit.messages.MessagesCentral;
 
-public final class ExceptionFactory {
+public final class RuntimeExceptionFactory {
 
-	private static final ExceptionFactory instance = new ExceptionFactory();
+	private static final RuntimeExceptionFactory instance = new RuntimeExceptionFactory();
 
-	private ExceptionFactory() {
+	private RuntimeExceptionFactory() {
 
 		super();
 	}
@@ -25,7 +25,7 @@ public final class ExceptionFactory {
 		return result;
 	}
 
-	public static ExceptionFactory getInstance() {
+	public static RuntimeExceptionFactory getInstance() {
 
 		return instance;
 	};

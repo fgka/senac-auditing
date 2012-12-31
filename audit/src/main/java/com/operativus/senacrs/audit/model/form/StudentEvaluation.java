@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.operativus.senacrs.audit.exceptions.InvalidEvaluationType;
-import com.operativus.senacrs.audit.exceptions.MismatchingEvaluationType;
 
 public class StudentEvaluation
 		extends
@@ -48,13 +46,13 @@ public class StudentEvaluation
 			throw new IllegalArgumentException();
 		}
 		if (EvaluationType.INVALID.equals(activity.getType())) {
-			throw new InvalidEvaluationType();
+			throw new InvalidEvaluationTypeException();
 		}
 		if (EvaluationType.INVALID.equals(grade.getType())) {
-			throw new InvalidEvaluationType();
+			throw new InvalidEvaluationTypeException();
 		}
 		if (activity.getType() != grade.getType()) {
-			throw new MismatchingEvaluationType(activity.getType(), grade.getType());
+			throw new MismatchingEvaluationTypeException(activity.getType(), grade.getType());
 		}
 
 		return this.grades.put(activity, grade);

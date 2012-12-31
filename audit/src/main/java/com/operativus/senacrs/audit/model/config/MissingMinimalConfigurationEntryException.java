@@ -1,13 +1,14 @@
-package com.operativus.senacrs.audit.exceptions;
+package com.operativus.senacrs.audit.model.config;
 
+import com.operativus.senacrs.audit.exceptions.ExceptionMessagesEnum;
 import com.operativus.senacrs.audit.messages.Messages;
 import com.operativus.senacrs.audit.messages.MessagesCentral;
 
 @SuppressWarnings("serial")
-public class MissingMinimalConfigurationEntry
+public class MissingMinimalConfigurationEntryException
 		extends IllegalArgumentException {
 
-	public MissingMinimalConfigurationEntry(final String file, final String entry) {
+	public MissingMinimalConfigurationEntryException(final String file, final String entry) {
 
 		super(getMessage(file, entry));
 	}
@@ -23,7 +24,7 @@ public class MissingMinimalConfigurationEntry
 		return result;
 	}
 
-	public MissingMinimalConfigurationEntry(final Throwable cause, final String file, final String entry) {
+	public MissingMinimalConfigurationEntryException(final Throwable cause, final String file, final String entry) {
 
 		super(getMessage(file, entry), cause);
 	}

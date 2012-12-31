@@ -10,7 +10,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.operativus.senacrs.audit.exceptions.MissingMinimalConfigurationEntry;
 import com.operativus.senacrs.audit.model.config.ConfigurationFactory.ConfigKey;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
@@ -116,13 +115,13 @@ public class ConfigurationFactoryTest {
 		try {
 			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
 			Assert.fail();
-		} catch (MissingMinimalConfigurationEntry e) {
+		} catch (MissingMinimalConfigurationEntryException e) {
 			check = this.containsFileAndField(e, ConfigKey.BASE_URL);
 			Assert.assertTrue(check);
 		}
 	}
 
-	private boolean containsFileAndField(final MissingMinimalConfigurationEntry e, final ConfigKey key) {
+	private boolean containsFileAndField(final MissingMinimalConfigurationEntryException e, final ConfigKey key) {
 
 		String msg = null;
 
@@ -143,7 +142,7 @@ public class ConfigurationFactoryTest {
 		try {
 			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
 			Assert.fail();
-		} catch (MissingMinimalConfigurationEntry e) {
+		} catch (MissingMinimalConfigurationEntryException e) {
 			check = this.containsFileAndField(e, ConfigKey.VERSION);
 			Assert.assertTrue(check);
 		}
@@ -161,7 +160,7 @@ public class ConfigurationFactoryTest {
 		try {
 			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
 			Assert.fail();
-		} catch (MissingMinimalConfigurationEntry e) {
+		} catch (MissingMinimalConfigurationEntryException e) {
 			check = this.containsFileAndField(e, ConfigKey.USERNAME);
 			Assert.assertTrue(check);
 		}

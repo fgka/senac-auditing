@@ -9,7 +9,6 @@ import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.operativus.senacrs.audit.exceptions.MissingMinimalConfigurationEntry;
 import com.operativus.senacrs.audit.messages.MessagesCentral;
 
 public final class ConfigurationFactory {
@@ -118,13 +117,13 @@ public final class ConfigurationFactory {
 	private static void checkMinimalNonNullValeus(final String filename, final Configuration result) {
 
 		if (!isValueOk(result.getBaseUrl())) {
-			throw new MissingMinimalConfigurationEntry(filename, ConfigKey.BASE_URL.getKey());
+			throw new MissingMinimalConfigurationEntryException(filename, ConfigKey.BASE_URL.getKey());
 		}
 		if (!isValueOk(result.getUsername())) {
-			throw new MissingMinimalConfigurationEntry(filename, ConfigKey.USERNAME.getKey());
+			throw new MissingMinimalConfigurationEntryException(filename, ConfigKey.USERNAME.getKey());
 		}
 		if (!isValueOk(result.getVersion())) {
-			throw new MissingMinimalConfigurationEntry(filename, ConfigKey.VERSION.getKey());
+			throw new MissingMinimalConfigurationEntryException(filename, ConfigKey.VERSION.getKey());
 		}
 	}
 

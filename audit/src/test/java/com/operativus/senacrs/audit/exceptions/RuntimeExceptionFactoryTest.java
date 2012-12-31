@@ -5,13 +5,13 @@ import org.junit.Test;
 
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
-public class ExceptionFactoryTest {
+public class RuntimeExceptionFactoryTest {
 
 	@Test
 	public void testGetNullArgumentExceptionNull() {
 
 		try {
-			ExceptionFactory.getInstance().getNullArgumentException(null);
+			RuntimeExceptionFactory.getInstance().getNullArgumentException(null);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
@@ -26,7 +26,7 @@ public class ExceptionFactoryTest {
 		String msg = null;
 
 		arg = TestBoilerplateUtils.randomString();
-		result = ExceptionFactory.getInstance().getNullArgumentException(arg);
+		result = RuntimeExceptionFactory.getInstance().getNullArgumentException(arg);
 		Assert.assertNotNull(result);
 		msg = result.getMessage();
 		Assert.assertNotNull(msg);
