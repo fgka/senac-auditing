@@ -1,7 +1,11 @@
-package com.operativus.senacrs.audit.graph.nodes.webdriver;
+package com.operativus.senacrs.audit.graph.nodes.webdriver.checkers;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverCheckerTypeEnum;
+import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElementPresenceChecker;
+import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElementPresenceCheckerFactory;
 
 public class WebDriverElementPresenceCheckerFactoryTest {
 

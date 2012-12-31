@@ -3,6 +3,7 @@ package com.operativus.senacrs.audit.graph.nodes.webdriver;
 import org.openqa.selenium.WebDriver;
 
 import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
+import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElementPresenceChecker;
 
 
 public class DefaultWebDriverNode extends AbstractWebDriverNode {

@@ -1,4 +1,4 @@
-package com.operativus.senacrs.audit.graph.nodes.webdriver;
+package com.operativus.senacrs.audit.graph.nodes.webdriver.checkers;
 
 import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 

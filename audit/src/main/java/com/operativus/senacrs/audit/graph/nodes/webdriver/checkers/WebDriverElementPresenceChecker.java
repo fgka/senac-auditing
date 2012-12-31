@@ -1,4 +1,4 @@
-package com.operativus.senacrs.audit.graph.nodes.webdriver;
+package com.operativus.senacrs.audit.graph.nodes.webdriver.checkers;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;

@@ -1,4 +1,4 @@
-package com.operativus.senacrs.audit.graph.nodes.webdriver;
+package com.operativus.senacrs.audit.graph.nodes.webdriver.checkers;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElementPresenceChecker;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class WebDriverElementPresenceCheckerTest {

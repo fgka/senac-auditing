@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 
+import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElementPresenceChecker;
+
 public class DefaultWebDriverNodeTest {
 
 	WebDriver driver = null;
