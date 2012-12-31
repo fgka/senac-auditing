@@ -45,10 +45,23 @@ public class WebDriverElementPresenceChecker {
 	public boolean hasAll(WebDriver driver) {
 		
 		boolean result = false;
+		
+		if (driver == null) {
+			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("driver");
+		}
+		result = internHasAll(driver);
+		
+		return result;
+	}
+
+
+	private boolean internHasAll(WebDriver driver) {
+
+		boolean result = false;
 		By[] xpaths = null;
 		By el = null;
 		int ndx = 0; 
-		
+
 		xpaths = getXPaths();
 		result = true;
 		ndx = 0;

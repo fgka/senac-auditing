@@ -28,7 +28,7 @@ public class WebDriverElementPresenceCheckerTest {
 
 	@Test
 	public void testWebDriverElementPresenceCheckerNull() {
-		
+
 		try {
 			new WebDriverElementPresenceChecker(null);
 			Assert.fail();
@@ -39,9 +39,9 @@ public class WebDriverElementPresenceCheckerTest {
 
 	@Test
 	public void testWebDriverElementPresenceCheckerNullElement() {
-		
-		String[] values = null; 
-		
+
+		String[] values = null;
+
 		values = getRandomStringArray();
 		randomIndexToNull(values);
 		try {
@@ -50,6 +50,20 @@ public class WebDriverElementPresenceCheckerTest {
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
 		}
+	}
+
+	private String[] getRandomStringArray() {
+
+		String[] result = null;
+		int amount = 0;
+
+		amount = TestBoilerplateUtils.randomInt(100);
+		result = new String[amount];
+		for (int i = 0; i < amount; i++) {
+			result[i] = TestBoilerplateUtils.randomString();
+		}
+
+		return result;
 	}
 
 	private void randomIndexToNull(String[] values) {
@@ -63,12 +77,28 @@ public class WebDriverElementPresenceCheckerTest {
 	}
 
 	@Test
+	public void testHasAllNull() {
+
+		WebDriverElementPresenceChecker obj = null;
+		String[] elements = null;
+
+		elements = getRandomStringArray();
+		obj = new WebDriverElementPresenceChecker(elements);
+		try {
+			obj.hasAll(null);
+			Assert.fail();
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+	}
+
+	@Test
 	public void testHasAll() {
-		
+
 		WebDriverElementPresenceChecker obj = null;
 		String[] elements = null;
 		By by = null;
-		
+
 		elements = getRandomStringArray();
 		obj = new WebDriverElementPresenceChecker(elements);
 		obj.hasAll(driver);
@@ -77,19 +107,4 @@ public class WebDriverElementPresenceCheckerTest {
 			Mockito.verify(driver).findElement(by);
 		}
 	}
-
-	private String[] getRandomStringArray() {
-
-		String[] result = null;
-		int amount = 0;
-		
-		amount = TestBoilerplateUtils.randomInt(100);
-		result = new String[amount];
-		for (int i = 0; i < amount; i++) {
-			result[i] = TestBoilerplateUtils.randomString();
-		}
-
-		return result;
-	}
-
 }
