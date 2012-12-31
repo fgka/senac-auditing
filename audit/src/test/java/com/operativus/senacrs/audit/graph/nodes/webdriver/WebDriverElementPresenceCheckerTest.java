@@ -43,13 +43,23 @@ public class WebDriverElementPresenceCheckerTest {
 		String[] values = null; 
 		
 		values = getRandomStringArray();
-		values[TestBoilerplateUtils.randomInt(values.length)] = null;
+		randomIndexToNull(values);
 		try {
 			new WebDriverElementPresenceChecker(values);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
 		}
+	}
+
+	private void randomIndexToNull(String[] values) {
+
+		int amount = 0;
+		int ndx = 0;
+
+		amount = values.length;
+		ndx = TestBoilerplateUtils.randomInt(amount);
+		values[ndx] = null;
 	}
 
 	@Test
