@@ -5,10 +5,20 @@ import org.openqa.selenium.WebDriver;
 
 public class WebDriverElementPresenceChecker {
 
-	public String[] getXPathToCheck() {
+	private final String[] xPathElementsToCheck;
+	
+	public WebDriverElementPresenceChecker(String[] xPathElementsToCheck) {
+
+		super();
 		
-		return null;
-	};
+		this.xPathElementsToCheck = xPathElementsToCheck;
+	}
+	
+	
+	public String[] getxPathElementsToCheck() {
+
+		return xPathElementsToCheck;
+	}
 	
 	public boolean hasAll(WebDriver driver) {
 		
