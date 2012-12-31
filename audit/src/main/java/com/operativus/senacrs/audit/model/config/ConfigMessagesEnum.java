@@ -1,8 +1,8 @@
 package com.operativus.senacrs.audit.model.config;
 
-import com.operativus.senacrs.audit.messages.Messages;
+import com.operativus.senacrs.audit.messages.PropertyKey;
 
-public enum ConfigMessagesEnum implements Messages {
+public enum ConfigMessagesEnum implements PropertyKey {
 
 	LOG_CONFIG_BEGIN("log.config.begin"),
 	LOG_CONFIG_END("log.config.end"),

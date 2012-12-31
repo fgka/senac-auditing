@@ -38,7 +38,7 @@ public final class MessagesCentral {
 		super();
 	}
 
-	public static String getMessage(final Messages key, final Object... arguments) {
+	public static String getMessage(final PropertyKey key, final Object... arguments) {
 
 		String result = null;
 		String keyValue = null;
@@ -54,7 +54,7 @@ public final class MessagesCentral {
 		return result;
 	}
 
-	private static String getKeyValue(final Messages key) {
+	private static String getKeyValue(final PropertyKey key) {
 
 		String result;
 
@@ -77,7 +77,7 @@ public final class MessagesCentral {
 		properties.load(in);
 	}
 
-	public static boolean hasKey(final Messages key) {
+	public static boolean hasKey(final PropertyKey key) {
 
 		boolean result = false;
 		String keyStr = null;

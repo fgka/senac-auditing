@@ -1,8 +1,8 @@
 package com.operativus.senacrs.audit.exceptions;
 
-import com.operativus.senacrs.audit.messages.Messages;
+import com.operativus.senacrs.audit.messages.PropertyKey;
 
-public enum ExceptionMessagesEnum implements Messages {
+public enum ExceptionMessagesEnum implements PropertyKey {
 
 	//Runtime
 	NULL_ARGUMENT("exception.null.argument"),

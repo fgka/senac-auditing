@@ -1,7 +1,7 @@
 package com.operativus.senacrs.audit.model.config;
 
 import com.operativus.senacrs.audit.exceptions.ExceptionMessagesEnum;
-import com.operativus.senacrs.audit.messages.Messages;
+import com.operativus.senacrs.audit.messages.PropertyKey;
 import com.operativus.senacrs.audit.messages.MessagesCentral;
 
 @SuppressWarnings("serial")
@@ -16,7 +16,7 @@ public class MissingMinimalConfigurationEntryException
 	private static String getMessage(final String file, final String entry) {
 
 		String result = null;
-		Messages key = null;
+		PropertyKey key = null;
 
 		key = ExceptionMessagesEnum.EVAL_TYPE_MISMATCH;
 		result = MessagesCentral.getMessage(key, file, entry);

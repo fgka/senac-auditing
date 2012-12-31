@@ -9,7 +9,7 @@ import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class MessagesCentralTest {
 
-	private static enum TestMessagesEnum implements Messages {
+	private static enum TestMessagesEnum implements PropertyKey {
 
 		TEST_MESSAGE("test.message"),
 		TEST_MESSAGES_PROPERTIES("test.messages.properties"),
@@ -33,7 +33,7 @@ public class MessagesCentralTest {
 	private static final String INPUT_FILE = TestBoilerplateUtils.TST_RESOURCES
 			+ "test_messages.properties";
 	private static final String TEST_MESSAGE = "Just a test message not really used outside testing";
-	private static final Messages[] PRE_LOADED_KEYS = new Messages[] {
+	private static final PropertyKey[] PRE_LOADED_KEYS = new PropertyKey[] {
 			TestMessagesEnum.TEST_MESSAGES_PROPERTIES,
 			TestMessagesEnum.TEST_MESSAGES_UI_PROPERTIES,
 	};
@@ -41,10 +41,10 @@ public class MessagesCentralTest {
 	@Test
 	public void testGetMessageNonExistent() {
 
-		Messages key = null;
+		PropertyKey key = null;
 
 		try {
-			key = new Messages() {
+			key = new PropertyKey() {
 
 				@Override
 				public String getKey() {
@@ -82,7 +82,7 @@ public class MessagesCentralTest {
 
 		String result = null;
 
-		for (Messages k : PRE_LOADED_KEYS) {
+		for (PropertyKey k : PRE_LOADED_KEYS) {
 			result = MessagesCentral.getMessage(k);
 			Assert.assertEquals(TEST_MESSAGE, result);
 		}
@@ -115,10 +115,10 @@ public class MessagesCentralTest {
 	@Test
 	public void testHasKeyNullValue() {
 
-		Messages key = null;
+		PropertyKey key = null;
 
 		try {
-			key = new Messages() {
+			key = new PropertyKey() {
 
 				@Override
 				public String getKey() {

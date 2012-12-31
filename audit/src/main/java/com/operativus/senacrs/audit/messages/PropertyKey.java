@@ -1,6 +1,6 @@
 package com.operativus.senacrs.audit.messages;
 
-public interface Messages {
+public interface PropertyKey {
 
 	String getKey();
 }

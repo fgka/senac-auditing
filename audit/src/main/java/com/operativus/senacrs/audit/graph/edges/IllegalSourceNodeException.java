@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import com.operativus.senacrs.audit.exceptions.ExceptionMessagesEnum;
 import com.operativus.senacrs.audit.graph.nodes.Node;
-import com.operativus.senacrs.audit.messages.Messages;
+import com.operativus.senacrs.audit.messages.PropertyKey;
 import com.operativus.senacrs.audit.messages.MessagesCentral;
 
 @SuppressWarnings("serial")
@@ -19,7 +19,7 @@ public class IllegalSourceNodeException
 	private static String getMessage(final Node source, final Node... valid) {
 
 		String result = null;
-		Messages key = null;
+		PropertyKey key = null;
 
 		key = ExceptionMessagesEnum.ILLEGAL_START_NODE;
 		result = MessagesCentral.getMessage(key, source, Arrays.toString(valid));
