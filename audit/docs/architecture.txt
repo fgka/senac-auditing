@@ -31,6 +31,14 @@ Simple directed graph. Meaning that there is only one (or none) edge connecting
 two given nodes and no loops are allowed, which would be a browser refresh 
 request.
 
+- How is the graph structure/algorithms applied to the navigation?
+The basic structure says that nodes represent navigation states/pages and edges
+are the navigation actions. This is applied to a browser model (WebDriver) and
+nodes are actually state validation, i.e., given the transition applied which
+state has been achieved. Transition, on the other hand, check preconditions
+(source node) and apply navigation operations in the browser model, transition 
+to a desired state (node).  
+
 Data models:
 com.operativus.senacrs.audit.model
 
