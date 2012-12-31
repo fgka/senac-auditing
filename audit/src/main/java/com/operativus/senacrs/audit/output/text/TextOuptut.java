@@ -1,11 +1,13 @@
 package com.operativus.senacrs.audit.output.text;
 
+import com.operativus.senacrs.audit.common.AbstractHasLogger;
 import com.operativus.senacrs.audit.model.form.Form;
 import com.operativus.senacrs.audit.model.form.Identification;
 import com.operativus.senacrs.audit.model.form.SkillSet;
 import com.operativus.senacrs.audit.output.FormOutput;
 
 public final class TextOuptut
+		extends AbstractHasLogger
 		implements FormOutput {
 
 	private static final TextOuptut instance = new TextOuptut();
@@ -16,6 +18,7 @@ public final class TextOuptut
 
 		return instance;
 	}
+
 	private final TextOutputIdentification idTextOut = TextOutputIdentification.getInstance();
 	private final TextOutputSkillSet skillTextOut = TextOutputSkillSet.getInstance();
 	private final TextOutputCollectionEvaluationActivity activitiesTextOut = TextOutputCollectionEvaluationActivity
@@ -101,6 +104,6 @@ public final class TextOuptut
 		}
 		builder = this.buildOutput(input);
 		output = builder.toString();
-		System.out.println(output);
+		this.getLogger().debug(output);
 	}
 }
