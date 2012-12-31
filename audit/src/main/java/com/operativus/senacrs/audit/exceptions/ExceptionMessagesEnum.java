@@ -4,9 +4,15 @@ import com.operativus.senacrs.audit.messages.Messages;
 
 public enum ExceptionMessagesEnum implements Messages {
 
-	EVAL_TYPE_MISMATCH("exception.eval.type.mismatch"),
+	//Runtime
 	NULL_ARGUMENT("exception.null.argument"),
-	MISSING_MINIMAL_CONFIG_ENTRY("exception.missing.config.entry"), ;
+	//Form
+	EVAL_TYPE_MISMATCH("exception.eval.type.mismatch"),
+	//Config
+	MISSING_MINIMAL_CONFIG_ENTRY("exception.missing.config.entry"),
+	//Graph
+	ILLEGAL_START_NODE("exception.illegal.start.node"),
+	;
 
 	private final String key;
 
