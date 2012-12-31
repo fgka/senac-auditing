@@ -12,6 +12,11 @@ public final class TextOutputCollectionEvaluationActivity {
 	private static final String FIELD_SEP_COMMA_SPACE = ", ";
 	private static final TextOutputCollectionEvaluationActivity instance = new TextOutputCollectionEvaluationActivity();
 
+	public static TextOutputCollectionEvaluationActivity getInstance() {
+
+		return instance;
+	}
+
 	private TextOutputCollectionEvaluationActivity() {
 
 		super();
@@ -32,16 +37,6 @@ public final class TextOutputCollectionEvaluationActivity {
 		}
 	}
 
-	private void checkArguments(final StringBuilder builder, final Collection<EvaluationActivity> input) {
-
-		if (builder == null) {
-			throw new IllegalArgumentException();
-		}
-		if (input == null) {
-			throw new IllegalArgumentException();
-		}
-	}
-
 	private void buildActivity(final StringBuilder builder, final EvaluationActivity activity) {
 
 		builder.append(activity.getName());
@@ -50,8 +45,13 @@ public final class TextOutputCollectionEvaluationActivity {
 		builder.append(DESCRIPTION_SUFFIX_SEP_PARENS);
 	}
 
-	public static TextOutputCollectionEvaluationActivity getInstance() {
+	private void checkArguments(final StringBuilder builder, final Collection<EvaluationActivity> input) {
 
-		return instance;
+		if (builder == null) {
+			throw new IllegalArgumentException();
+		}
+		if (input == null) {
+			throw new IllegalArgumentException();
+		}
 	}
 }

@@ -18,20 +18,22 @@ public class Course {
 	private String baseUrl;
 	private final StringBuffer verificationErrors = new StringBuffer();
 
+	private boolean isElementPresent(final By by) {
+
+		try {
+			this.driver.findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+
 	@Before
 	public void setUp() throws Exception {
 
 		this.driver = new FirefoxDriver();
 		this.baseUrl = "@BASE_URL@";
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	}
-
-	@Test
-	public void testPickCourse() throws Exception {
-
-		this.driver.findElement(
-				By.xpath("//td/div[contains(@class, 'x-grid3-col-dis') and contains(text(), '@DISCIPLINE_NAME@')]"))
-				.click();
 	}
 
 	@After
@@ -44,13 +46,11 @@ public class Course {
 		}
 	}
 
-	private boolean isElementPresent(final By by) {
+	@Test
+	public void testPickCourse() throws Exception {
 
-		try {
-			this.driver.findElement(by);
-			return true;
-		} catch (NoSuchElementException e) {
-			return false;
-		}
+		this.driver.findElement(
+				By.xpath("//td/div[contains(@class, 'x-grid3-col-dis') and contains(text(), '@DISCIPLINE_NAME@')]"))
+				.click();
 	}
 }

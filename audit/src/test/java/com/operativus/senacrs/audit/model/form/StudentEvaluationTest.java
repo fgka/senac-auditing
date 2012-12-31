@@ -7,35 +7,81 @@ import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class StudentEvaluationTest {
 
+	private StudentEvaluation getBaseline() {
+
+		return new StudentEvaluation(TestBoilerplateUtils.randomInt(100), TestBoilerplateUtils.randomString());
+	}
+
+	private EvaluationActivity getEvalActivity(final EvaluationType type) {
+
+		return new EvaluationActivity(0, type, null, null);
+	}
+
+	private EvaluationGrade getEvalGrade(final EvaluationType type) {
+
+		return new EvaluationGrade() {
+
+			@Override
+			public void fromString(final String str) {
+
+			}
+
+			@Override
+			public EvaluationType getType() {
+
+				return type;
+			}
+		};
+	}
+
 	@Test
-	public void testPutGradeMismatchNullGrade() {
+	public void testPutGrade() {
 
 		StudentEvaluation obj = null;
 		EvaluationActivity activity = null;
+		EvaluationGrade grade = null;
+		EvaluationGrade result = null;
 
 		obj = this.getBaseline();
 		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
+		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
+		result = obj.putGrade(activity, grade);
+		Assert.assertNull(result);
+	}
+
+	@Test
+	public void testPutGradeInvalidActivity() {
+
+		StudentEvaluation obj = null;
+		EvaluationActivity activity = null;
+		EvaluationGrade grade = null;
+
+		obj = this.getBaseline();
+		activity = this.getEvalActivity(EvaluationType.INVALID);
+		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
 		try {
-			obj.putGrade(activity, null);
+			obj.putGrade(activity, grade);
 			Assert.fail();
-		} catch (IllegalArgumentException e) {
+		} catch (InvalidEvaluationTypeException e) {
 			Assert.assertTrue(true);
 		}
 
 	}
 
 	@Test
-	public void testPutGradeMismatchNullActivity() {
+	public void testPutGradeInvalidGrade() {
 
 		StudentEvaluation obj = null;
+		EvaluationActivity activity = null;
 		EvaluationGrade grade = null;
 
 		obj = this.getBaseline();
-		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
+		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
+		grade = this.getEvalGrade(EvaluationType.INVALID);
 		try {
-			obj.putGrade(null, grade);
+			obj.putGrade(activity, grade);
 			Assert.fail();
-		} catch (IllegalArgumentException e) {
+		} catch (InvalidEvaluationTypeException e) {
 			Assert.assertTrue(true);
 		}
 
@@ -60,84 +106,38 @@ public class StudentEvaluationTest {
 
 	}
 
-	private StudentEvaluation getBaseline() {
-
-		return new StudentEvaluation(TestBoilerplateUtils.randomInt(100), TestBoilerplateUtils.randomString());
-	}
-
-	private EvaluationActivity getEvalActivity(final EvaluationType type) {
-
-		return new EvaluationActivity(0, type, null, null);
-	}
-
-	private EvaluationGrade getEvalGrade(final EvaluationType type) {
-
-		return new EvaluationGrade() {
-
-			@Override
-			public EvaluationType getType() {
-
-				return type;
-			}
-
-			@Override
-			public void fromString(final String str) {
-
-			}
-		};
-	}
-
 	@Test
-	public void testPutGradeInvalidGrade() {
+	public void testPutGradeMismatchNullActivity() {
 
 		StudentEvaluation obj = null;
-		EvaluationActivity activity = null;
 		EvaluationGrade grade = null;
 
 		obj = this.getBaseline();
-		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
-		grade = this.getEvalGrade(EvaluationType.INVALID);
+		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
 		try {
-			obj.putGrade(activity, grade);
+			obj.putGrade(null, grade);
 			Assert.fail();
-		} catch (InvalidEvaluationTypeException e) {
+		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
 		}
 
 	}
 
 	@Test
-	public void testPutGradeInvalidActivity() {
+	public void testPutGradeMismatchNullGrade() {
 
 		StudentEvaluation obj = null;
 		EvaluationActivity activity = null;
-		EvaluationGrade grade = null;
-
-		obj = this.getBaseline();
-		activity = this.getEvalActivity(EvaluationType.INVALID);
-		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
-		try {
-			obj.putGrade(activity, grade);
-			Assert.fail();
-		} catch (InvalidEvaluationTypeException e) {
-			Assert.assertTrue(true);
-		}
-
-	}
-
-	@Test
-	public void testPutGrade() {
-
-		StudentEvaluation obj = null;
-		EvaluationActivity activity = null;
-		EvaluationGrade grade = null;
-		EvaluationGrade result = null;
 
 		obj = this.getBaseline();
 		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
-		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
-		result = obj.putGrade(activity, grade);
-		Assert.assertNull(result);
+		try {
+			obj.putGrade(activity, null);
+			Assert.fail();
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+
 	}
 
 	@Test

@@ -19,24 +19,24 @@ public class RelatedSkill {
 		return this.description;
 	}
 
-	public void setDescription(final String description) {
-
-		this.description = description;
-	}
-
 	public String getRequiredAttitude() {
 
 		return this.requiredAttitude;
 	}
 
-	public void setRequiredAttitude(final String requiredAttitude) {
-
-		this.requiredAttitude = requiredAttitude;
-	}
-
 	public String getResultsEvidence() {
 
 		return this.resultsEvidence;
+	}
+
+	public void setDescription(final String description) {
+
+		this.description = description;
+	}
+
+	public void setRequiredAttitude(final String requiredAttitude) {
+
+		this.requiredAttitude = requiredAttitude;
 	}
 
 	public void setResultsEvidence(final String resultsEvidence) {

@@ -8,11 +8,6 @@ import com.operativus.senacrs.audit.messages.MessagesCentral;
 public class MismatchingEvaluationTypeException
 		extends IllegalArgumentException {
 
-	public MismatchingEvaluationTypeException(final EvaluationType activityType, final EvaluationType gradeType) {
-
-		super(getMessage(activityType, gradeType));
-	}
-
 	private static String getMessage(final EvaluationType activityType, final EvaluationType gradeType) {
 
 		String result = null;
@@ -22,6 +17,11 @@ public class MismatchingEvaluationTypeException
 		result = MessagesCentral.getMessage(key, activityType, gradeType);
 
 		return result;
+	}
+
+	public MismatchingEvaluationTypeException(final EvaluationType activityType, final EvaluationType gradeType) {
+
+		super(getMessage(activityType, gradeType));
 	}
 
 	public MismatchingEvaluationTypeException(final Throwable cause, final EvaluationType activityType,

@@ -18,12 +18,32 @@ public class Plan {
 	private String baseUrl;
 	private final StringBuffer verificationErrors = new StringBuffer();
 
+	private boolean isElementPresent(final By by) {
+
+		try {
+			this.driver.findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+
 	@Before
 	public void setUp() throws Exception {
 
 		this.driver = new FirefoxDriver();
 		this.baseUrl = "@BASE_URL@";
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	}
+
+	@After
+	public void tearDown() throws Exception {
+
+		this.driver.quit();
+		String verificationErrorString = this.verificationErrors.toString();
+		if (!"".equals(verificationErrorString)) {
+			fail(verificationErrorString);
+		}
 	}
 
 	@Test
@@ -84,25 +104,5 @@ public class Plan {
 // //div[@id='viewPlanoEnsino']//span[contains(text(), '7 -') and
 // contains(text(), 'Aprendizagem')]/../../../pre[2] | ]]
 		this.driver.findElement(By.xpath("//button[contains(text(), 'Voltar')]")).click();
-	}
-
-	@After
-	public void tearDown() throws Exception {
-
-		this.driver.quit();
-		String verificationErrorString = this.verificationErrors.toString();
-		if (!"".equals(verificationErrorString)) {
-			fail(verificationErrorString);
-		}
-	}
-
-	private boolean isElementPresent(final By by) {
-
-		try {
-			this.driver.findElement(by);
-			return true;
-		} catch (NoSuchElementException e) {
-			return false;
-		}
 	}
 }

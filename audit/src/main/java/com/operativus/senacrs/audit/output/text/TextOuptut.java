@@ -12,44 +12,21 @@ public final class TextOuptut
 
 	private static final String NL = System.getProperty("line.separator");
 
+	public static TextOuptut getInstance() {
+
+		return instance;
+	}
 	private final TextOutputIdentification idTextOut = TextOutputIdentification.getInstance();
 	private final TextOutputSkillSet skillTextOut = TextOutputSkillSet.getInstance();
 	private final TextOutputCollectionEvaluationActivity activitiesTextOut = TextOutputCollectionEvaluationActivity
 			.getInstance();
+
 	private final TextOutputCollectionStudentEvaluation evalsTextOut = TextOutputCollectionStudentEvaluation
 			.getInstance();
 
 	private TextOuptut() {
 
 		super();
-	}
-
-	@Override
-	public void print(final Form input) {
-
-		StringBuilder builder = null;
-		String output = null;
-
-		if (input == null) {
-			throw new IllegalArgumentException();
-		}
-		builder = this.buildOutput(input);
-		output = builder.toString();
-		System.out.println(output);
-	}
-
-	protected StringBuilder buildOutput(final Form input) {
-
-		StringBuilder result = null;
-
-		result = new StringBuilder();
-		this.buildFirstBlock(result, input);
-		result.append(NL);
-		result.append(NL);
-		this.buildSecondBlock(result, input);
-		result.append(NL);
-
-		return result;
 	}
 
 	private void buildFirstBlock(final StringBuilder builder, final Form input) {
@@ -66,6 +43,25 @@ public final class TextOuptut
 		this.idTextOut.buildClass(builder, id);
 		builder.append(NL);
 		this.idTextOut.buildSemester(builder, id);
+	}
+
+	private void buildNotes(final StringBuilder builder, final Form input) {
+
+		builder.append(input.getNotes());
+	}
+
+	protected StringBuilder buildOutput(final Form input) {
+
+		StringBuilder result = null;
+
+		result = new StringBuilder();
+		this.buildFirstBlock(result, input);
+		result.append(NL);
+		result.append(NL);
+		this.buildSecondBlock(result, input);
+		result.append(NL);
+
+		return result;
 	}
 
 	private void buildSecondBlock(final StringBuilder builder, final Form input) {
@@ -94,13 +90,17 @@ public final class TextOuptut
 		this.idTextOut.buildAcademic(builder, id);
 	}
 
-	private void buildNotes(final StringBuilder builder, final Form input) {
+	@Override
+	public void print(final Form input) {
 
-		builder.append(input.getNotes());
-	}
+		StringBuilder builder = null;
+		String output = null;
 
-	public static TextOuptut getInstance() {
-
-		return instance;
+		if (input == null) {
+			throw new IllegalArgumentException();
+		}
+		builder = this.buildOutput(input);
+		output = builder.toString();
+		System.out.println(output);
 	}
 }

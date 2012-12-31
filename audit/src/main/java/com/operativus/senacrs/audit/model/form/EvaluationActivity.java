@@ -16,19 +16,10 @@ public class EvaluationActivity
 		this.description = description;
 	}
 
-	public EvaluationType getType() {
+	@Override
+	protected String getComparisonStringField() {
 
-		return this.type;
-	}
-
-	public String getName() {
-
-		return this.name;
-	}
-
-	public void setName(final String name) {
-
-		this.name = name;
+		return this.getName();
 	}
 
 	public String getDescription() {
@@ -36,15 +27,24 @@ public class EvaluationActivity
 		return this.description;
 	}
 
+	public String getName() {
+
+		return this.name;
+	}
+
+	public EvaluationType getType() {
+
+		return this.type;
+	}
+
 	public void setDescription(final String description) {
 
 		this.description = description;
 	}
 
-	@Override
-	protected String getComparisonStringField() {
+	public void setName(final String name) {
 
-		return this.getName();
+		this.name = name;
 	}
 
 	@Override

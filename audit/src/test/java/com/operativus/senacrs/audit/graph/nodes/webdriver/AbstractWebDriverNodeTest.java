@@ -27,6 +27,22 @@ public class AbstractWebDriverNodeTest {
 	}
 
 	@Test
+	public void testVerifyState() {
+
+		AbstractWebDriverNode obj = null;
+
+		obj = new AbstractWebDriverNode() {
+			@Override
+			protected boolean verifyStateConditions(WebDriver driver) {
+			
+				return node.verifyStateConditions(driver);
+			}
+		};
+		obj.verifyState(driver);
+		Mockito.verify(node).verifyStateConditions(driver);
+	}
+
+	@Test
 	public void testVerifyStateNull() {
 
 		AbstractWebDriverNode obj = null;
@@ -44,21 +60,5 @@ public class AbstractWebDriverNodeTest {
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
 		}
-	}
-
-	@Test
-	public void testVerifyState() {
-
-		AbstractWebDriverNode obj = null;
-
-		obj = new AbstractWebDriverNode() {
-			@Override
-			protected boolean verifyStateConditions(WebDriver driver) {
-			
-				return node.verifyStateConditions(driver);
-			}
-		};
-		obj.verifyState(driver);
-		Mockito.verify(node).verifyStateConditions(driver);
 	}
 }

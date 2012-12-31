@@ -5,12 +5,17 @@ import com.operativus.senacrs.audit.graph.edges.Edge;
 import com.operativus.senacrs.audit.graph.edges.IllegalSourceNodeException;
 import com.operativus.senacrs.audit.graph.nodes.Node;
 
-public class OpenDashboard
+public final class OpenDashboard
 		extends AbstractHasLogger
 		implements Edge {
 
 	private static final OpenDashboard instance = new OpenDashboard();
 
+	public static OpenDashboard getInstance() {
+
+		return instance;
+	}
+	
 	private OpenDashboard() {
 		
 		super();
@@ -22,10 +27,5 @@ public class OpenDashboard
 		if (!Node.START.equals(source)) {
 			throw new IllegalSourceNodeException(source, Node.START);
 		}		
-	}
-	
-	public static OpenDashboard getInstance() {
-
-		return instance;
 	}
 }

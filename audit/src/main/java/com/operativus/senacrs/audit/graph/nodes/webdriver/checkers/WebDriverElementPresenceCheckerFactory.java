@@ -5,11 +5,6 @@ import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 
 public final class WebDriverElementPresenceCheckerFactory {
 
-	private WebDriverElementPresenceCheckerFactory() {
-		
-		super();
-	}
-	
 	public static WebDriverElementPresenceChecker createChecker(WebDriverCheckerTypeEnum type) {
 		
 		if (type == null) {
@@ -17,6 +12,12 @@ public final class WebDriverElementPresenceCheckerFactory {
 		}
 		
 		return internCreateChecker(type);
+	}
+	
+	protected static WebDriverElementPresenceChecker createDashboardChecker() {
+
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private static WebDriverElementPresenceChecker internCreateChecker(WebDriverCheckerTypeEnum type) {
@@ -34,9 +35,8 @@ public final class WebDriverElementPresenceCheckerFactory {
 		return result;
 	}
 
-	protected static WebDriverElementPresenceChecker createDashboardChecker() {
-
-		// TODO Auto-generated method stub
-		return null;
+	private WebDriverElementPresenceCheckerFactory() {
+		
+		super();
 	}
 }

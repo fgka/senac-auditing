@@ -14,11 +14,6 @@ public class SkillSet {
 		this.essential = essential;
 	}
 
-	public List<RelatedSkill> getSkills() {
-
-		return this.skills;
-	}
-
 	public void addRelatedSkill(final RelatedSkill skill) {
 
 		if (skill == null) {
@@ -30,6 +25,11 @@ public class SkillSet {
 	public EssentialSkill getEssential() {
 
 		return this.essential;
+	}
+
+	public List<RelatedSkill> getSkills() {
+
+		return this.skills;
 	}
 
 	@Override

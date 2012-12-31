@@ -6,6 +6,11 @@ public final class RuntimeExceptionFactory {
 
 	private static final RuntimeExceptionFactory instance = new RuntimeExceptionFactory();
 
+	public static RuntimeExceptionFactory getInstance() {
+
+		return instance;
+	}
+
 	private RuntimeExceptionFactory() {
 
 		super();
@@ -23,10 +28,5 @@ public final class RuntimeExceptionFactory {
 		result = new IllegalArgumentException(msg);
 
 		return result;
-	}
-
-	public static RuntimeExceptionFactory getInstance() {
-
-		return instance;
 	};
 }

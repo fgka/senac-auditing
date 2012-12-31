@@ -20,11 +20,6 @@ public class StudentEvaluation
 		this.name = name;
 	}
 
-	public String getName() {
-
-		return this.name;
-	}
-
 	public List<EvaluationGrade> createAscendingGradesList() {
 
 		List<EvaluationGrade> result = null;
@@ -35,6 +30,22 @@ public class StudentEvaluation
 		}
 
 		return result;
+	}
+
+	@Override
+	protected String getComparisonStringField() {
+
+		return this.getName();
+	}
+
+	public EvaluationGrade getFinalGrade() {
+
+		return this.finalGrade;
+	}
+
+	public String getName() {
+
+		return this.name;
 	}
 
 	public EvaluationGrade putGrade(final EvaluationActivity activity, final EvaluationGrade grade) {
@@ -58,20 +69,9 @@ public class StudentEvaluation
 		return this.grades.put(activity, grade);
 	}
 
-	public EvaluationGrade getFinalGrade() {
-
-		return this.finalGrade;
-	}
-
 	public void setFinalGrade(final EvaluationGrade finalGrade) {
 
 		this.finalGrade = finalGrade;
-	}
-
-	@Override
-	protected String getComparisonStringField() {
-
-		return this.getName();
 	}
 
 	@Override

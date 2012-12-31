@@ -17,28 +17,13 @@ public class ConfigurationFactoryTest {
 
 	private File tempFile = null;
 
-	@Before
-	public void setUp() throws Exception {
+	private boolean containsFileAndField(final MissingMinimalConfigurationEntryException e, final ConfigKey key) {
 
-		this.tempFile = File.createTempFile("config", null);
-	}
+		String msg = null;
 
-	@After
-	public void tearDown() throws Exception {
+		msg = e.getLocalizedMessage();
 
-		this.tempFile = null;
-	}
-
-	@Test
-	public void testCreateConfigurationString() throws IOException {
-
-		Configuration result = null;
-		Configuration expected = null;
-
-		expected = this.createRandomConfiguration();
-		this.putToFile(expected);
-		result = ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
-		Assert.assertEquals(expected, result);
+		return msg.contains(key.getKey()) && msg.contains(this.tempFile.getName());
 	}
 
 	private Configuration createRandomConfiguration() {
@@ -53,18 +38,6 @@ public class ConfigurationFactoryTest {
 		result.setLogFile(TestBoilerplateUtils.randomAlphanumericString());
 
 		return result;
-	}
-
-	private void putToFile(final Configuration obj) throws IOException {
-
-		BufferedWriter writer = null;
-
-		writer = new BufferedWriter(new FileWriter(this.tempFile));
-		for (ConfigurationFactory.ConfigKey k : ConfigurationFactory.ConfigKey.values()) {
-			this.putLine(writer, k, obj);
-		}
-		writer.flush();
-		writer.close();
 	}
 
 	private void putLine(final BufferedWriter writer, final ConfigurationFactory.ConfigKey key, final Configuration obj)
@@ -103,6 +76,30 @@ public class ConfigurationFactoryTest {
 		}
 	}
 
+	private void putToFile(final Configuration obj) throws IOException {
+
+		BufferedWriter writer = null;
+
+		writer = new BufferedWriter(new FileWriter(this.tempFile));
+		for (ConfigurationFactory.ConfigKey k : ConfigurationFactory.ConfigKey.values()) {
+			this.putLine(writer, k, obj);
+		}
+		writer.flush();
+		writer.close();
+	}
+
+	@Before
+	public void setUp() throws Exception {
+
+		this.tempFile = File.createTempFile("config", null);
+	}
+
+	@After
+	public void tearDown() throws Exception {
+
+		this.tempFile = null;
+	}
+
 	@Test
 	public void testCreateConfigurationNoBaseUrl() throws IOException {
 
@@ -121,31 +118,32 @@ public class ConfigurationFactoryTest {
 		}
 	}
 
-	private boolean containsFileAndField(final MissingMinimalConfigurationEntryException e, final ConfigKey key) {
+	@Test
+	public void testCreateConfigurationNoLogFile() throws IOException {
 
-		String msg = null;
+		Configuration template = null;
+		Configuration result = null;
 
-		msg = e.getLocalizedMessage();
-
-		return msg.contains(key.getKey()) && msg.contains(this.tempFile.getName());
+		template = this.createRandomConfiguration();
+		template.setLogFile(null);
+		this.putToFile(template);
+		result = ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
+		Assert.assertEquals(template, result);
+		Assert.assertNull(result.getLogFile());
 	}
 
 	@Test
-	public void testCreateConfigurationNoVersion() throws IOException {
+	public void testCreateConfigurationNoPassword() throws IOException {
 
 		Configuration template = null;
-		boolean check = false;
+		Configuration result = null;
 
 		template = this.createRandomConfiguration();
-		template.setVersion(null);
+		template.setPassword(null);
 		this.putToFile(template);
-		try {
-			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
-			Assert.fail();
-		} catch (MissingMinimalConfigurationEntryException e) {
-			check = this.containsFileAndField(e, ConfigKey.VERSION);
-			Assert.assertTrue(check);
-		}
+		result = ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
+		Assert.assertEquals(template, result);
+		Assert.assertNull(result.getPassword());
 	}
 
 	@Test
@@ -167,30 +165,32 @@ public class ConfigurationFactoryTest {
 	}
 
 	@Test
-	public void testCreateConfigurationNoPassword() throws IOException {
+	public void testCreateConfigurationNoVersion() throws IOException {
 
 		Configuration template = null;
-		Configuration result = null;
+		boolean check = false;
 
 		template = this.createRandomConfiguration();
-		template.setPassword(null);
+		template.setVersion(null);
 		this.putToFile(template);
-		result = ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
-		Assert.assertEquals(template, result);
-		Assert.assertNull(result.getPassword());
+		try {
+			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
+			Assert.fail();
+		} catch (MissingMinimalConfigurationEntryException e) {
+			check = this.containsFileAndField(e, ConfigKey.VERSION);
+			Assert.assertTrue(check);
+		}
 	}
 
 	@Test
-	public void testCreateConfigurationNoLogFile() throws IOException {
+	public void testCreateConfigurationString() throws IOException {
 
-		Configuration template = null;
 		Configuration result = null;
+		Configuration expected = null;
 
-		template = this.createRandomConfiguration();
-		template.setLogFile(null);
-		this.putToFile(template);
+		expected = this.createRandomConfiguration();
+		this.putToFile(expected);
 		result = ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
-		Assert.assertEquals(template, result);
-		Assert.assertNull(result.getLogFile());
+		Assert.assertEquals(expected, result);
 	}
 }

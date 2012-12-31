@@ -8,13 +8,18 @@ import com.operativus.senacrs.audit.model.form.SkillSet;
 
 public final class TextOutputSkillSet {
 
-	private static final String FIELD_SEP_COMMA_SPACE = ", ";
-	private static final TextOutputSkillSet instance = new TextOutputSkillSet();
-
 	private static enum RelatedSkillField {
 		DESCRIPTION,
 		REQUIRED_ATTITUDE,
 		RESULTS_EVIDENCE, ;
+	}
+	private static final String FIELD_SEP_COMMA_SPACE = ", ";
+
+	private static final TextOutputSkillSet instance = new TextOutputSkillSet();
+
+	public static TextOutputSkillSet getInstance() {
+
+		return instance;
 	}
 
 	private TextOutputSkillSet() {
@@ -26,40 +31,6 @@ public final class TextOutputSkillSet {
 
 		this.checkArguments(builder, input);
 		builder.append(input.getEssential().getDescription());
-	}
-
-	private void checkArguments(final StringBuilder builder, final SkillSet input) {
-
-		if (builder == null) {
-			throw new IllegalArgumentException();
-		}
-		if (input == null) {
-			throw new IllegalArgumentException();
-		}
-	}
-
-	public void buildRelatedSkills(final StringBuilder builder, final SkillSet input) {
-
-		this.checkArguments(builder, input);
-		this.buildRelatedSkills(builder, input.getSkills(), RelatedSkillField.DESCRIPTION);
-	}
-
-	private void buildRelatedSkills(final StringBuilder builder, final List<RelatedSkill> skills,
-			final RelatedSkillField field) {
-
-		Iterator<RelatedSkill> iter = null;
-		RelatedSkill skill = null;
-
-		iter = skills.iterator();
-		if (iter.hasNext()) {
-			skill = iter.next();
-			this.buildRelatedSkill(builder, skill, field);
-			while (iter.hasNext()) {
-				builder.append(FIELD_SEP_COMMA_SPACE);
-				skill = iter.next();
-				this.buildRelatedSkill(builder, skill, field);
-			}
-		}
 	}
 
 	private void buildRelatedSkill(final StringBuilder builder, final RelatedSkill skill,
@@ -83,6 +54,30 @@ public final class TextOutputSkillSet {
 		builder.append(value);
 	}
 
+	private void buildRelatedSkills(final StringBuilder builder, final List<RelatedSkill> skills,
+			final RelatedSkillField field) {
+
+		Iterator<RelatedSkill> iter = null;
+		RelatedSkill skill = null;
+
+		iter = skills.iterator();
+		if (iter.hasNext()) {
+			skill = iter.next();
+			this.buildRelatedSkill(builder, skill, field);
+			while (iter.hasNext()) {
+				builder.append(FIELD_SEP_COMMA_SPACE);
+				skill = iter.next();
+				this.buildRelatedSkill(builder, skill, field);
+			}
+		}
+	}
+
+	public void buildRelatedSkills(final StringBuilder builder, final SkillSet input) {
+
+		this.checkArguments(builder, input);
+		this.buildRelatedSkills(builder, input.getSkills(), RelatedSkillField.DESCRIPTION);
+	}
+
 	public void buildRequiredAttitudes(final StringBuilder builder, final SkillSet input) {
 
 		this.checkArguments(builder, input);
@@ -95,8 +90,13 @@ public final class TextOutputSkillSet {
 		this.buildRelatedSkills(builder, input.getSkills(), RelatedSkillField.RESULTS_EVIDENCE);
 	}
 
-	public static TextOutputSkillSet getInstance() {
+	private void checkArguments(final StringBuilder builder, final SkillSet input) {
 
-		return instance;
+		if (builder == null) {
+			throw new IllegalArgumentException();
+		}
+		if (input == null) {
+			throw new IllegalArgumentException();
+		}
 	}
 }

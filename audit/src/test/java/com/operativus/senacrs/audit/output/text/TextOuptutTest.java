@@ -33,9 +33,6 @@ import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class TextOuptutTest {
 
-	private static final String PROPERTIES_DATE_FORMAT_STR_DD_MM_YYYY = "dd/MM/yyyy";
-	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(PROPERTIES_DATE_FORMAT_STR_DD_MM_YYYY);
-
 	private enum PropertyKey {
 		COURSE("course"),
 		UNIT("unit"),
@@ -67,6 +64,9 @@ public class TextOuptutTest {
 			return this.key;
 		}
 	}
+	private static final String PROPERTIES_DATE_FORMAT_STR_DD_MM_YYYY = "dd/MM/yyyy";
+
+	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(PROPERTIES_DATE_FORMAT_STR_DD_MM_YYYY);
 
 	private static final EvaluationType DEFAULT_TYPE = EvaluationType.SENAC_LEVEL;
 	private static final String INPUT_FILE = TestBoilerplateUtils.TST_RESOURCES
@@ -74,159 +74,14 @@ public class TextOuptutTest {
 	private static final String OUTPUT_FILE = TestBoilerplateUtils.TST_RESOURCES
 			+ "test_text_output.txt";
 
-	@Test
-	public void testPrintNull() {
+	private void compare(final StringBuilder builder, final String outputFile) throws IOException {
 
-		TextOuptut obj = null;
+		BufferedReader actual = null;
+		BufferedReader expected = null;
 
-		obj = TextOuptut.getInstance();
-		try {
-			obj.print(null);
-			fail("null accepted");
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
-	}
-
-	@Test
-	public void testBuildOutput() throws IOException, ParseException {
-
-		TextOuptut obj = null;
-		Form form = null;
-		StringBuilder result = null;
-
-		obj = TextOuptut.getInstance();
-		form = this.readForm(INPUT_FILE);
-		result = obj.buildOutput(form);
-		Assert.assertNotNull(result);
-		this.compare(result, OUTPUT_FILE);
-	}
-
-	private Form readForm(final String inputFile) throws IOException, ParseException {
-
-		Form result = null;
-		Properties prop = null;
-		InputStream input = null;
-
-		prop = new Properties();
-		input = new FileInputStream(INPUT_FILE);
-		prop.load(input);
-		result = this.createFormFromProp(prop);
-
-		return result;
-	}
-
-	private Form createFormFromProp(final Properties prop) throws ParseException {
-
-		Form result = null;
-		Identification id = null;
-		SkillSet skillSet = null;
-		List<EvaluationActivity> activities = null;
-		List<StudentEvaluation> evaluations = null;
-		String notes = null;
-
-		result = new Form();
-		id = this.createIdFromProp(prop);
-		skillSet = this.createSkillSetFromProp(prop);
-		activities = this.createActivituesFromProp(prop);
-		evaluations = this.createEvaluationsFromProp(prop, activities);
-		notes = this.getProperty(prop, PropertyKey.NOTES);
-		result.setId(id);
-		result.setSkillSet(skillSet);
-		result.setActivities(activities);
-		result.setEvaluations(evaluations);
-		result.setNotes(notes);
-
-		return result;
-	}
-
-	private String getProperty(final Properties prop, final PropertyKey key) {
-
-		return prop.getProperty(key.toString());
-	}
-
-	private Identification createIdFromProp(final Properties prop) throws ParseException {
-
-		Identification result = null;
-		String course = null;
-		String unit = null;
-		String academic = null;
-		String classDesc = null;
-		String semester = null;
-		String lastDayStr = null;
-
-		course = this.getProperty(prop, PropertyKey.COURSE);
-		unit = this.getProperty(prop, PropertyKey.UNIT);
-		academic = this.getProperty(prop, PropertyKey.ACADEMIC);
-		classDesc = this.getProperty(prop, PropertyKey.CLASS);
-		semester = this.getProperty(prop, PropertyKey.SEMESTER);
-		lastDayStr = this.getProperty(prop, PropertyKey.LAST_DAY);
-		result = new Identification(course, unit, academic, classDesc, semester);
-		result.setLastDay(this.getDateFromString(lastDayStr));
-
-		return result;
-	}
-
-	private Date getDateFromString(final String lastDayStr) throws ParseException {
-
-		Date result = null;
-
-		result = DATE_FORMATTER.parse(lastDayStr);
-
-		return result;
-	}
-
-	private SkillSet createSkillSetFromProp(final Properties prop) {
-
-		SkillSet result = null;
-		EssentialSkill essential = null;
-		List<RelatedSkill> skills = null;
-
-		essential = this.createEssentailFromProp(prop);
-		skills = this.createRelatedFromProp(prop);
-		result = new SkillSet(essential);
-		for (RelatedSkill skill : skills) {
-			result.addRelatedSkill(skill);
-		}
-
-		return result;
-	}
-
-	private EssentialSkill createEssentailFromProp(final Properties prop) {
-
-		EssentialSkill result = null;
-		String str = null;
-
-		str = this.getProperty(prop, PropertyKey.ESSENTIAL_SKILL);
-		result = new EssentialSkill(str.trim());
-
-		return result;
-	}
-
-	private List<RelatedSkill> createRelatedFromProp(final Properties prop) {
-
-		List<RelatedSkill> result = null;
-		RelatedSkill skill = null;
-		String relatedSkills = null;
-		String requiredAttitudes = null;
-		String resultsEvidences = null;
-		String[] relSkill = null;
-		String[] reqAtt = null;
-		String[] resEvi = null;
-
-		relatedSkills = this.getProperty(prop, PropertyKey.RELATED_SKILLS);
-		requiredAttitudes = this.getProperty(prop, PropertyKey.REQUIRED_ATTITUDES);
-		resultsEvidences = this.getProperty(prop, PropertyKey.RESULTS_EVIDENCES);
-		relSkill = this.splitByPipe(relatedSkills);
-		reqAtt = this.splitByPipe(requiredAttitudes);
-		resEvi = this.splitByPipe(resultsEvidences);
-		result = new LinkedList<RelatedSkill>();
-		for (int i = 0; i < relSkill.length; i++) {
-			skill = new RelatedSkill(relSkill[i], reqAtt[i], resEvi[i]);
-			result.add(skill);
-		}
-
-		return result;
+		actual = new BufferedReader(new StringReader(builder.toString()));
+		expected = new BufferedReader(new FileReader(new File(outputFile)));
+		CompareTextUtils.compareReaders(expected, actual);
 	}
 
 	private List<EvaluationActivity> createActivituesFromProp(final Properties prop) {
@@ -247,6 +102,17 @@ public class TextOuptutTest {
 			activity = new EvaluationActivity(i, DEFAULT_TYPE, actNames[i], actDescs[i]);
 			result.add(activity);
 		}
+
+		return result;
+	}
+
+	private EssentialSkill createEssentailFromProp(final Properties prop) {
+
+		EssentialSkill result = null;
+		String str = null;
+
+		str = this.getProperty(prop, PropertyKey.ESSENTIAL_SKILL);
+		result = new EssentialSkill(str.trim());
 
 		return result;
 	}
@@ -278,50 +144,120 @@ public class TextOuptutTest {
 		return result;
 	}
 
-	private String[] parseNames(final String namesProp) {
+	private Form createFormFromProp(final Properties prop) throws ParseException {
 
-		return this.splitByPipe(namesProp);
+		Form result = null;
+		Identification id = null;
+		SkillSet skillSet = null;
+		List<EvaluationActivity> activities = null;
+		List<StudentEvaluation> evaluations = null;
+		String notes = null;
+
+		result = new Form();
+		id = this.createIdFromProp(prop);
+		skillSet = this.createSkillSetFromProp(prop);
+		activities = this.createActivituesFromProp(prop);
+		evaluations = this.createEvaluationsFromProp(prop, activities);
+		notes = this.getProperty(prop, PropertyKey.NOTES);
+		result.setId(id);
+		result.setSkillSet(skillSet);
+		result.setActivities(activities);
+		result.setEvaluations(evaluations);
+		result.setNotes(notes);
+
+		return result;
 	}
 
-	private String[] splitByPipe(final String str) {
+	private EvaluationGrade createGrade(final String value) {
 
-		return this.splitByChar(str, "\\|");
+		EvaluationGrade result = null;
+
+		result = new EvaluationGrade() {
+
+			@Override
+			public void fromString(final String str) {
+
+				// nothing
+			}
+
+			@Override
+			public EvaluationType getType() {
+
+				return DEFAULT_TYPE;
+			}
+
+			@Override
+			public String toString() {
+
+				return value;
+			}
+		};
+
+		return result;
 	}
 
-	private String[] splitByChar(final String str, final String splitStr) {
+	private Identification createIdFromProp(final Properties prop) throws ParseException {
 
-		String[] result = null;
+		Identification result = null;
+		String course = null;
+		String unit = null;
+		String academic = null;
+		String classDesc = null;
+		String semester = null;
+		String lastDayStr = null;
 
-		result = str.split(splitStr);
-		for (int i = 0; i < result.length; i++) {
-			result[i] = result[i].trim();
+		course = this.getProperty(prop, PropertyKey.COURSE);
+		unit = this.getProperty(prop, PropertyKey.UNIT);
+		academic = this.getProperty(prop, PropertyKey.ACADEMIC);
+		classDesc = this.getProperty(prop, PropertyKey.CLASS);
+		semester = this.getProperty(prop, PropertyKey.SEMESTER);
+		lastDayStr = this.getProperty(prop, PropertyKey.LAST_DAY);
+		result = new Identification(course, unit, academic, classDesc, semester);
+		result.setLastDay(this.getDateFromString(lastDayStr));
+
+		return result;
+	}
+
+	private List<RelatedSkill> createRelatedFromProp(final Properties prop) {
+
+		List<RelatedSkill> result = null;
+		RelatedSkill skill = null;
+		String relatedSkills = null;
+		String requiredAttitudes = null;
+		String resultsEvidences = null;
+		String[] relSkill = null;
+		String[] reqAtt = null;
+		String[] resEvi = null;
+
+		relatedSkills = this.getProperty(prop, PropertyKey.RELATED_SKILLS);
+		requiredAttitudes = this.getProperty(prop, PropertyKey.REQUIRED_ATTITUDES);
+		resultsEvidences = this.getProperty(prop, PropertyKey.RESULTS_EVIDENCES);
+		relSkill = this.splitByPipe(relatedSkills);
+		reqAtt = this.splitByPipe(requiredAttitudes);
+		resEvi = this.splitByPipe(resultsEvidences);
+		result = new LinkedList<RelatedSkill>();
+		for (int i = 0; i < relSkill.length; i++) {
+			skill = new RelatedSkill(relSkill[i], reqAtt[i], resEvi[i]);
+			result.add(skill);
 		}
 
 		return result;
 	}
 
-	private String[][] parseGrades(final String gradesProp) {
+	private SkillSet createSkillSetFromProp(final Properties prop) {
 
-		String[][] result = null;
-		String[] partial = null;
+		SkillSet result = null;
+		EssentialSkill essential = null;
+		List<RelatedSkill> skills = null;
 
-		partial = this.splitByPipe(gradesProp);
-		result = new String[partial.length][];
-		for (int i = 0; i < partial.length; i++) {
-			result[i] = this.splitByComma(partial[i]);
+		essential = this.createEssentailFromProp(prop);
+		skills = this.createRelatedFromProp(prop);
+		result = new SkillSet(essential);
+		for (RelatedSkill skill : skills) {
+			result.addRelatedSkill(skill);
 		}
 
 		return result;
-	}
-
-	private String[] splitByComma(final String str) {
-
-		return this.splitByChar(str, ",");
-	}
-
-	private String[] parseFinalGrades(final String finalGradesProp) {
-
-		return this.splitByPipe(finalGradesProp);
 	}
 
 	private StudentEvaluation createStudentEntry(final int sequence, final String name,
@@ -343,41 +279,105 @@ public class TextOuptutTest {
 		return result;
 	}
 
-	private EvaluationGrade createGrade(final String value) {
+	private Date getDateFromString(final String lastDayStr) throws ParseException {
 
-		EvaluationGrade result = null;
+		Date result = null;
 
-		result = new EvaluationGrade() {
-
-			@Override
-			public EvaluationType getType() {
-
-				return DEFAULT_TYPE;
-			}
-
-			@Override
-			public void fromString(final String str) {
-
-				// nothing
-			}
-
-			@Override
-			public String toString() {
-
-				return value;
-			}
-		};
+		result = DATE_FORMATTER.parse(lastDayStr);
 
 		return result;
 	}
 
-	private void compare(final StringBuilder builder, final String outputFile) throws IOException {
+	private String getProperty(final Properties prop, final PropertyKey key) {
 
-		BufferedReader actual = null;
-		BufferedReader expected = null;
+		return prop.getProperty(key.toString());
+	}
 
-		actual = new BufferedReader(new StringReader(builder.toString()));
-		expected = new BufferedReader(new FileReader(new File(outputFile)));
-		CompareTextUtils.compareReaders(expected, actual);
+	private String[] parseFinalGrades(final String finalGradesProp) {
+
+		return this.splitByPipe(finalGradesProp);
+	}
+
+	private String[][] parseGrades(final String gradesProp) {
+
+		String[][] result = null;
+		String[] partial = null;
+
+		partial = this.splitByPipe(gradesProp);
+		result = new String[partial.length][];
+		for (int i = 0; i < partial.length; i++) {
+			result[i] = this.splitByComma(partial[i]);
+		}
+
+		return result;
+	}
+
+	private String[] parseNames(final String namesProp) {
+
+		return this.splitByPipe(namesProp);
+	}
+
+	private Form readForm(final String inputFile) throws IOException, ParseException {
+
+		Form result = null;
+		Properties prop = null;
+		InputStream input = null;
+
+		prop = new Properties();
+		input = new FileInputStream(INPUT_FILE);
+		prop.load(input);
+		result = this.createFormFromProp(prop);
+
+		return result;
+	}
+
+	private String[] splitByChar(final String str, final String splitStr) {
+
+		String[] result = null;
+
+		result = str.split(splitStr);
+		for (int i = 0; i < result.length; i++) {
+			result[i] = result[i].trim();
+		}
+
+		return result;
+	}
+
+	private String[] splitByComma(final String str) {
+
+		return this.splitByChar(str, ",");
+	}
+
+	private String[] splitByPipe(final String str) {
+
+		return this.splitByChar(str, "\\|");
+	}
+
+	@Test
+	public void testBuildOutput() throws IOException, ParseException {
+
+		TextOuptut obj = null;
+		Form form = null;
+		StringBuilder result = null;
+
+		obj = TextOuptut.getInstance();
+		form = this.readForm(INPUT_FILE);
+		result = obj.buildOutput(form);
+		Assert.assertNotNull(result);
+		this.compare(result, OUTPUT_FILE);
+	}
+
+	@Test
+	public void testPrintNull() {
+
+		TextOuptut obj = null;
+
+		obj = TextOuptut.getInstance();
+		try {
+			obj.print(null);
+			fail("null accepted");
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
 	}
 }

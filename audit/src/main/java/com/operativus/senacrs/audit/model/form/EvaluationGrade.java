@@ -2,9 +2,9 @@ package com.operativus.senacrs.audit.model.form;
 
 public interface EvaluationGrade {
 
-	EvaluationType getType();
-
 	void fromString(String str);
+
+	EvaluationType getType();
 
 	@Override
 	String toString();

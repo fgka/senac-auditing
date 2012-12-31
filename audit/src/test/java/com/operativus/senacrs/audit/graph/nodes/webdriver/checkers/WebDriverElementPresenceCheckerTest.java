@@ -15,6 +15,30 @@ public class WebDriverElementPresenceCheckerTest {
 
 	WebDriver driver = null;
 
+	private String[] getRandomStringArray() {
+
+		String[] result = null;
+		int amount = 0;
+
+		amount = TestBoilerplateUtils.randomInt(100);
+		result = new String[amount];
+		for (int i = 0; i < amount; i++) {
+			result[i] = TestBoilerplateUtils.randomString();
+		}
+
+		return result;
+	}
+
+	private void randomIndexToNull(String[] values) {
+
+		int amount = 0;
+		int ndx = 0;
+
+		amount = values.length;
+		ndx = TestBoilerplateUtils.randomInt(amount);
+		values[ndx] = null;
+	}
+
 	@Before
 	public void setUp() throws Exception {
 
@@ -25,6 +49,38 @@ public class WebDriverElementPresenceCheckerTest {
 	public void tearDown() throws Exception {
 
 		driver = null;
+	}
+
+	@Test
+	public void testHasAll() {
+
+		WebDriverElementPresenceChecker obj = null;
+		String[] elements = null;
+		By by = null;
+
+		elements = getRandomStringArray();
+		obj = new WebDriverElementPresenceChecker(elements);
+		obj.hasAll(driver);
+		for (int i = 0; i < elements.length; i++) {
+			by = By.xpath(elements[i]);
+			Mockito.verify(driver).findElement(by);
+		}
+	}
+
+	@Test
+	public void testHasAllNull() {
+
+		WebDriverElementPresenceChecker obj = null;
+		String[] elements = null;
+
+		elements = getRandomStringArray();
+		obj = new WebDriverElementPresenceChecker(elements);
+		try {
+			obj.hasAll(null);
+			Assert.fail();
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
 	}
 
 	@Test
@@ -50,62 +106,6 @@ public class WebDriverElementPresenceCheckerTest {
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
-		}
-	}
-
-	private String[] getRandomStringArray() {
-
-		String[] result = null;
-		int amount = 0;
-
-		amount = TestBoilerplateUtils.randomInt(100);
-		result = new String[amount];
-		for (int i = 0; i < amount; i++) {
-			result[i] = TestBoilerplateUtils.randomString();
-		}
-
-		return result;
-	}
-
-	private void randomIndexToNull(String[] values) {
-
-		int amount = 0;
-		int ndx = 0;
-
-		amount = values.length;
-		ndx = TestBoilerplateUtils.randomInt(amount);
-		values[ndx] = null;
-	}
-
-	@Test
-	public void testHasAllNull() {
-
-		WebDriverElementPresenceChecker obj = null;
-		String[] elements = null;
-
-		elements = getRandomStringArray();
-		obj = new WebDriverElementPresenceChecker(elements);
-		try {
-			obj.hasAll(null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
-	}
-
-	@Test
-	public void testHasAll() {
-
-		WebDriverElementPresenceChecker obj = null;
-		String[] elements = null;
-		By by = null;
-
-		elements = getRandomStringArray();
-		obj = new WebDriverElementPresenceChecker(elements);
-		obj.hasAll(driver);
-		for (int i = 0; i < elements.length; i++) {
-			by = By.xpath(elements[i]);
-			Mockito.verify(driver).findElement(by);
 		}
 	}
 }

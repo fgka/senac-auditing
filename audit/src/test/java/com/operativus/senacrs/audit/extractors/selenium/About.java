@@ -19,12 +19,32 @@ public class About {
 	private String baseUrl;
 	private final StringBuffer verificationErrors = new StringBuffer();
 
+	private boolean isElementPresent(final By by) {
+
+		try {
+			this.driver.findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+
 	@Before
 	public void setUp() throws Exception {
 
 		this.driver = new FirefoxDriver();
 		this.baseUrl = "@BASE_URL@";
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	}
+
+	@After
+	public void tearDown() throws Exception {
+
+		this.driver.quit();
+		String verificationErrorString = this.verificationErrors.toString();
+		if (!"".equals(verificationErrorString)) {
+			fail(verificationErrorString);
+		}
 	}
 
 	@Test
@@ -39,25 +59,5 @@ public class About {
 		assertTrue(this.driver.findElement(By.xpath("//p[contains(@class, 'about-line')]/b[1]")).getText()
 				.matches("^@VERSION@$"));
 		this.driver.findElement(By.xpath("//button[contains(text(), 'Fechar')]")).click();
-	}
-
-	@After
-	public void tearDown() throws Exception {
-
-		this.driver.quit();
-		String verificationErrorString = this.verificationErrors.toString();
-		if (!"".equals(verificationErrorString)) {
-			fail(verificationErrorString);
-		}
-	}
-
-	private boolean isElementPresent(final By by) {
-
-		try {
-			this.driver.findElement(by);
-			return true;
-		} catch (NoSuchElementException e) {
-			return false;
-		}
 	}
 }

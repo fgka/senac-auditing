@@ -12,11 +12,6 @@ public abstract class AbstractSequenceStringFieldComparable
 		this.sequence = sequence;
 	}
 
-	public int getSequence() {
-
-		return this.sequence;
-	}
-
 	@Override
 	public int compareTo(final AbstractSequenceStringFieldComparable o) {
 
@@ -58,8 +53,6 @@ public abstract class AbstractSequenceStringFieldComparable
 		return result;
 	}
 
-	protected abstract String getComparisonStringField();
-
 	private int compareToThisStrFieldNull(final AbstractSequenceStringFieldComparable o) {
 
 		int result = 0;
@@ -71,6 +64,13 @@ public abstract class AbstractSequenceStringFieldComparable
 		}
 
 		return result;
+	}
+
+	protected abstract String getComparisonStringField();
+
+	public int getSequence() {
+
+		return this.sequence;
 	}
 
 	@Override

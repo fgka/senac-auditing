@@ -26,9 +26,9 @@ public final class MessagesCentral {
 		}
 	}
 
-	private MessagesCentral() {
+	public static void addMessagesFile(final String filename) throws IOException {
 
-		super();
+		central.addPropertiesFile(filename);
 	}
 
 	public static String getMessage(final PropertyKey key, final Object... arguments) {
@@ -36,13 +36,13 @@ public final class MessagesCentral {
 		return central.getMessage(key, arguments);
 	}
 
-	public static void addMessagesFile(final String filename) throws IOException {
-
-		central.addPropertiesFile(filename);
-	}
-
 	public static boolean hasKey(final PropertyKey key) {
 
 		return central.hasKey(key);
+	}
+
+	private MessagesCentral() {
+
+		super();
 	}
 }

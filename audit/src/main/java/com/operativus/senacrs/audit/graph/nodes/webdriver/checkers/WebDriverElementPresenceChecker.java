@@ -16,24 +16,30 @@ public class WebDriverElementPresenceChecker {
 
 		super();
 		
-		checkArgument(xPathElementsToCheck);
-		this.xPathElementsToCheck = xPathElementsToCheck;
+		this.xPathElementsToCheck = checkAndCloneArgument(xPathElementsToCheck);
 	}
 
 
-	private void checkArgument(String[] xPathElementsToCheck) {
+	private String[] checkAndCloneArgument(String[] xPathElementsToCheck) {
 
+		String[] result = null;
 		String argName = null;
+		String item = null;
 		
 		argName = "xPathElementsToCheck";
 		if (xPathElementsToCheck == null) {
 			throw RuntimeExceptionFactory.getInstance().getNullArgumentException(argName);
 		}
+		result = new String[xPathElementsToCheck.length];
 		for (int i = 0; i < xPathElementsToCheck.length; i++) {
-			if (xPathElementsToCheck[i] == null) {
+			item = xPathElementsToCheck[i];
+			if (item == null) {
 				throw RuntimeExceptionFactory.getInstance().getNullArgumentException(argName + "[" + i + "]");
 			}
+			result[i] = item;
 		}
+		
+		return result;
 	}
 	
 	
@@ -42,6 +48,19 @@ public class WebDriverElementPresenceChecker {
 		return xPathElementsToCheck;
 	}
 	
+	private By[] getXPaths() {
+
+		if (xPaths == null) {
+			xPaths = new By[this.xPathElementsToCheck.length];
+			for (int i = 0; i < this.xPathElementsToCheck.length; i++) {
+				xPaths[i] = By.xpath(this.xPathElementsToCheck[i]);
+			}
+		}
+		
+		return xPaths;
+	}
+
+
 	public boolean hasAll(WebDriver driver) {
 		
 		boolean result = false;
@@ -53,7 +72,6 @@ public class WebDriverElementPresenceChecker {
 		
 		return result;
 	}
-
 
 	private boolean internHasAll(WebDriver driver) {
 
@@ -71,18 +89,6 @@ public class WebDriverElementPresenceChecker {
 		}
 		
 		return result;
-	}
-
-	private By[] getXPaths() {
-
-		if (xPaths == null) {
-			xPaths = new By[this.xPathElementsToCheck.length];
-			for (int i = 0; i < this.xPathElementsToCheck.length; i++) {
-				xPaths[i] = By.xpath(this.xPathElementsToCheck[i]);
-			}
-		}
-		
-		return xPaths;
 	}
 
 	private boolean isElementPresent(WebDriver driver, By element) {

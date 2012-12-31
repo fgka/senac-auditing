@@ -14,12 +14,41 @@ public class PropertiesCentral extends AbstractHasLogger {
 	private static final String READ_PROPERTIES_FILE = "Start reading properties file ";
 	private static final String NULL_ARGUMENT_KEY = "Null argument [key]";
 	private static final String NULL_KEY_VALUE = "Key is valid, but its value is null";
+	private static String getKeyValue(final PropertyKey key) {
+
+		String result;
+
+		if (key == null) {
+			throw new IllegalArgumentException(NULL_ARGUMENT_KEY);
+		}
+		result = key.getKey();
+		if (result == null) {
+			throw new IllegalArgumentException(NULL_KEY_VALUE);
+		}
+
+		return result;
+	}
+
 	private final Properties properties;
 
 	public PropertiesCentral() {
 
 		super();
 		properties = new Properties();
+	}
+
+	public void addPropertiesFile(InputStream in) throws IOException {
+		
+		this.properties.load(in);
+	}
+
+	public void addPropertiesFile(final String filename) throws IOException {
+
+		InputStream in = null;
+
+		in = new FileInputStream(new File(filename));
+		getLogger().info(READ_PROPERTIES_FILE + filename);
+		addPropertiesFile(in);
 	}
 
 	public String getMessage(final PropertyKey key, final Object... arguments) {
@@ -36,35 +65,6 @@ public class PropertiesCentral extends AbstractHasLogger {
 		result = MessageFormat.format(tmpl, arguments);
 
 		return result;
-	}
-
-	private static String getKeyValue(final PropertyKey key) {
-
-		String result;
-
-		if (key == null) {
-			throw new IllegalArgumentException(NULL_ARGUMENT_KEY);
-		}
-		result = key.getKey();
-		if (result == null) {
-			throw new IllegalArgumentException(NULL_KEY_VALUE);
-		}
-
-		return result;
-	}
-
-	public void addPropertiesFile(final String filename) throws IOException {
-
-		InputStream in = null;
-
-		in = new FileInputStream(new File(filename));
-		getLogger().info(READ_PROPERTIES_FILE + filename);
-		addPropertiesFile(in);
-	}
-
-	public void addPropertiesFile(InputStream in) throws IOException {
-		
-		this.properties.load(in);
 	}
 
 	public boolean hasKey(final PropertyKey key) {

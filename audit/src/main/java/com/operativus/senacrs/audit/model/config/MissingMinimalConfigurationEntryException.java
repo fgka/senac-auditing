@@ -8,11 +8,6 @@ import com.operativus.senacrs.audit.messages.MessagesCentral;
 public class MissingMinimalConfigurationEntryException
 		extends IllegalArgumentException {
 
-	public MissingMinimalConfigurationEntryException(final String file, final String entry) {
-
-		super(getMessage(file, entry));
-	}
-
 	private static String getMessage(final String file, final String entry) {
 
 		String result = null;
@@ -22,6 +17,11 @@ public class MissingMinimalConfigurationEntryException
 		result = MessagesCentral.getMessage(key, file, entry);
 
 		return result;
+	}
+
+	public MissingMinimalConfigurationEntryException(final String file, final String entry) {
+
+		super(getMessage(file, entry));
 	}
 
 	public MissingMinimalConfigurationEntryException(final Throwable cause, final String file, final String entry) {

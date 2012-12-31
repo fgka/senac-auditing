@@ -6,31 +6,14 @@ public final class TextOutputIdentification {
 
 	private static final TextOutputIdentification instance = new TextOutputIdentification();
 
+	public static TextOutputIdentification getInstance() {
+
+		return instance;
+	}
+
 	private TextOutputIdentification() {
 
 		super();
-	}
-
-	public void buildCourse(final StringBuilder builder, final Identification input) {
-
-		this.checkArguments(builder, input);
-		builder.append(input.getCourse());
-	}
-
-	private void checkArguments(final StringBuilder builder, final Identification input) {
-
-		if (builder == null) {
-			throw new IllegalArgumentException();
-		}
-		if (input == null) {
-			throw new IllegalArgumentException();
-		}
-	}
-
-	public void buildUnit(final StringBuilder builder, final Identification input) {
-
-		this.checkArguments(builder, input);
-		builder.append(input.getUnit());
 	}
 
 	public void buildAcademic(final StringBuilder builder, final Identification input) {
@@ -45,10 +28,10 @@ public final class TextOutputIdentification {
 		builder.append(input.getClassDesc());
 	}
 
-	public void buildSemester(final StringBuilder builder, final Identification input) {
+	public void buildCourse(final StringBuilder builder, final Identification input) {
 
 		this.checkArguments(builder, input);
-		builder.append(input.getSemester());
+		builder.append(input.getCourse());
 	}
 
 	public void buildLastDay(final StringBuilder builder, final Identification input) {
@@ -57,8 +40,25 @@ public final class TextOutputIdentification {
 		builder.append(input.toStringLastDay());
 	}
 
-	public static TextOutputIdentification getInstance() {
+	public void buildSemester(final StringBuilder builder, final Identification input) {
 
-		return instance;
+		this.checkArguments(builder, input);
+		builder.append(input.getSemester());
+	}
+
+	public void buildUnit(final StringBuilder builder, final Identification input) {
+
+		this.checkArguments(builder, input);
+		builder.append(input.getUnit());
+	}
+
+	private void checkArguments(final StringBuilder builder, final Identification input) {
+
+		if (builder == null) {
+			throw new IllegalArgumentException();
+		}
+		if (input == null) {
+			throw new IllegalArgumentException();
+		}
 	}
 }

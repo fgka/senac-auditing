@@ -19,12 +19,32 @@ public class Year {
 	private String baseUrl;
 	private final StringBuffer verificationErrors = new StringBuffer();
 
+	private boolean isElementPresent(final By by) {
+
+		try {
+			this.driver.findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+
 	@Before
 	public void setUp() throws Exception {
 
 		this.driver = new FirefoxDriver();
 		this.baseUrl = "@BASE_URL@";
 		this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	}
+
+	@After
+	public void tearDown() throws Exception {
+
+		this.driver.quit();
+		String verificationErrorString = this.verificationErrors.toString();
+		if (!"".equals(verificationErrorString)) {
+			fail(verificationErrorString);
+		}
 	}
 
 	@Test
@@ -42,26 +62,6 @@ public class Year {
 			assertTrue(this.isElementPresent(By.xpath("//td/div[contains(text(),'@YEAR@')]")));
 		} catch (Error e) {
 			this.verificationErrors.append(e.toString());
-		}
-	}
-
-	@After
-	public void tearDown() throws Exception {
-
-		this.driver.quit();
-		String verificationErrorString = this.verificationErrors.toString();
-		if (!"".equals(verificationErrorString)) {
-			fail(verificationErrorString);
-		}
-	}
-
-	private boolean isElementPresent(final By by) {
-
-		try {
-			this.driver.findElement(by);
-			return true;
-		} catch (NoSuchElementException e) {
-			return false;
 		}
 	}
 }

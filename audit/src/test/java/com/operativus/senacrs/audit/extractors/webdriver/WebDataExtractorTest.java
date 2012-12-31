@@ -25,17 +25,6 @@ public class WebDataExtractorTest {
 	}
 
 	@Test
-	public void testWebDataExtractorNull() {
-
-		try {
-			new WebDataExtractor(null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
-	}
-
-	@Test
 	public void testExtract() {
 
 		WebDataExtractor obj = null;
@@ -45,6 +34,17 @@ public class WebDataExtractorTest {
 		result = obj.extract();
 		Assert.assertNotNull(result);
 		//TODO
+	}
+
+	@Test
+	public void testWebDataExtractorNull() {
+
+		try {
+			new WebDataExtractor(null);
+			Assert.fail();
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
 	}
 
 }

@@ -27,34 +27,9 @@ public class Identification {
 		this.semester = semester;
 	}
 
-	public String getCourse() {
-
-		return this.course;
-	}
-
-	public void setCourse(final String course) {
-
-		this.course = course;
-	}
-
-	public String getUnit() {
-
-		return this.unit;
-	}
-
-	public void setUnit(final String unit) {
-
-		this.unit = unit;
-	}
-
 	public String getAcademic() {
 
 		return this.academic;
-	}
-
-	public void setAcademic(final String academic) {
-
-		this.academic = academic;
 	}
 
 	public String getClassDesc() {
@@ -62,19 +37,9 @@ public class Identification {
 		return this.classDesc;
 	}
 
-	public void setClassDesc(final String classDesc) {
+	public String getCourse() {
 
-		this.classDesc = classDesc;
-	}
-
-	public String getSemester() {
-
-		return this.semester;
-	}
-
-	public void setSemester(final String semester) {
-
-		this.semester = semester;
+		return this.course;
 	}
 
 	public Date getLastDay() {
@@ -82,14 +47,44 @@ public class Identification {
 		return this.lastDay;
 	}
 
+	public String getSemester() {
+
+		return this.semester;
+	}
+
+	public String getUnit() {
+
+		return this.unit;
+	}
+
+	public void setAcademic(final String academic) {
+
+		this.academic = academic;
+	}
+
+	public void setClassDesc(final String classDesc) {
+
+		this.classDesc = classDesc;
+	}
+
+	public void setCourse(final String course) {
+
+		this.course = course;
+	}
+
 	public void setLastDay(final Date lastDay) {
 
 		this.lastDay = lastDay;
 	}
 
-	public String toStringLastDay() {
+	public void setSemester(final String semester) {
 
-		return DATE_FORMATTER.format(this.lastDay);
+		this.semester = semester;
+	}
+
+	public void setUnit(final String unit) {
+
+		this.unit = unit;
 	}
 
 	@Override
@@ -97,5 +92,10 @@ public class Identification {
 
 		return this.academic + ":" + this.unit + ":" + this.course + ":" + this.classDesc + ":" + this.semester + ":"
 				+ this.toStringLastDay();
+	}
+
+	public String toStringLastDay() {
+
+		return DATE_FORMATTER.format(this.lastDay);
 	}
 }

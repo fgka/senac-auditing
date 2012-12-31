@@ -1,6 +1,7 @@
 package com.operativus.senacrs.audit.graph.nodes.webdriver.checkers;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverCheckerTypeEnum;
@@ -8,6 +9,18 @@ import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElem
 import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElementPresenceCheckerFactory;
 
 public class WebDriverElementPresenceCheckerFactoryTest {
+
+	@Ignore
+	@Test
+	public void testCreateCheckerAllTypes() {
+
+		WebDriverElementPresenceChecker result = null;
+
+		for (WebDriverCheckerTypeEnum t : WebDriverCheckerTypeEnum.values()) {
+			result = WebDriverElementPresenceCheckerFactory.createChecker(t);
+			Assert.assertNotNull(result);
+		}
+	}
 
 	@Test
 	public void testCreateCheckerNull() {
@@ -17,17 +30,6 @@ public class WebDriverElementPresenceCheckerFactoryTest {
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
-		}
-	}
-
-	@Test
-	public void testCreateCheckerAllTypes() {
-
-		WebDriverElementPresenceChecker result = null;
-
-		for (WebDriverCheckerTypeEnum t : WebDriverCheckerTypeEnum.values()) {
-			result = WebDriverElementPresenceCheckerFactory.createChecker(t);
-			Assert.assertNotNull(result);
 		}
 	}
 }

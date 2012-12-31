@@ -17,15 +17,14 @@ public class AbstractHasLoggerTest {
 	}
 
 	@Test
-	public void testGetLoggerNonNull() {
+	public void testGetLoggerAnnonymousClassName() {
 
 		HasLogger obj = null;
 		Logger result = null;
 		
-		LogManager.getLogger(this.getClass());
 		obj = new AbstractHasLogger(){};
 		result = obj.getLogger();
-		Assert.assertNotNull(result);
+		Assert.assertEquals(obj.getClass().getName(), result.getName());
 	}
 
 	@Test
@@ -40,13 +39,14 @@ public class AbstractHasLoggerTest {
 	}
 
 	@Test
-	public void testGetLoggerAnnonymousClassName() {
+	public void testGetLoggerNonNull() {
 
 		HasLogger obj = null;
 		Logger result = null;
 		
+		LogManager.getLogger(this.getClass());
 		obj = new AbstractHasLogger(){};
 		result = obj.getLogger();
-		Assert.assertEquals(obj.getClass().getName(), result.getName());
+		Assert.assertNotNull(result);
 	}
 }

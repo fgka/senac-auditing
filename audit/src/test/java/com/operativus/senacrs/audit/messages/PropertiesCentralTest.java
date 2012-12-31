@@ -41,6 +41,16 @@ public class PropertiesCentralTest {
 	
 	private PropertiesCentral central = null;
 
+	private String createPropFile() throws IOException {
+
+		File result = null;
+
+		result = File.createTempFile("properties", null);
+		writeContentToFile(result);
+
+		return result.getAbsolutePath();
+	}
+
 	@Before
 	public void setUp() throws Exception {
 
@@ -54,22 +64,16 @@ public class PropertiesCentralTest {
 	}
 
 	@Test
-	public void testGetMessageNonExistent() {
+	public void testAddPropertiesFile() {
 
-		PropertyKey key = null;
+		boolean result = false;
 
 		try {
-			key = new PropertyKey() {
-
-				@Override
-				public String getKey() {
-
-					return TestBoilerplateUtils.randomString();
-				}
-			};
-			central.getMessage(key);
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
+			central.addPropertiesFile(createPropFile());
+			result = central.hasKey(TestMessagesEnum.TEST_MESSAGE);
+			Assert.assertTrue(result);
+		} catch (IOException e) {
+			Assert.fail(e.getLocalizedMessage());
 		}
 	}
 
@@ -92,40 +96,23 @@ public class PropertiesCentralTest {
 		}
 	}
 
-	private String createPropFile() throws IOException {
-
-		File result = null;
-
-		result = File.createTempFile("properties", null);
-		writeContentToFile(result);
-
-		return result.getAbsolutePath();
-	}
-
-	private void writeContentToFile(File result) throws IOException {
-
-		BufferedWriter writer = null;
-		
-		writer = new BufferedWriter(new FileWriter(result));
-		for (String l : CONTENT) {
-			writer.write(l);
-			writer.newLine();			
-		}
-		writer.flush();
-		writer.close();
-	}
-
 	@Test
-	public void testAddPropertiesFile() {
+	public void testGetMessageNonExistent() {
 
-		boolean result = false;
+		PropertyKey key = null;
 
 		try {
-			central.addPropertiesFile(createPropFile());
-			result = central.hasKey(TestMessagesEnum.TEST_MESSAGE);
-			Assert.assertTrue(result);
-		} catch (IOException e) {
-			Assert.fail(e.getLocalizedMessage());
+			key = new PropertyKey() {
+
+				@Override
+				public String getKey() {
+
+					return TestBoilerplateUtils.randomString();
+				}
+			};
+			central.getMessage(key);
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);
 		}
 	}
 
@@ -157,5 +144,18 @@ public class PropertiesCentralTest {
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
 		}
+	}
+
+	private void writeContentToFile(File result) throws IOException {
+
+		BufferedWriter writer = null;
+		
+		writer = new BufferedWriter(new FileWriter(result));
+		for (String l : CONTENT) {
+			writer.write(l);
+			writer.newLine();			
+		}
+		writer.flush();
+		writer.close();
 	}
 }
