@@ -6,11 +6,6 @@ License URL: http://seleniumhq.org/about/license.jsp
 License URL: http://www.apache.org/licenses/LICENSE-2.0
 Type: Apache 2.0 License
 
-JUnit
-URL: http://www.junit.org
-License URL: https://github.com/KentBeck/junit/raw/master/LICENSE
-Type: Common Public License - v 1.0
-
 Log4j2
 URL: http://logging.apache.org/log4j/2.x/
 License URL: http://logging.apache.org/log4j/2.x/LICENSE
@@ -36,6 +31,19 @@ URL: http://jgrapht.org/
 License URL: http://jgrapht.org/LGPL.html
 Type: LGPL 2.1
 
+================================
+
+Only required for building:
+
+JUnit
+URL: http://www.junit.org
+License URL: https://github.com/KentBeck/junit/raw/master/LICENSE
+Type: Common Public License - v 1.0
+
+Mockito
+URL: http://code.google.com/p/mockito/
+License URL: http://www.opensource.org/licenses/mit-license.php
+Type: MIT License
 
 Template
 URL: 
