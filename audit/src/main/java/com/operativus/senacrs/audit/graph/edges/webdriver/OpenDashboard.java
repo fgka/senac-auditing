@@ -2,6 +2,7 @@ package com.operativus.senacrs.audit.graph.edges.webdriver;
 
 import com.operativus.senacrs.audit.common.AbstractHasLogger;
 import com.operativus.senacrs.audit.graph.edges.Edge;
+import com.operativus.senacrs.audit.graph.edges.IllegalSourceNodeException;
 import com.operativus.senacrs.audit.graph.nodes.Node;
 
 public class OpenDashboard
@@ -18,6 +19,9 @@ public class OpenDashboard
 	@Override
 	public Node traverse(Node source) {
 
+		if (!Node.START.equals(source)) {
+			throw new IllegalSourceNodeException(source);
+		}
 		return null;
 	}
 	
