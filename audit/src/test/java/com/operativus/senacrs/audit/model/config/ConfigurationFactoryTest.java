@@ -51,6 +51,7 @@ public class ConfigurationFactoryTest {
 		result.setVersion(TestBoilerplateUtils.randomAlphanumericString());
 		result.setUsername(TestBoilerplateUtils.randomAlphanumericString());
 		result.setPassword(TestBoilerplateUtils.randomAlphanumericString());
+		result.setLogFile(TestBoilerplateUtils.randomAlphanumericString());
 
 		return result;
 	}
@@ -76,6 +77,9 @@ public class ConfigurationFactoryTest {
 			break;
 		case PASSWORD:
 			this.putNonNullValueLine(writer, key, obj.getPassword());
+			break;
+		case LOG_FILE:
+			this.putNonNullValueLine(writer, key, obj.getLogFile());
 			break;
 		case USERNAME:
 			this.putNonNullValueLine(writer, key, obj.getUsername());
@@ -175,5 +179,19 @@ public class ConfigurationFactoryTest {
 		result = ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
 		Assert.assertEquals(template, result);
 		Assert.assertNull(result.getPassword());
+	}
+
+	@Test
+	public void testCreateConfigurationNoLogFile() throws IOException {
+
+		Configuration template = null;
+		Configuration result = null;
+
+		template = this.createRandomConfiguration();
+		template.setLogFile(null);
+		this.putToFile(template);
+		result = ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
+		Assert.assertEquals(template, result);
+		Assert.assertNull(result.getLogFile());
 	}
 }

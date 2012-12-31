@@ -19,7 +19,9 @@ public final class ConfigurationFactory {
 		BASE_URL("base_url"),
 		VERSION("version"),
 		USERNAME("username"),
-		PASSWORD("password"), ;
+		PASSWORD("password"), 
+		LOG_FILE("log_file"), 
+		;
 
 		private String key;
 
@@ -91,6 +93,9 @@ public final class ConfigurationFactory {
 			break;
 		case PASSWORD:
 			result.setPassword(value);
+			break;
+		case LOG_FILE:
+			result.setLogFile(value);
 			break;
 		case USERNAME:
 			result.setUsername(value);

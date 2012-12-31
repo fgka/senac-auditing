@@ -7,6 +7,7 @@ public class Configuration {
 	private String version = null;
 	private String username = null;
 	private String password = null;
+	private String logFile = null;
 
 	public Configuration() {
 
@@ -51,6 +52,18 @@ public class Configuration {
 	public void setPassword(final String password) {
 
 		this.password = password;
+	}
+	
+	
+	public String getLogFile() {
+	
+		return logFile;
+	}
+
+	
+	public void setLogFile(String logFile) {
+	
+		this.logFile = logFile;
 	}
 
 	@Override
@@ -124,6 +137,8 @@ public class Configuration {
 		result.append(this.username);
 		result.append(SEP_PIPE);
 		result.append(this.password);
+		result.append(SEP_PIPE);
+		result.append(this.logFile);
 
 		return result.toString();
 	}
