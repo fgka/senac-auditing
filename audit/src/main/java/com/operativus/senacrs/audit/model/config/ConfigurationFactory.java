@@ -58,7 +58,7 @@ public final class ConfigurationFactory {
 		logger.info(MessagesCentral.getMessage(ConfigMessagesEnum.LOG_CONFIG_BEGIN, filename));
 		props = getProperties(filename);
 		result = read(props);
-		checkMinimalNonNullValeus(filename, result);
+		checkMinimalNonNullValues(filename, result);
 		logger.debug(MessagesCentral.getMessage(ConfigMessagesEnum.LOG_CONFIG_END, filename));
 
 		return result;
@@ -114,7 +114,7 @@ public final class ConfigurationFactory {
 		}
 	}
 
-	private static void checkMinimalNonNullValeus(final String filename, final Configuration result) {
+	private static void checkMinimalNonNullValues(final String filename, final Configuration result) {
 
 		if (!isValueOk(result.getBaseUrl())) {
 			throw new MissingMinimalConfigurationEntryException(filename, ConfigKey.BASE_URL.getKey());
