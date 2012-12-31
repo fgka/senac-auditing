@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 import com.operativus.senacrs.audit.exceptions.ExceptionMessagesEnum;
 import com.operativus.senacrs.audit.graph.nodes.Node;
-import com.operativus.senacrs.audit.messages.PropertyKey;
-import com.operativus.senacrs.audit.messages.MessagesCentral;
+import com.operativus.senacrs.audit.properties.PropertyKey;
+import com.operativus.senacrs.audit.properties.messages.MessagesCentral;
 
 @SuppressWarnings("serial")
 public class IllegalSourceNodeException

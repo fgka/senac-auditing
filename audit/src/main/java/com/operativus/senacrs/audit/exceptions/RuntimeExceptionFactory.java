@@ -1,6 +1,6 @@
 package com.operativus.senacrs.audit.exceptions;
 
-import com.operativus.senacrs.audit.messages.MessagesCentral;
+import com.operativus.senacrs.audit.properties.messages.MessagesCentral;
 
 public final class RuntimeExceptionFactory {
 

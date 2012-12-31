@@ -1,9 +1,12 @@
-package com.operativus.senacrs.audit.messages;
+package com.operativus.senacrs.audit.properties.messages;
 
 import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.operativus.senacrs.audit.properties.PropertiesCentral;
+import com.operativus.senacrs.audit.properties.PropertyKey;
 
 public final class MessagesCentral {
 

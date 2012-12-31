@@ -1,4 +1,4 @@
-package com.operativus.senacrs.audit.messages;
+package com.operativus.senacrs.audit.properties;
 
 public interface PropertyKey {
 

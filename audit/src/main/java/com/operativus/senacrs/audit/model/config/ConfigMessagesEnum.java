@@ -1,6 +1,6 @@
 package com.operativus.senacrs.audit.model.config;
 
-import com.operativus.senacrs.audit.messages.PropertyKey;
+import com.operativus.senacrs.audit.properties.PropertyKey;
 
 public enum ConfigMessagesEnum implements PropertyKey {
 

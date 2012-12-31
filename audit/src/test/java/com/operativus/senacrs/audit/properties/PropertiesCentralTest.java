@@ -1,4 +1,4 @@
-package com.operativus.senacrs.audit.messages;
+package com.operativus.senacrs.audit.properties;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,6 +10,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.operativus.senacrs.audit.properties.PropertiesCentral;
+import com.operativus.senacrs.audit.properties.PropertyKey;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class PropertiesCentralTest {

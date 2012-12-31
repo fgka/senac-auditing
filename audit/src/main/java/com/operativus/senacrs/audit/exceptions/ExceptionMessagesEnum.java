@@ -1,6 +1,6 @@
 package com.operativus.senacrs.audit.exceptions;
 
-import com.operativus.senacrs.audit.messages.PropertyKey;
+import com.operativus.senacrs.audit.properties.PropertyKey;
 
 public enum ExceptionMessagesEnum implements PropertyKey {
 

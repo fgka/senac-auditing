@@ -9,7 +9,7 @@ import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.operativus.senacrs.audit.messages.MessagesCentral;
+import com.operativus.senacrs.audit.properties.messages.MessagesCentral;
 
 public final class ConfigurationFactory {
 

@@ -1,8 +1,10 @@
-package com.operativus.senacrs.audit.messages;
+package com.operativus.senacrs.audit.properties.messages;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.operativus.senacrs.audit.properties.PropertyKey;
+import com.operativus.senacrs.audit.properties.messages.MessagesCentral;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class MessagesCentralTest {

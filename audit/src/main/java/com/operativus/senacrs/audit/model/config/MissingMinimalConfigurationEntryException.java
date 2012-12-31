@@ -1,8 +1,8 @@
 package com.operativus.senacrs.audit.model.config;
 
 import com.operativus.senacrs.audit.exceptions.ExceptionMessagesEnum;
-import com.operativus.senacrs.audit.messages.PropertyKey;
-import com.operativus.senacrs.audit.messages.MessagesCentral;
+import com.operativus.senacrs.audit.properties.PropertyKey;
+import com.operativus.senacrs.audit.properties.messages.MessagesCentral;
 
 @SuppressWarnings("serial")
 public class MissingMinimalConfigurationEntryException
