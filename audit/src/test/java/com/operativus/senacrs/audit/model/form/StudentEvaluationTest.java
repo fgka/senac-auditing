@@ -3,8 +3,6 @@ package com.operativus.senacrs.audit.model.form;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.operativus.senacrs.audit.exceptions.InvalidEvaluationType;
-import com.operativus.senacrs.audit.exceptions.MismatchingEvaluationType;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class StudentEvaluationTest {
@@ -56,7 +54,7 @@ public class StudentEvaluationTest {
 		try {
 			obj.putGrade(activity, grade);
 			Assert.fail();
-		} catch (MismatchingEvaluationType e) {
+		} catch (MismatchingEvaluationTypeException e) {
 			Assert.assertTrue(true);
 		}
 
@@ -102,7 +100,7 @@ public class StudentEvaluationTest {
 		try {
 			obj.putGrade(activity, grade);
 			Assert.fail();
-		} catch (InvalidEvaluationType e) {
+		} catch (InvalidEvaluationTypeException e) {
 			Assert.assertTrue(true);
 		}
 
@@ -121,7 +119,7 @@ public class StudentEvaluationTest {
 		try {
 			obj.putGrade(activity, grade);
 			Assert.fail();
-		} catch (InvalidEvaluationType e) {
+		} catch (InvalidEvaluationTypeException e) {
 			Assert.assertTrue(true);
 		}
 

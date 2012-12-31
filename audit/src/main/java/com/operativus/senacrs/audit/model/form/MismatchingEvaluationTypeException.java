@@ -1,14 +1,14 @@
-package com.operativus.senacrs.audit.exceptions;
+package com.operativus.senacrs.audit.model.form;
 
+import com.operativus.senacrs.audit.exceptions.ExceptionMessagesEnum;
 import com.operativus.senacrs.audit.messages.Messages;
 import com.operativus.senacrs.audit.messages.MessagesCentral;
-import com.operativus.senacrs.audit.model.form.EvaluationType;
 
 @SuppressWarnings("serial")
-public class MismatchingEvaluationType
+public class MismatchingEvaluationTypeException
 		extends IllegalArgumentException {
 
-	public MismatchingEvaluationType(final EvaluationType activityType, final EvaluationType gradeType) {
+	public MismatchingEvaluationTypeException(final EvaluationType activityType, final EvaluationType gradeType) {
 
 		super(getMessage(activityType, gradeType));
 	}
@@ -24,7 +24,7 @@ public class MismatchingEvaluationType
 		return result;
 	}
 
-	public MismatchingEvaluationType(final Throwable cause, final EvaluationType activityType,
+	public MismatchingEvaluationTypeException(final Throwable cause, final EvaluationType activityType,
 			final EvaluationType gradeType) {
 
 		super(getMessage(activityType, gradeType), cause);
