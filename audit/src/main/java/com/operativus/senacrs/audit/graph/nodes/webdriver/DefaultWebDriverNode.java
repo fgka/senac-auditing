@@ -2,21 +2,27 @@ package com.operativus.senacrs.audit.graph.nodes.webdriver;
 
 import org.openqa.selenium.WebDriver;
 
+import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
+
 
 public class DefaultWebDriverNode extends AbstractWebDriverNode {
 	
+	private final WebDriverElementPresenceChecker checker;
 	
 	public DefaultWebDriverNode(WebDriverElementPresenceChecker checker) {
 
-		// TODO Auto-generated constructor stub
 		super();
+
+		if (checker == null) {
+			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("checker");
+		}
+		this.checker = checker;
 	}
 
 	@Override
 	protected boolean verifyStateConditions(WebDriver driver) {
 
-		// TODO Auto-generated method stub
-		return false;
+		return this.checker.hasAll(driver);
 	}
 
 }
