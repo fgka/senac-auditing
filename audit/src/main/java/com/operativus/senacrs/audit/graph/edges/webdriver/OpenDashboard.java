@@ -20,8 +20,8 @@ public class OpenDashboard
 	public Node traverse(Node source) {
 
 		if (!Node.START.equals(source)) {
-			throw new IllegalSourceNodeException(source);
-		}
+			throw new IllegalSourceNodeException(source, Node.START);
+		}		
 		return null;
 	}
 	
