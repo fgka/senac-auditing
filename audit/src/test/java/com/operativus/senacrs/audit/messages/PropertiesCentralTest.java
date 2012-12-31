@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
@@ -36,6 +38,20 @@ public class PropertiesCentralTest {
 	private static final String[] CONTENT = new String[] {
 		TestMessagesEnum.TEST_MESSAGE.getKey() + " = " + TEST_MESSAGE,
 	};
+	
+	private PropertiesCentral central = null;
+
+	@Before
+	public void setUp() throws Exception {
+
+		this.central = new PropertiesCentral();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+
+		this.central = null;
+	}
 
 	@Test
 	public void testGetMessageNonExistent() {
@@ -51,7 +67,7 @@ public class PropertiesCentralTest {
 					return TestBoilerplateUtils.randomString();
 				}
 			};
-			PropertiesCentral.getMessage(key);
+			central.getMessage(key);
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
 		}
@@ -66,8 +82,8 @@ public class PropertiesCentralTest {
 
 		try {
 			arg = TestBoilerplateUtils.randomString();
-			PropertiesCentral.addPropertiesFile(createPropFile());
-			result = PropertiesCentral.getMessage(TestMessagesEnum.TEST_MESSAGE, arg);
+			central.addPropertiesFile(createPropFile());
+			result = central.getMessage(TestMessagesEnum.TEST_MESSAGE, arg);
 			Assert.assertNotNull(result);
 			check = result.contains(arg);
 			Assert.assertTrue(check);
@@ -105,8 +121,8 @@ public class PropertiesCentralTest {
 		boolean result = false;
 
 		try {
-			PropertiesCentral.addPropertiesFile(createPropFile());
-			result = PropertiesCentral.hasKey(TestMessagesEnum.TEST_MESSAGE);
+			central.addPropertiesFile(createPropFile());
+			result = central.hasKey(TestMessagesEnum.TEST_MESSAGE);
 			Assert.assertTrue(result);
 		} catch (IOException e) {
 			Assert.fail(e.getLocalizedMessage());
@@ -117,7 +133,7 @@ public class PropertiesCentralTest {
 	public void testHasKeyNull() {
 
 		try {
-			PropertiesCentral.hasKey(null);
+			central.hasKey(null);
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
 		}
@@ -137,7 +153,7 @@ public class PropertiesCentralTest {
 					return null;
 				}
 			};
-			PropertiesCentral.hasKey(key);
+			central.hasKey(key);
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
 		}
