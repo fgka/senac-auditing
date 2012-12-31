@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.operativus.senacrs.audit.graph.edges.IllegalSourceNodeException;
+import com.operativus.senacrs.audit.graph.nodes.Node;
 
 
 public class OpenDashboardTest {
@@ -26,13 +27,17 @@ public class OpenDashboardTest {
 
 	@Test
 	public void testTraverseNonStartSource() {
+		
+		String msg = null;
+		boolean condition = false;
 
 		try {
 			this.edge.traverse(null);
 			Assert.fail();
 		} catch (IllegalSourceNodeException e) {
-			Assert.assertTrue(true);			
+			msg = e.getLocalizedMessage();
+			condition = msg.contains(Node.START.toString());
+			Assert.assertTrue(condition);			
 		}
 	}
-
 }

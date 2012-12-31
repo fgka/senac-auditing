@@ -5,5 +5,5 @@ import com.operativus.senacrs.audit.graph.nodes.Node;
 
 public interface Edge {
 	
-	Node traverse(Node source);
+	void traverse(Node source);
 }

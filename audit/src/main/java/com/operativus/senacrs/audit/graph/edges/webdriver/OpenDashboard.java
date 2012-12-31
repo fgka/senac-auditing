@@ -17,12 +17,11 @@ public class OpenDashboard
 	}
 	
 	@Override
-	public Node traverse(Node source) {
+	public void traverse(Node source) {
 
 		if (!Node.START.equals(source)) {
 			throw new IllegalSourceNodeException(source, Node.START);
 		}		
-		return null;
 	}
 	
 	public static OpenDashboard getInstance() {
