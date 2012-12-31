@@ -1,4 +1,4 @@
-Third party componentes:
+Third party components:
 
 Selenium
 URL: http://seleniumhq.org
@@ -11,3 +11,33 @@ URL: http://www.junit.org
 License URL: https://github.com/KentBeck/junit/raw/master/LICENSE
 Type: Common Public License - v 1.0
 
+Log4j2
+URL: http://logging.apache.org/log4j/2.x/
+License URL: http://logging.apache.org/log4j/2.x/LICENSE
+Type: Apache 2.0 License
+
+Xerces2 for Java
+URL: http://xerces.apache.org/xerces2-j/
+License URL: http://www.apache.org/licenses/LICENSE-2.0
+Type: Apache 2.0 License
+
+JasperReports Library
+URL: http://community.jaspersoft.com/project/jasperreports-library
+License URL: http://code.jaspersoft.com/svn/repos/jasperreports/trunk/jasperreports/license.txt
+Type: LGPL 3.0
+
+Apache Common Lang
+URL: http://commons.apache.org/lang/ 
+License URL: http://svn.apache.org/viewvc/commons/proper/lang/trunk/LICENSE.txt?view=markup 
+Type: Apache 2.0 License
+
+JGraphT
+URL: http://jgrapht.org/
+License URL: http://jgrapht.org/LGPL.html
+Type: LGPL 2.1
+
+
+Template
+URL: 
+License URL:
+Type: 
