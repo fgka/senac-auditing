@@ -7,8 +7,12 @@ import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.Properties;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public final class MessagesCentral {
 
+	private static final String FAILED_TO_READ_PROPERTIES_FILE = "Failed to read properties file ";
 	private static final String NULL_ARGUMENT_KEY = "Null argument [key]";
 	private static final String NULL_KEY_VALUE = "Key is valid, but its value is null";
 	private static final Properties properties = new Properties();
@@ -16,14 +20,15 @@ public final class MessagesCentral {
 			"messages_ui.properties",
 			"messages.properties",
 	};
+	private static final Logger logger = LogManager.getLogger(MessagesCentral.class.getClass());
 
 	static {
+		
 		for (String filename : LIST_FILES) {
 			try {
 				properties.load(MessagesCentral.class.getResourceAsStream("/" + filename));
 			} catch (IOException e) {
-				// TODO
-				e.printStackTrace();
+				logger.error(FAILED_TO_READ_PROPERTIES_FILE + filename, e);
 			}
 		}
 	}

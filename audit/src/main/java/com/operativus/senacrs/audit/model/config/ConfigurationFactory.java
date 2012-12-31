@@ -6,13 +6,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.operativus.senacrs.audit.exceptions.MissingMinimalConfigurationEntry;
+import com.operativus.senacrs.audit.messages.MessagesCentral;
 
 public final class ConfigurationFactory {
 
 	private static final String PWD = System.getProperty("user.dir");
 	private static final String DEFAULT_CONFIGURATION_FILENAME = PWD
 			+ File.separator + "configuration.properties";
+	private static final Logger logger = LogManager.getLogger(ConfigurationFactory.class.getClass());
 
 	protected static enum ConfigKey {
 
@@ -50,10 +55,12 @@ public final class ConfigurationFactory {
 
 		Configuration result = null;
 		Properties props = null;
-
+		
+		logger.info(MessagesCentral.getMessage(ConfigMessagesEnum.LOG_CONFIG_BEGIN, filename));
 		props = getProperties(filename);
 		result = read(props);
 		checkMinimalNonNullValeus(filename, result);
+		logger.debug(MessagesCentral.getMessage(ConfigMessagesEnum.LOG_CONFIG_END, filename));
 
 		return result;
 	}
