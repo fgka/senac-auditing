@@ -8,7 +8,6 @@ import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 
 public class AbstractWebDriverNodeTest {
-
 	
 	AbstractWebDriverNode node = null;
 	WebDriver driver = null;
