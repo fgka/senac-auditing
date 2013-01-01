@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.operativus.senacrs.audit.properties.PropertyKey;
-import com.operativus.senacrs.audit.properties.messages.MessagesCentral;
-import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class MessagesCentralTest {
 
@@ -34,26 +32,6 @@ public class MessagesCentralTest {
 			TestMessagesEnum.TEST_MESSAGES_PROPERTIES,
 			TestMessagesEnum.TEST_MESSAGES_UI_PROPERTIES,
 	};
-
-	@Test
-	public void testGetMessageNonExistent() {
-
-		PropertyKey key = null;
-
-		try {
-			key = new PropertyKey() {
-
-				@Override
-				public String getKey() {
-
-					return TestBoilerplateUtils.randomString();
-				}
-			};
-			MessagesCentral.getMessage(key);
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
-	}
 
 	@Test
 	public void testGetMessagePreLoaded() {
