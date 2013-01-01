@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -19,8 +20,7 @@ public class PropertiesCentralTest {
 
 	private static enum TestMessagesEnum implements PropertyKey {
 
-		TEST_MESSAGE("test.message"),
-		;
+		TEST_MESSAGE("test.message"), ;
 
 		private final String key;
 
@@ -39,20 +39,10 @@ public class PropertiesCentralTest {
 
 	private static final String TEST_MESSAGE = "test message with one argument: {0}";
 	private static final String[] CONTENT = new String[] {
-		TestMessagesEnum.TEST_MESSAGE.getKey() + " = " + TEST_MESSAGE,
+			TestMessagesEnum.TEST_MESSAGE.getKey() + " = " + TEST_MESSAGE,
 	};
-	
+
 	private PropertiesCentral central = null;
-
-	private String createPropFile() throws IOException {
-
-		File result = null;
-
-		result = File.createTempFile("properties", null);
-		writeContentToFile(result);
-
-		return result.getAbsolutePath();
-	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -70,7 +60,7 @@ public class PropertiesCentralTest {
 	public void testAddPropertiesFileNullString() {
 
 		try {
-			central.addPropertiesFile((String)null);
+			central.addPropertiesFile((String) null);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
@@ -83,7 +73,7 @@ public class PropertiesCentralTest {
 	public void testAddPropertiesFileNullIn() {
 
 		try {
-			central.addPropertiesFile((InputStream)null);
+			central.addPropertiesFile((InputStream) null);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
@@ -120,6 +110,16 @@ public class PropertiesCentralTest {
 		} catch (IOException e) {
 			Assert.fail(e.getLocalizedMessage());
 		}
+	}
+
+	private String createPropFile() throws IOException {
+
+		File result = null;
+
+		result = File.createTempFile("properties", null);
+		writeContentToFile(result);
+
+		return result.getAbsolutePath();
 	}
 
 	@Test
@@ -194,13 +194,40 @@ public class PropertiesCentralTest {
 	private void writeContentToFile(File result) throws IOException {
 
 		BufferedWriter writer = null;
-		
+
 		writer = new BufferedWriter(new FileWriter(result));
 		for (String l : CONTENT) {
 			writer.write(l);
-			writer.newLine();			
+			writer.newLine();
 		}
 		writer.flush();
 		writer.close();
+	}
+
+	@Test
+	public void testGetAvailableKeysEmpty() {
+
+		List<String> result = null;
+
+		result = central.getAvailableKeys();
+		Assert.assertNotNull(result);
+		Assert.assertTrue(result.isEmpty());
+	}
+
+	@Test
+	public void testGetAvailableKeys() {
+
+		List<String> result = null;
+
+		try {
+			central.addPropertiesFile(createPropFile());
+			result = central.getAvailableKeys();
+			Assert.assertNotNull(result);
+			for (TestMessagesEnum k : TestMessagesEnum.values()) {
+				Assert.assertTrue(result.contains(k.getKey()));
+			}
+		} catch (IOException e) {
+			Assert.fail(e.getLocalizedMessage());
+		}
 	}
 }
