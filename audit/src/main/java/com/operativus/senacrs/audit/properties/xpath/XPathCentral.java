@@ -1,6 +1,8 @@
 package com.operativus.senacrs.audit.properties.xpath;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 import com.operativus.senacrs.audit.properties.PropertyKey;
@@ -12,9 +14,20 @@ public final class XPathCentral {
 	private static final String[] LIST_FILES = new String[] {
 			"xpath.properties",
 	};
+	
+	private static class ModifiablePropertyKey implements PropertyKey {
+		
+		public String key = null;
+
+		@Override
+		public String getKey() {
+
+			return key;
+		}
+		
+	}
 
 	static {
-
 		central.populateCentral(LIST_FILES);
 	}
 
@@ -30,12 +43,48 @@ public final class XPathCentral {
 	
 	public static String[] getXPathByPrefix(final XPathKeyPrefix prefix) {
 		
-		if (prefix == null) {
+		String[] result = null;
+		List<String> keyList = null;
+		
+		if ((prefix == null) || (prefix.getKeyPrefix() == null)) {
 			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("prefix");
 		}
+		keyList = getAllKeysWithPrefix(prefix.getKeyPrefix().trim());
+		result = getValuesForKeys(keyList);
+
+		return result;
+	}
+
+	private static List<String> getAllKeysWithPrefix(String prefix) {
+
+		List<String> result = null;
+		List<String> keys = null;
 		
-		//TODO
-		return null;
+		keys = central.getAvailableKeys();
+		result = new LinkedList<String>();
+		for (String k : keys) {
+			if (k.startsWith(prefix)) {
+				result.add(k);
+			}
+		}
+		
+		return result;
+	}
+
+	private static String[] getValuesForKeys(List<String> keyList) {
+
+		String[] result = null;
+		int ndx = 0;
+		ModifiablePropertyKey key = null;
+		
+		key = new ModifiablePropertyKey();
+		result = new String[keyList.size()];
+		for (String k : keyList) {
+			key.key = k;
+			result[ndx++] = central.getMessage(key);					
+		}
+		
+		return result;
 	}
 
 	public static boolean hasKey(final PropertyKey key) {
