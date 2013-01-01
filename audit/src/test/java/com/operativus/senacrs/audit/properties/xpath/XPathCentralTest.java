@@ -31,8 +31,7 @@ public class XPathCentralTest {
 	private static enum TestXPathPrefixEnum implements XPathKeyPrefix {
 
 		XPATH_TEST("xpath.test"),
-		NONE("none.none"),
-		;
+		NONE("none.none"), ;
 
 		private final String keyPrefix;
 
@@ -53,8 +52,8 @@ public class XPathCentralTest {
 			TestXPathEnum.TEST_XPATH_PROPERTIES,
 	};
 	private static final String[] XPATH_TEST_PREFIX_CONTENT = new String[] {
-		"//xpath/path1",
-		"//xpath/path2",
+			"//xpath/path1",
+			"//xpath/path2",
 	};
 
 	@Test
@@ -84,17 +83,17 @@ public class XPathCentralTest {
 
 		String[] result = null;
 
-		result = XPathCentral.getXPathByPrefix(TestXPathPrefixEnum.NONE);		
+		result = XPathCentral.getXPathByPrefix(TestXPathPrefixEnum.NONE);
 		Assert.assertNotNull(result);
 		Assert.assertEquals(0, result.length);
 	}
-	
+
 	@Test
 	public void testGetXPathByPrefix() throws Exception {
 
 		String[] result = null;
 
-		result = XPathCentral.getXPathByPrefix(TestXPathPrefixEnum.XPATH_TEST);		
+		result = XPathCentral.getXPathByPrefix(TestXPathPrefixEnum.XPATH_TEST);
 		Assert.assertNotNull(result);
 		Arrays.sort(XPATH_TEST_PREFIX_CONTENT);
 		Arrays.sort(result);

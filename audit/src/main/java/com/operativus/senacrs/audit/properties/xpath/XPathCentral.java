@@ -14,17 +14,18 @@ public final class XPathCentral {
 	private static final String[] LIST_FILES = new String[] {
 			"xpath.properties",
 	};
-	
-	private static class ModifiablePropertyKey implements PropertyKey {
-		
+
+	private static class ModifiablePropertyKey
+			implements PropertyKey {
+
 		public String key = null;
 
 		@Override
 		public String getKey() {
 
-			return key;
+			return this.key;
 		}
-		
+
 	}
 
 	static {
@@ -40,12 +41,12 @@ public final class XPathCentral {
 
 		return central.getMessage(key, arguments);
 	}
-	
+
 	public static String[] getXPathByPrefix(final XPathKeyPrefix prefix) {
-		
+
 		String[] result = null;
 		List<String> keyList = null;
-		
+
 		if ((prefix == null) || (prefix.getKeyPrefix() == null)) {
 			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("prefix");
 		}
@@ -55,11 +56,11 @@ public final class XPathCentral {
 		return result;
 	}
 
-	private static List<String> getAllKeysWithPrefix(String prefix) {
+	private static List<String> getAllKeysWithPrefix(final String prefix) {
 
 		List<String> result = null;
 		List<String> keys = null;
-		
+
 		keys = central.getAvailableKeys();
 		result = new LinkedList<String>();
 		for (String k : keys) {
@@ -67,23 +68,23 @@ public final class XPathCentral {
 				result.add(k);
 			}
 		}
-		
+
 		return result;
 	}
 
-	private static String[] getValuesForKeys(List<String> keyList) {
+	private static String[] getValuesForKeys(final List<String> keyList) {
 
 		String[] result = null;
 		int ndx = 0;
 		ModifiablePropertyKey key = null;
-		
+
 		key = new ModifiablePropertyKey();
 		result = new String[keyList.size()];
 		for (String k : keyList) {
 			key.key = k;
-			result[ndx++] = central.getMessage(key);					
+			result[ndx++] = central.getMessage(key);
 		}
-		
+
 		return result;
 	}
 
