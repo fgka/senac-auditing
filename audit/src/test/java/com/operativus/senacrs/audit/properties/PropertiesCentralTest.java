@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -63,6 +64,48 @@ public class PropertiesCentralTest {
 	public void tearDown() throws Exception {
 
 		this.central = null;
+	}
+
+	@Test
+	public void testAddPropertiesFileNullString() {
+
+		try {
+			central.addPropertiesFile((String)null);
+			Assert.fail();
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		} catch (IOException e) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testAddPropertiesFileNullIn() {
+
+		try {
+			central.addPropertiesFile((InputStream)null);
+			Assert.fail();
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		} catch (IOException e) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testAddPropertiesFileInvalid() {
+
+		String filename = null;
+
+		filename = TestBoilerplateUtils.randomAlphanumericString();
+		try {
+			central.addPropertiesFile(filename);
+			Assert.fail();
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		} catch (IOException e) {
+			Assert.fail();
+		}
 	}
 
 	@Test
