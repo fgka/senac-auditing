@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.MessageFormat;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Properties;
 
 import com.operativus.senacrs.audit.common.AbstractHasLogger;
@@ -107,6 +109,18 @@ public class PropertiesCentral
 		keyStr = getKeyValue(key);
 		result = this.properties.containsKey(keyStr);
 
+		return result;
+	}
+	
+	public List<String> getAvailableKeys() {
+		
+		List<String> result = null;
+		
+		result = new LinkedList<String>();
+		for (Object k : this.properties.keySet()) {
+			result.add((String) k);			
+		}
+				
 		return result;
 	}
 }
