@@ -1,43 +1,33 @@
 package com.operativus.senacrs.audit.graph.nodes.webdriver.checkers;
 
 import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
+import com.operativus.senacrs.audit.properties.xpath.XPathCentral;
 import com.operativus.senacrs.audit.properties.xpath.XPathPrefixesEnum;
-
 
 public final class WebDriverElementPresenceCheckerFactory {
 
-	public static WebDriverElementPresenceChecker createChecker(XPathPrefixesEnum type) {
-		
+	private WebDriverElementPresenceCheckerFactory() {
+
+		super();
+	}
+
+	public static WebDriverElementPresenceChecker createChecker(final XPathPrefixesEnum type) {
+
 		if (type == null) {
 			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("type");
 		}
-		
+
 		return internCreateChecker(type);
 	}
-	
-	protected static WebDriverElementPresenceChecker createDashboardChecker() {
 
-		// TODO Auto-generated method stub
-		return null;
-	}
+	private static WebDriverElementPresenceChecker internCreateChecker(final XPathPrefixesEnum type) {
 
-	private static WebDriverElementPresenceChecker internCreateChecker(XPathPrefixesEnum type) {
-		
 		WebDriverElementPresenceChecker result = null;
+		String[] xpathElements = null;
 
-		switch (type) {
-		case DASHBOARD:
-			result = createDashboardChecker();
-			break;
-		default:
-			throw new IllegalArgumentException(type.name());
-		} 
-				
+		xpathElements = XPathCentral.getXPathByPrefix(type);
+		result = new WebDriverElementPresenceChecker(xpathElements);
+
 		return result;
-	}
-
-	private WebDriverElementPresenceCheckerFactory() {
-		
-		super();
 	}
 }
