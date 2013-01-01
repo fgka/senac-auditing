@@ -1,6 +1,6 @@
 package com.operativus.senacrs.audit.properties.xpath;
 
-public enum XPathPrefixesEnum {
+public enum XPathPrefixesEnum implements XPathKeyPrefix {
 
 	DASHBOARD("xpath.dashboard"),
 	ABOUT("xpath.about"),
@@ -18,6 +18,7 @@ public enum XPathPrefixesEnum {
 		this.keyPrefix = keyPrefix;
 	}
 
+	@Override
 	public String getKeyPrefix() {
 
 		return this.keyPrefix;

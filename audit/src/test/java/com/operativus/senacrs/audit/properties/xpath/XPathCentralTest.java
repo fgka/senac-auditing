@@ -41,4 +41,9 @@ public class XPathCentralTest {
 			Assert.assertEquals(TEST_XPATH, result);
 		}
 	}
+	
+	public void testGetXPathByPrefix() throws Exception {
+
+		
+	}
 }
