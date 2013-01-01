@@ -26,6 +26,12 @@ public final class XPathCentral {
 
 		return central.getMessage(key, arguments);
 	}
+	
+	public static String[] getXPathByPrefix(final XPathPrefixesEnum prefix) {
+		
+		//TODO
+		return null;
+	}
 
 	public static boolean hasKey(final PropertyKey key) {
 
