@@ -8,7 +8,6 @@ import org.mockito.Mockito;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElementPresenceChecker;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class WebDriverElementPresenceCheckerTest {
@@ -29,7 +28,7 @@ public class WebDriverElementPresenceCheckerTest {
 		return result;
 	}
 
-	private void randomIndexToNull(String[] values) {
+	private void randomIndexToNull(final String[] values) {
 
 		int amount = 0;
 		int ndx = 0;
@@ -42,13 +41,13 @@ public class WebDriverElementPresenceCheckerTest {
 	@Before
 	public void setUp() throws Exception {
 
-		driver = Mockito.mock(WebDriver.class);
+		this.driver = Mockito.mock(WebDriver.class);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 
-		driver = null;
+		this.driver = null;
 	}
 
 	@Test
@@ -58,12 +57,12 @@ public class WebDriverElementPresenceCheckerTest {
 		String[] elements = null;
 		By by = null;
 
-		elements = getRandomStringArray();
+		elements = this.getRandomStringArray();
 		obj = new WebDriverElementPresenceChecker(elements);
-		obj.hasAll(driver);
-		for (int i = 0; i < elements.length; i++) {
-			by = By.xpath(elements[i]);
-			Mockito.verify(driver).findElement(by);
+		obj.hasAll(this.driver);
+		for (String element : elements) {
+			by = By.xpath(element);
+			Mockito.verify(this.driver).findElement(by);
 		}
 	}
 
@@ -73,7 +72,7 @@ public class WebDriverElementPresenceCheckerTest {
 		WebDriverElementPresenceChecker obj = null;
 		String[] elements = null;
 
-		elements = getRandomStringArray();
+		elements = this.getRandomStringArray();
 		obj = new WebDriverElementPresenceChecker(elements);
 		try {
 			obj.hasAll(null);
@@ -99,8 +98,8 @@ public class WebDriverElementPresenceCheckerTest {
 
 		String[] values = null;
 
-		values = getRandomStringArray();
-		randomIndexToNull(values);
+		values = this.getRandomStringArray();
+		this.randomIndexToNull(values);
 		try {
 			new WebDriverElementPresenceChecker(values);
 			Assert.fail();

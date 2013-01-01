@@ -6,26 +6,24 @@ import org.openqa.selenium.WebDriver;
 
 import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 
-
 public class WebDriverElementPresenceChecker {
 
 	private final String[] xPathElementsToCheck;
 	private By[] xPaths;
-	
-	public WebDriverElementPresenceChecker(String[] xPathElementsToCheck) {
+
+	public WebDriverElementPresenceChecker(final String[] xPathElementsToCheck) {
 
 		super();
-		
-		this.xPathElementsToCheck = checkAndCloneArgument(xPathElementsToCheck);
+
+		this.xPathElementsToCheck = this.checkAndCloneArgument(xPathElementsToCheck);
 	}
 
-
-	private String[] checkAndCloneArgument(String[] xPathElementsToCheck) {
+	private String[] checkAndCloneArgument(final String[] xPathElementsToCheck) {
 
 		String[] result = null;
 		String argName = null;
 		String item = null;
-		
+
 		argName = "xPathElementsToCheck";
 		if (xPathElementsToCheck == null) {
 			throw RuntimeExceptionFactory.getInstance().getNullArgumentException(argName);
@@ -38,61 +36,59 @@ public class WebDriverElementPresenceChecker {
 			}
 			result[i] = item;
 		}
-		
+
 		return result;
 	}
-	
-	
+
 	public String[] getxPathElementsToCheck() {
 
-		return xPathElementsToCheck;
+		return this.xPathElementsToCheck;
 	}
-	
+
 	private By[] getXPaths() {
 
-		if (xPaths == null) {
-			xPaths = new By[this.xPathElementsToCheck.length];
+		if (this.xPaths == null) {
+			this.xPaths = new By[this.xPathElementsToCheck.length];
 			for (int i = 0; i < this.xPathElementsToCheck.length; i++) {
-				xPaths[i] = By.xpath(this.xPathElementsToCheck[i]);
+				this.xPaths[i] = By.xpath(this.xPathElementsToCheck[i]);
 			}
 		}
-		
-		return xPaths;
+
+		return this.xPaths;
 	}
 
+	public boolean hasAll(final WebDriver driver) {
 
-	public boolean hasAll(WebDriver driver) {
-		
 		boolean result = false;
-		
+
 		if (driver == null) {
 			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("driver");
 		}
-		result = internHasAll(driver);
-		
+		result = this.internHasAll(driver);
+
 		return result;
 	}
 
-	private boolean internHasAll(WebDriver driver) {
+	private boolean internHasAll(final WebDriver driver) {
 
 		boolean result = false;
 		By[] xpaths = null;
 		By el = null;
-		int ndx = 0; 
+		int ndx = 0;
 
-		xpaths = getXPaths();
+		xpaths = this.getXPaths();
 		result = true;
 		ndx = 0;
 		while (result && (ndx < xpaths.length)) {
 			el = xpaths[ndx++];
-			result &= isElementPresent(driver, el);
+			result &= this.isElementPresent(driver, el);
 		}
-		
+
 		return result;
 	}
 
-	private boolean isElementPresent(WebDriver driver, By element) {
-		
+	private boolean isElementPresent(final WebDriver driver, final By element) {
+
 		boolean result = false;
 
 		try {
@@ -101,7 +97,7 @@ public class WebDriverElementPresenceChecker {
 		} catch (NoSuchElementException e) {
 			result = false;
 		}
-		
+
 		return result;
 	}
 }
