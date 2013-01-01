@@ -1,11 +1,12 @@
 package com.operativus.senacrs.audit.graph.nodes.webdriver.checkers;
 
 import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
+import com.operativus.senacrs.audit.properties.xpath.XPathPrefixesEnum;
 
 
 public final class WebDriverElementPresenceCheckerFactory {
 
-	public static WebDriverElementPresenceChecker createChecker(WebDriverCheckerTypeEnum type) {
+	public static WebDriverElementPresenceChecker createChecker(XPathPrefixesEnum type) {
 		
 		if (type == null) {
 			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("type");
@@ -20,7 +21,7 @@ public final class WebDriverElementPresenceCheckerFactory {
 		return null;
 	}
 
-	private static WebDriverElementPresenceChecker internCreateChecker(WebDriverCheckerTypeEnum type) {
+	private static WebDriverElementPresenceChecker internCreateChecker(XPathPrefixesEnum type) {
 		
 		WebDriverElementPresenceChecker result = null;
 
