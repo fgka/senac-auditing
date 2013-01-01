@@ -36,25 +36,25 @@ public class PropertiesCentral
 			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("filename");
 		}
 		file = new File(filename);
-		checkFile(file);
+		this.checkFile(file);
 		in = new FileInputStream(file);
 		this.getLogger().info(READ_PROPERTIES_FILE + filename);
 		this.addPropertiesFile(in);
 	}
 
-	private void checkFile(File file) {
-		
+	private void checkFile(final File file) {
+
 		StringBuilder msg = null;
 
 		msg = new StringBuilder();
 		if (!file.exists()) {
-			msg.append("Informed filename does not exist. ");						
+			msg.append("Informed filename does not exist. ");
 		}
 		if (!file.isFile()) {
-			msg.append("Informed filename is not a regular file. ");						
+			msg.append("Informed filename is not a regular file. ");
 		}
 		if (!file.canRead()) {
-			msg.append("Informed filename cannot be read. ");						
+			msg.append("Informed filename cannot be read. ");
 		}
 		if (msg.length() > 0) {
 			msg.append("File: " + file.getAbsolutePath());
@@ -111,16 +111,16 @@ public class PropertiesCentral
 
 		return result;
 	}
-	
+
 	public List<String> getAvailableKeys() {
-		
+
 		List<String> result = null;
-		
+
 		result = new LinkedList<String>();
 		for (Object k : this.properties.keySet()) {
-			result.add((String) k);			
+			result.add((String) k);
 		}
-				
+
 		return result;
 	}
 }
