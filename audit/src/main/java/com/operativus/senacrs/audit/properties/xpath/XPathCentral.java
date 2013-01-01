@@ -2,6 +2,7 @@ package com.operativus.senacrs.audit.properties.xpath;
 
 import java.io.IOException;
 
+import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 import com.operativus.senacrs.audit.properties.PropertyKey;
 import com.operativus.senacrs.audit.properties.ResourceCentral;
 
@@ -28,6 +29,10 @@ public final class XPathCentral {
 	}
 	
 	public static String[] getXPathByPrefix(final XPathKeyPrefix prefix) {
+		
+		if (prefix == null) {
+			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("prefix");
+		}
 		
 		//TODO
 		return null;
