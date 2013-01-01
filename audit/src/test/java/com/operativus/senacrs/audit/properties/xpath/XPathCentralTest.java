@@ -1,5 +1,7 @@
 package com.operativus.senacrs.audit.properties.xpath;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -94,6 +96,8 @@ public class XPathCentralTest {
 
 		result = XPathCentral.getXPathByPrefix(TestXPathPrefixEnum.XPATH_TEST);		
 		Assert.assertNotNull(result);
+		Arrays.sort(XPATH_TEST_PREFIX_CONTENT);
+		Arrays.sort(result);
 		Assert.assertArrayEquals(XPATH_TEST_PREFIX_CONTENT, result);
 	}
 }
