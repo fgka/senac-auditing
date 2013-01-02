@@ -2,25 +2,13 @@ package com.operativus.senacrs.audit.graph.nodes.webdriver;
 
 import static org.junit.Assert.fail;
 
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.operativus.senacrs.audit.graph.nodes.Node;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class WebDriverNodeFactoryTest {
-
-	@Before
-	public void setUp() throws Exception {
-
-	}
-
-	@After
-	public void tearDown() throws Exception {
-
-	}
 
 	@Test
 	public void testCreateNodeNull() {
@@ -69,12 +57,12 @@ public class WebDriverNodeFactoryTest {
 
 		for (WebDriverNodeTypeEnum t : WebDriverNodeTypeEnum.values()) {
 			if (t.getPrefixKey() != null) {
-				testCheckerBasedNodeCreation(t);
+				this.testCheckerBasedNodeCreation(t);
 			}
 		}
 	}
 
-	private void testCheckerBasedNodeCreation(WebDriverNodeTypeEnum t) {
+	private void testCheckerBasedNodeCreation(final WebDriverNodeTypeEnum t) {
 
 		WebDriverNode result = null;
 		String msg = null;
@@ -97,13 +85,13 @@ public class WebDriverNodeFactoryTest {
 			WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.YEAR);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);			
+			Assert.assertTrue(true);
 		}
 	}
 
 	@Test
 	public void testCreateNodeYear() {
-		
+
 		WebDriverNode result = null;
 
 		result = WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.YEAR, TestBoilerplateUtils.randomInt(3000));
