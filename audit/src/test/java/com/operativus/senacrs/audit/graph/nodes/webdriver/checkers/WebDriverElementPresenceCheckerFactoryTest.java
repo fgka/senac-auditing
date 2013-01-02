@@ -13,8 +13,13 @@ public class WebDriverElementPresenceCheckerFactoryTest {
 		WebDriverElementPresenceChecker result = null;
 
 		for (XPathPrefixesEnum t : XPathPrefixesEnum.values()) {
-			result = WebDriverElementPresenceCheckerFactory.createChecker(t);
-			Assert.assertNotNull(result);
+			try {
+				result = WebDriverElementPresenceCheckerFactory.createChecker(t);
+				Assert.assertNotNull(result);
+				Assert.assertEquals(0, t.paramAmount());
+			} catch (IllegalArgumentException e) {
+				Assert.assertTrue(t.paramAmount() > 0);
+			}
 		}
 	}
 
