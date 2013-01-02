@@ -13,6 +13,8 @@ public enum ExceptionMessagesEnum implements PropertyKey {
 	//Graph
 	ILLEGAL_START_NODE("exception.illegal.start.node"),
 	ILLEGAL_NODE_TYPE("exception.illegal.node.type"),
+	//WebDriver
+	ILLEGAL_XPATH_PARAM_AMOUNT("exception.illegal.xpath.param.amount"),
 	;
 
 	private final String key;
