@@ -1,5 +1,7 @@
 package com.operativus.senacrs.audit.graph.nodes.webdriver;
 
+import org.openqa.selenium.WebDriver;
+
 import com.operativus.senacrs.audit.exceptions.ExceptionMessagesEnum;
 import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElementPresenceChecker;
@@ -14,7 +16,7 @@ public final class WebDriverNodeFactory {
 		super();
 	}
 
-	public static WebDriverNode createNode(WebDriverNodeType type, Object... args) {
+	public static WebDriverNode createNode(WebDriverNodeTypeEnum type, Object... args) {
 
 		WebDriverNode result = null;
 
@@ -26,19 +28,48 @@ public final class WebDriverNodeFactory {
 		return result;
 	}
 
-	private static WebDriverNode internCreateNode(WebDriverNodeType type, Object[] args) {
+	private static WebDriverNode internCreateNode(WebDriverNodeTypeEnum type, Object[] args) {
 
 		WebDriverNode result = null;
 		String msg = null;
-
+		
 		if (type.getPrefixKey() != null) {
 			result = internCreateNodeCheckerBased(type);
-		} else {
+		} else if (WebDriverNodeTypeEnum.START.equals(type)) {
+			result = internCreateNodeStart();
+		} else if (WebDriverNodeTypeEnum.END.equals(type)) {
+			result = internCreateNodeEnd();			
+		} else if (WebDriverNodeTypeEnum.NONE.equals(type)) {
 			msg = MessagesCentral.getMessage(ExceptionMessagesEnum.ILLEGAL_NODE_TYPE, type);
 			throw new IllegalArgumentException(msg);
 		}
 
 		return result;
+	}
+
+	private static WebDriverNode internCreateNodeStart() {
+
+		return new AbstractWebDriverNode(WebDriverNodeTypeEnum.START) {
+			
+			@Override
+			protected boolean verifyStateConditions(WebDriver driver) {
+			
+				return false;
+			}
+		};  
+	}
+
+	private static WebDriverNode internCreateNodeEnd() {
+
+
+		return new AbstractWebDriverNode(WebDriverNodeTypeEnum.END) {
+			
+			@Override
+			protected boolean verifyStateConditions(WebDriver driver) {
+			
+				return false;
+			}
+		};  
 	}
 
 	private static WebDriverNode internCreateNodeCheckerBased(WebDriverNodeType type) {
