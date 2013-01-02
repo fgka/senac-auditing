@@ -12,7 +12,7 @@ public class ExceptionMessagesEnumTest {
 	public void testExists() {
 		
 		for (ExceptionMessagesEnum e : ExceptionMessagesEnum.values()) {
-			Assert.assertTrue(MessagesCentral.hasKey(e));			
+			Assert.assertTrue(e.name(), MessagesCentral.hasKey(e));			
 		}
 	}
 
