@@ -31,6 +31,18 @@ public class WebDriverNodeFactoryTest {
 	}
 
 	@Test
+	public void testCreateNodeNone() {
+		
+
+		try {
+			WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.NONE);
+			fail();
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+	}
+
+	@Test
 	public void testCreateNodeForXPathPrefix() {
 		
 		WebDriverNode node = null;
