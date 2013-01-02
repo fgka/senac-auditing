@@ -2,7 +2,7 @@ package com.operativus.senacrs.audit.graph.edges;
 
 import java.util.Arrays;
 
-import com.operativus.senacrs.audit.exceptions.ExceptionMessagesEnum;
+import com.operativus.senacrs.audit.exceptions.ExceptionMessagesKeyEnum;
 import com.operativus.senacrs.audit.graph.nodes.Node;
 import com.operativus.senacrs.audit.properties.PropertyKey;
 import com.operativus.senacrs.audit.properties.messages.MessagesCentral;
@@ -16,7 +16,7 @@ public class IllegalSourceNodeException
 		String result = null;
 		PropertyKey key = null;
 
-		key = ExceptionMessagesEnum.ILLEGAL_START_NODE;
+		key = ExceptionMessagesKeyEnum.ILLEGAL_START_NODE;
 		result = MessagesCentral.getMessage(key, source, Arrays.toString(valid));
 
 		return result;

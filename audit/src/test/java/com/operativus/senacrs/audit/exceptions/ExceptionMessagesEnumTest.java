@@ -11,7 +11,7 @@ public class ExceptionMessagesEnumTest {
 	@Test
 	public void testExists() {
 		
-		for (ExceptionMessagesEnum e : ExceptionMessagesEnum.values()) {
+		for (ExceptionMessagesKeyEnum e : ExceptionMessagesKeyEnum.values()) {
 			Assert.assertTrue(e.name(), MessagesCentral.hasKey(e));			
 		}
 	}

@@ -1,6 +1,6 @@
 package com.operativus.senacrs.audit.model.config;
 
-import com.operativus.senacrs.audit.exceptions.ExceptionMessagesEnum;
+import com.operativus.senacrs.audit.exceptions.ExceptionMessagesKeyEnum;
 import com.operativus.senacrs.audit.properties.PropertyKey;
 import com.operativus.senacrs.audit.properties.messages.MessagesCentral;
 
@@ -13,7 +13,7 @@ public class MissingMinimalConfigurationEntryException
 		String result = null;
 		PropertyKey key = null;
 
-		key = ExceptionMessagesEnum.EVAL_TYPE_MISMATCH;
+		key = ExceptionMessagesKeyEnum.EVAL_TYPE_MISMATCH;
 		result = MessagesCentral.getMessage(key, file, entry);
 
 		return result;

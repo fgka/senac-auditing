@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import org.openqa.selenium.WebDriver;
 
-import com.operativus.senacrs.audit.exceptions.ExceptionMessagesEnum;
+import com.operativus.senacrs.audit.exceptions.ExceptionMessagesKeyEnum;
 import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElementPresenceChecker;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElementPresenceCheckerFactory;
@@ -44,7 +44,7 @@ public final class WebDriverNodeFactory {
 		} else if (WebDriverNodeTypeEnum.YEAR.equals(type)) {
 			result = internCreateNodeYear(args);			
 		} else if (WebDriverNodeTypeEnum.NONE.equals(type)) {
-			msg = MessagesCentral.getMessage(ExceptionMessagesEnum.ILLEGAL_NODE_TYPE, type);
+			msg = MessagesCentral.getMessage(ExceptionMessagesKeyEnum.ILLEGAL_NODE_TYPE, type);
 			throw new IllegalArgumentException(msg);
 		}
 
@@ -74,7 +74,7 @@ public final class WebDriverNodeFactory {
 		int year = 0;
 		
 		if ((args == null) || (args.length < 1)) {
-			msg = MessagesCentral.getMessage(ExceptionMessagesEnum.ILLEGAL_VARARGS_AMOUNT, 1, Arrays.toString(args));
+			msg = MessagesCentral.getMessage(ExceptionMessagesKeyEnum.ILLEGAL_VARARGS_AMOUNT, 1, Arrays.toString(args));
 			throw new IllegalArgumentException(msg);
 		}
 		year = ((Integer) args[0]).intValue();		

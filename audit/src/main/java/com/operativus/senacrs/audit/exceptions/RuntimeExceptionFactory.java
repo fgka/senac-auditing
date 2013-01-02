@@ -24,7 +24,7 @@ public final class RuntimeExceptionFactory {
 		if (argumentName == null) {
 			throw new IllegalArgumentException();
 		}
-		msg = MessagesCentral.getMessage(ExceptionMessagesEnum.NULL_ARGUMENT, argumentName);
+		msg = MessagesCentral.getMessage(ExceptionMessagesKeyEnum.NULL_ARGUMENT, argumentName);
 		result = new IllegalArgumentException(msg);
 
 		return result;

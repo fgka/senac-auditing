@@ -2,7 +2,7 @@ package com.operativus.senacrs.audit.exceptions;
 
 import com.operativus.senacrs.audit.properties.PropertyKey;
 
-public enum ExceptionMessagesEnum implements PropertyKey {
+public enum ExceptionMessagesKeyEnum implements PropertyKey {
 
 	//Runtime
 	NULL_ARGUMENT("exception.null.argument"),
@@ -21,7 +21,7 @@ public enum ExceptionMessagesEnum implements PropertyKey {
 
 	private final String key;
 
-	private ExceptionMessagesEnum(final String key) {
+	private ExceptionMessagesKeyEnum(final String key) {
 
 		this.key = key;
 	}
