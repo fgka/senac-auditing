@@ -25,7 +25,7 @@ public class TextOutputCollectionEvaluationActivityTest {
 	}
 
 	@Test
-	public void testCheckArgumentsNullId() {
+	public void testCheckArgumentsNullCollection() {
 
 		try {
 			TextOutputCollectionEvaluationActivity.checkArguments(new StringBuilder(), null);
