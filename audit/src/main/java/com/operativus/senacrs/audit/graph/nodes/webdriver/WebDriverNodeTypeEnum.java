@@ -8,7 +8,7 @@ public enum WebDriverNodeTypeEnum implements WebDriverNodeType {
 	
 	NONE(null),
 	START(null),
-	STOP(null),
+	END(null),
 	DASHBOARD(XPathPrefixesEnum.DASHBOARD),
 	ABOUT(XPathPrefixesEnum.ABOUT),
 	LOGIN(XPathPrefixesEnum.LOGIN),
