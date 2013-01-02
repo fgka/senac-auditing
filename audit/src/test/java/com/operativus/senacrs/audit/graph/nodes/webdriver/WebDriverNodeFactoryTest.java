@@ -2,12 +2,12 @@ package com.operativus.senacrs.audit.graph.nodes.webdriver;
 
 import static org.junit.Assert.fail;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.operativus.senacrs.audit.graph.nodes.Node;
 
 public class WebDriverNodeFactoryTest {
 
@@ -44,8 +44,27 @@ public class WebDriverNodeFactoryTest {
 	}
 
 	@Test
-	public void testCreateNodeForXPathPrefix() {
+	public void testCreateNodeStart() {
 
+		WebDriverNode result = null;
+
+		result = WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.START);
+		Assert.assertNotNull(result);
+		Assert.assertEquals(Node.START.toString(), result.toString());
+	}
+
+	@Test
+	public void testCreateNodeEnd() {
+
+		WebDriverNode result = null;
+
+		result = WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.END);
+		Assert.assertNotNull(result);
+		Assert.assertEquals(Node.END.toString(), result.toString());
+	}
+
+	@Test
+	public void testCreateNodeForXPathPrefix() {
 
 		for (WebDriverNodeTypeEnum t : WebDriverNodeTypeEnum.values()) {
 			if (t.getPrefixKey() != null) {
@@ -58,7 +77,7 @@ public class WebDriverNodeFactoryTest {
 
 		WebDriverNode node = null;
 		String msg = null;
-		
+
 		msg = t.name();
 		try {
 			node = WebDriverNodeFactory.createNode(t);
