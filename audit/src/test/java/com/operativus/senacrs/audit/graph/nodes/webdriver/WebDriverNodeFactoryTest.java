@@ -68,7 +68,7 @@ public class WebDriverNodeFactoryTest {
 	public void testCreateNodeForXPathPrefix() {
 
 		for (WebDriverNodeTypeEnum t : WebDriverNodeTypeEnum.values()) {
-			if (t.getPrefixKey() != null) {
+			if ((t.getPrefixKey() != null) && (t.getPrefixKey().paramAmount() == 0)) {
 				testCheckerBasedNodeCreation(t);
 			}
 		}
