@@ -2,7 +2,7 @@ package com.operativus.senacrs.audit.graph.nodes.webdriver.checkers;
 
 import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 import com.operativus.senacrs.audit.properties.xpath.XPathCentral;
-import com.operativus.senacrs.audit.properties.xpath.XPathPrefixesEnum;
+import com.operativus.senacrs.audit.properties.xpath.XPathKeyPrefix;
 
 public final class WebDriverElementPresenceCheckerFactory {
 
@@ -11,21 +11,21 @@ public final class WebDriverElementPresenceCheckerFactory {
 		super();
 	}
 
-	public static WebDriverElementPresenceChecker createChecker(final XPathPrefixesEnum type) {
+	public static WebDriverElementPresenceChecker createChecker(final XPathKeyPrefix prefix) {
 
-		if (type == null) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("type");
+		if (prefix == null) {
+			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("prefix");
 		}
 
-		return internCreateChecker(type);
+		return internCreateChecker(prefix);
 	}
 
-	private static WebDriverElementPresenceChecker internCreateChecker(final XPathPrefixesEnum type) {
+	private static WebDriverElementPresenceChecker internCreateChecker(final XPathKeyPrefix prefix) {
 
 		WebDriverElementPresenceChecker result = null;
 		String[] xpathElements = null;
 
-		xpathElements = XPathCentral.getXPathByPrefix(type);
+		xpathElements = XPathCentral.getXPathByPrefix(prefix);
 		result = new WebDriverElementPresenceChecker(xpathElements);
 
 		return result;
