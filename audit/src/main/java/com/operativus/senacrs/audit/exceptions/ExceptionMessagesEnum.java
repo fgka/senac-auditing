@@ -12,6 +12,7 @@ public enum ExceptionMessagesEnum implements PropertyKey {
 	MISSING_MINIMAL_CONFIG_ENTRY("exception.missing.config.entry"),
 	//Graph
 	ILLEGAL_START_NODE("exception.illegal.start.node"),
+	ILLEGAL_NODE_TYPE("exception.illegal.node.type"),
 	;
 
 	private final String key;
