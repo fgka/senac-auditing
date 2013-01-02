@@ -10,6 +10,7 @@ public enum WebDriverNodeTypeEnum implements WebDriverNodeType {
 	START(null),
 	STOP(null),
 	DASHBOARD(XPathPrefixesEnum.DASHBOARD),
+	ABOUT(XPathPrefixesEnum.ABOUT),
 	LOGIN(XPathPrefixesEnum.LOGIN),
 	PORTAL(XPathPrefixesEnum.PORTAL),
 	YEAR(null),
