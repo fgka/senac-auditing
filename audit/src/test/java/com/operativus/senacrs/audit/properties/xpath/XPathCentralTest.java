@@ -45,6 +45,12 @@ public class XPathCentralTest {
 
 			return this.keyPrefix;
 		}
+		
+		@Override
+		public int paramAmount() {
+		
+			return 0;
+		}
 	}
 
 	private static final String XPATH_TEST = "//xpath/test";
