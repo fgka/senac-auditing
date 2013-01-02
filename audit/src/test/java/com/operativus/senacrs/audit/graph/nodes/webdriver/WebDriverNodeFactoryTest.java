@@ -2,6 +2,8 @@ package com.operativus.senacrs.audit.graph.nodes.webdriver;
 
 import static org.junit.Assert.fail;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -32,7 +34,6 @@ public class WebDriverNodeFactoryTest {
 
 	@Test
 	public void testCreateNodeNone() {
-		
 
 		try {
 			WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.NONE);
@@ -44,15 +45,28 @@ public class WebDriverNodeFactoryTest {
 
 	@Test
 	public void testCreateNodeForXPathPrefix() {
-		
-		WebDriverNode node = null;
+
 
 		for (WebDriverNodeTypeEnum t : WebDriverNodeTypeEnum.values()) {
 			if (t.getPrefixKey() != null) {
-				node = WebDriverNodeFactory.createNode(t);
-				Assert.assertNotNull(node);
-				Assert.assertTrue(node instanceof WebDriverNodeCheckerBased);
+				testCheckerBasedNodeCreation(t);
 			}
+		}
+	}
+
+	private void testCheckerBasedNodeCreation(WebDriverNodeTypeEnum t) {
+
+		WebDriverNode node = null;
+		String msg = null;
+		
+		msg = t.name();
+		try {
+			node = WebDriverNodeFactory.createNode(t);
+			Assert.assertNotNull(msg, node);
+			Assert.assertTrue(msg, node instanceof WebDriverNodeCheckerBased);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			Assert.fail(msg + ":" + e.getLocalizedMessage());
 		}
 	}
 

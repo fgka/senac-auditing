@@ -7,56 +7,45 @@ import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElem
 import com.operativus.senacrs.audit.properties.messages.MessagesCentral;
 import com.operativus.senacrs.audit.properties.xpath.XPathKeyPrefix;
 
-
 public final class WebDriverNodeFactory {
 
 	private WebDriverNodeFactory() {
-		
+
 		super();
 	}
-	
-	public static WebDriverNode createNode(WebDriverNodeTypeEnum type, Object... args) {
-		
+
+	public static WebDriverNode createNode(WebDriverNodeType type, Object... args) {
+
 		WebDriverNode result = null;
 
 		if (type == null) {
 			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("type");
 		}
-		internCreateNode(type, args);
-		
+		result = internCreateNode(type, args);
+
 		return result;
 	}
 
-	private static WebDriverNode internCreateNode(WebDriverNodeTypeEnum type, Object[] args) {
-		
+	private static WebDriverNode internCreateNode(WebDriverNodeType type, Object[] args) {
+
 		WebDriverNode result = null;
 		String msg = null;
 
-		switch (type) {
-		case DASHBOARD:
-		case ABOUT:
-		case LOGIN:
-		case PORTAL:
-		case CLASS:
-		case GRADES:
-		case PLAN:
+		if (type.getPrefixKey() != null) {
 			result = internCreateNodeCheckerBased(type);
-			break;
-		case NONE:
-			result = null;
-		default:
+		} else {
 			msg = MessagesCentral.getMessage(ExceptionMessagesEnum.ILLEGAL_NODE_TYPE, type);
 			throw new IllegalArgumentException(msg);
 		}
-		
+
 		return result;
 	}
 
-	private static WebDriverNode internCreateNodeCheckerBased(WebDriverNodeTypeEnum type) {
-		
+	private static WebDriverNode internCreateNodeCheckerBased(WebDriverNodeType type) {
+
 		WebDriverNode result = null;
 		WebDriverElementPresenceChecker checker = null;
-		
+
 		checker = createChecker(type.getPrefixKey());
 		result = new WebDriverNodeCheckerBased(type, checker);
 
@@ -65,7 +54,6 @@ public final class WebDriverNodeFactory {
 
 	private static WebDriverElementPresenceChecker createChecker(XPathKeyPrefix prefixKey) {
 
-		WebDriverElementPresenceCheckerFactory.createChecker(prefixKey);
-		return null;
-	}		
+		return WebDriverElementPresenceCheckerFactory.createChecker(prefixKey);
+	}
 }
