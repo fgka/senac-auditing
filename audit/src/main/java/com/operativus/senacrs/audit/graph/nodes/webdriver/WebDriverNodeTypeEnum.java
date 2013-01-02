@@ -30,10 +30,4 @@ public enum WebDriverNodeTypeEnum implements WebDriverNodeType {
 
 		return prefixKey;
 	}
-	
-	@Override
-	public String toString() {
-	
-		return name();
-	}
 }

@@ -22,10 +22,4 @@ public enum XPathPrefixesEnum implements XPathKeyPrefix {
 
 		return this.keyPrefix;
 	}
-	
-	@Override
-	public String toString() {
-	
-		return name();
-	}
 }
