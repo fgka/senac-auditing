@@ -8,7 +8,9 @@ public enum XPathPrefixesEnum implements XPathKeyPrefix {
 	PORTAL("xpath.portal", 0),
 	CLASS("xpath.class", 0),
 	GRADES("xpath.grades", 0),
-	PLAN("xpath.plan", 0), ;
+	PLAN("xpath.plan", 0),
+	YEAR("param.xpath.portal.year.classes", 1),
+	;
 
 	private final String keyPrefix;
 	private final int paramAmount;
