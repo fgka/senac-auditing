@@ -15,25 +15,18 @@ public final class TextOutputSkillSet {
 	}
 	private static final String FIELD_SEP_COMMA_SPACE = ", ";
 
-	private static final TextOutputSkillSet instance = new TextOutputSkillSet();
-
-	public static TextOutputSkillSet getInstance() {
-
-		return instance;
-	}
-
 	private TextOutputSkillSet() {
 
 		super();
 	}
 
-	public void buildEssentialSkill(final StringBuilder builder, final SkillSet input) {
+	public static void buildEssentialSkill(final StringBuilder builder, final SkillSet input) {
 
-		this.checkArguments(builder, input);
+		checkArguments(builder, input);
 		builder.append(input.getEssential().getDescription());
 	}
 
-	private void buildRelatedSkill(final StringBuilder builder, final RelatedSkill skill,
+	private static void buildRelatedSkill(final StringBuilder builder, final RelatedSkill skill,
 			final RelatedSkillField field) {
 
 		String value = null;
@@ -54,7 +47,7 @@ public final class TextOutputSkillSet {
 		builder.append(value);
 	}
 
-	private void buildRelatedSkills(final StringBuilder builder, final List<RelatedSkill> skills,
+	private static void buildRelatedSkills(final StringBuilder builder, final List<RelatedSkill> skills,
 			final RelatedSkillField field) {
 
 		Iterator<RelatedSkill> iter = null;
@@ -63,34 +56,34 @@ public final class TextOutputSkillSet {
 		iter = skills.iterator();
 		if (iter.hasNext()) {
 			skill = iter.next();
-			this.buildRelatedSkill(builder, skill, field);
+			buildRelatedSkill(builder, skill, field);
 			while (iter.hasNext()) {
 				builder.append(FIELD_SEP_COMMA_SPACE);
 				skill = iter.next();
-				this.buildRelatedSkill(builder, skill, field);
+				buildRelatedSkill(builder, skill, field);
 			}
 		}
 	}
 
-	public void buildRelatedSkills(final StringBuilder builder, final SkillSet input) {
+	public static void buildRelatedSkills(final StringBuilder builder, final SkillSet input) {
 
-		this.checkArguments(builder, input);
-		this.buildRelatedSkills(builder, input.getSkills(), RelatedSkillField.DESCRIPTION);
+		checkArguments(builder, input);
+		buildRelatedSkills(builder, input.getSkills(), RelatedSkillField.DESCRIPTION);
 	}
 
-	public void buildRequiredAttitudes(final StringBuilder builder, final SkillSet input) {
+	public static void buildRequiredAttitudes(final StringBuilder builder, final SkillSet input) {
 
-		this.checkArguments(builder, input);
-		this.buildRelatedSkills(builder, input.getSkills(), RelatedSkillField.REQUIRED_ATTITUDE);
+		checkArguments(builder, input);
+		buildRelatedSkills(builder, input.getSkills(), RelatedSkillField.REQUIRED_ATTITUDE);
 	}
 
-	public void buildResultEvidences(final StringBuilder builder, final SkillSet input) {
+	public static void buildResultEvidences(final StringBuilder builder, final SkillSet input) {
 
-		this.checkArguments(builder, input);
-		this.buildRelatedSkills(builder, input.getSkills(), RelatedSkillField.RESULTS_EVIDENCE);
+		checkArguments(builder, input);
+		buildRelatedSkills(builder, input.getSkills(), RelatedSkillField.RESULTS_EVIDENCE);
 	}
 
-	private void checkArguments(final StringBuilder builder, final SkillSet input) {
+	protected static void checkArguments(final StringBuilder builder, final SkillSet input) {
 
 		if (builder == null) {
 			throw new IllegalArgumentException();

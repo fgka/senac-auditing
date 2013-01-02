@@ -86,7 +86,7 @@ public class StudentEvaluation
 			result.append("," + e.getKey().getName() + "=" + e.getValue().toString());
 		}
 		result.append(":");
-		result.append(this.finalGrade.toString());
+		result.append(String.valueOf(this.finalGrade));
 
 		return result.toString();
 	}

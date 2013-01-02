@@ -176,6 +176,25 @@ public class StudentEvaluationTest {
 		result = obj.createAscendingGradesList();
 		Assert.assertNotNull(result);
 		Assert.assertEquals(1, result.size());
-		Assert.assertTrue(result.contains(expected));
+		Assert.assertTrue(result.contains(expected));		
+	}
+
+	@Test
+	public void testToString() {
+
+		StudentEvaluation obj = null;
+		EvaluationActivity activity = null;
+		EvaluationGrade grade = null;
+		String result = null;
+
+		obj = this.getBaseline();
+		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
+		activity.setName(TestBoilerplateUtils.randomString());
+		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
+		obj.putGrade(activity, grade);
+		result = obj.toString();
+		Assert.assertNotNull(result);
+		Assert.assertTrue(result.contains(activity.getName()));		
+		Assert.assertTrue(result.contains(grade.toString()));		
 	}
 }

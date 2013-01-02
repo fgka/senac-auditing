@@ -13,65 +13,59 @@ public final class TextOutputCollectionStudentEvaluation {
 	private static final String GRADES_SUFFIX_SEP_PARENS_EQUALS = ")=";
 	private static final String FIELD_SEP_COMMA_SPACE = ", ";
 	private static final String FIELD_SEP_COMMA = ",";
-	private static final TextOutputCollectionStudentEvaluation instance = new TextOutputCollectionStudentEvaluation();
-
-	public static TextOutputCollectionStudentEvaluation getInstance() {
-
-		return instance;
-	}
 
 	private TextOutputCollectionStudentEvaluation() {
 
 		super();
 	}
 
-	private void buidEvaluation(final StringBuilder builder, final StudentEvaluation eval) {
+	private static void buidEvaluation(final StringBuilder builder, final StudentEvaluation eval) {
 
 		builder.append(eval.getName());
 		builder.append(GRADES_PREFIX_SEP_PARENS);
-		this.buildGrades(builder, eval.createAscendingGradesList());
+		buildGrades(builder, eval.createAscendingGradesList());
 		builder.append(GRADES_SUFFIX_SEP_PARENS_EQUALS);
 		builder.append(eval.getFinalGrade().toString());
 	}
 
-	private void buildGrade(final StringBuilder builder, final EvaluationGrade grade) {
+	private static void buildGrade(final StringBuilder builder, final EvaluationGrade grade) {
 
 		builder.append(grade.toString());
 	}
 
-	private void buildGrades(final StringBuilder builder, final List<EvaluationGrade> grades) {
+	private static void buildGrades(final StringBuilder builder, final List<EvaluationGrade> grades) {
 
 		Iterator<EvaluationGrade> iter = null;
 
 		iter = grades.iterator();
 		if (iter.hasNext()) {
-			this.buildGrade(builder, iter.next());
+			buildGrade(builder, iter.next());
 			while (iter.hasNext()) {
 				builder.append(FIELD_SEP_COMMA);
-				this.buildGrade(builder, iter.next());
+				buildGrade(builder, iter.next());
 			}
 		}
 	}
 
-	public void buildStudents(final StringBuilder builder, final Collection<StudentEvaluation> input) {
+	public static void buildStudents(final StringBuilder builder, final Collection<StudentEvaluation> input) {
 
 		Iterator<StudentEvaluation> iter = null;
 		StudentEvaluation eval = null;
 
-		this.checkArguments(builder, input);
+		checkArguments(builder, input);
 		iter = input.iterator();
 		if (iter.hasNext()) {
 			eval = iter.next();
-			this.buidEvaluation(builder, eval);
+			buidEvaluation(builder, eval);
 			while (iter.hasNext()) {
 				builder.append(FIELD_SEP_COMMA_SPACE);
 				eval = iter.next();
-				this.buidEvaluation(builder, eval);
+				buidEvaluation(builder, eval);
 			}
 		}
 	}
 
-	private void checkArguments(final StringBuilder builder, final Collection<StudentEvaluation> input) {
+	protected static void checkArguments(final StringBuilder builder, final Collection<StudentEvaluation> input) {
 
 		if (builder == null) {
 			throw new IllegalArgumentException();

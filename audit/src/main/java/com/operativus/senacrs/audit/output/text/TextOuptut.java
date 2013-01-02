@@ -20,10 +20,6 @@ public final class TextOuptut
 		return instance;
 	}
 
-	private final TextOutputSkillSet skillTextOut = TextOutputSkillSet.getInstance();
-
-	private final TextOutputCollectionStudentEvaluation evalsTextOut = TextOutputCollectionStudentEvaluation
-			.getInstance();
 
 	private TextOuptut() {
 
@@ -72,17 +68,17 @@ public final class TextOuptut
 
 		skillSet = input.getSkillSet();
 		id = input.getId();
-		this.skillTextOut.buildEssentialSkill(builder, skillSet);
+		TextOutputSkillSet.buildEssentialSkill(builder, skillSet);
 		builder.append(NL);
-		this.skillTextOut.buildRelatedSkills(builder, skillSet);
+		TextOutputSkillSet.buildRelatedSkills(builder, skillSet);
 		builder.append(NL);
-		this.skillTextOut.buildRequiredAttitudes(builder, skillSet);
+		TextOutputSkillSet.buildRequiredAttitudes(builder, skillSet);
 		builder.append(NL);
-		this.skillTextOut.buildResultEvidences(builder, skillSet);
+		TextOutputSkillSet.buildResultEvidences(builder, skillSet);
 		builder.append(NL);
 		TextOutputCollectionEvaluationActivity.buildActivities(builder, input.getActivities());
 		builder.append(NL);
-		this.evalsTextOut.buildStudents(builder, input.getEvaluations());
+		TextOutputCollectionStudentEvaluation.buildStudents(builder, input.getEvaluations());
 		builder.append(NL);
 		this.buildNotes(builder, input);
 		builder.append(NL);
