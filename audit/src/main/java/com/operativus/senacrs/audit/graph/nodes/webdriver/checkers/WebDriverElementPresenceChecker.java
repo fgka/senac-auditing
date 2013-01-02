@@ -15,6 +15,9 @@ public class WebDriverElementPresenceChecker {
 
 		super();
 
+		if (xPathElementsToCheck == null) {
+			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("xPathElementsToCheck");
+		}
 		this.xPathElementsToCheck = this.checkAndCloneArgument(xPathElementsToCheck);
 	}
 
@@ -25,9 +28,6 @@ public class WebDriverElementPresenceChecker {
 		String item = null;
 
 		argName = "xPathElementsToCheck";
-		if (xPathElementsToCheck == null) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException(argName);
-		}
 		result = new String[xPathElementsToCheck.length];
 		for (int i = 0; i < xPathElementsToCheck.length; i++) {
 			item = xPathElementsToCheck[i];
@@ -48,13 +48,18 @@ public class WebDriverElementPresenceChecker {
 	private By[] getXPaths() {
 
 		if (this.xPaths == null) {
-			this.xPaths = new By[this.xPathElementsToCheck.length];
-			for (int i = 0; i < this.xPathElementsToCheck.length; i++) {
-				this.xPaths[i] = By.xpath(this.xPathElementsToCheck[i]);
-			}
+			resetXPaths();
 		}
 
 		return this.xPaths;
+	}
+
+	private void resetXPaths() {
+
+		this.xPaths = new By[this.xPathElementsToCheck.length];
+		for (int i = 0; i < this.xPathElementsToCheck.length; i++) {
+			this.xPaths[i] = By.xpath(this.xPathElementsToCheck[i]);
+		}
 	}
 
 	public boolean hasAll(final WebDriver driver) {
