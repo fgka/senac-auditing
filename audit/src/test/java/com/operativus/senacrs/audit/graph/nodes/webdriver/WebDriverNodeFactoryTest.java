@@ -7,6 +7,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.operativus.senacrs.audit.properties.xpath.XPathPrefixesEnum;
+
 public class WebDriverNodeFactoryTest {
 
 	@Before
@@ -27,6 +29,20 @@ public class WebDriverNodeFactoryTest {
 			fail();
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
+		}
+	}
+
+	@Test
+	public void testCreateNodeForXPathPrefix() {
+		
+		WebDriverNode node = null;
+
+		for (WebDriverNodeTypeEnum t : WebDriverNodeTypeEnum.values()) {
+			if (t.getPrefixKey() != null) {
+				node = WebDriverNodeFactory.createNode(t);
+				Assert.assertNotNull(node);
+				Assert.assertTrue(node instanceof DefaultWebDriverNode);
+			}
 		}
 	}
 
