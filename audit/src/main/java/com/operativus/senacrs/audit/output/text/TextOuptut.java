@@ -1,6 +1,7 @@
 package com.operativus.senacrs.audit.output.text;
 
 import com.operativus.senacrs.audit.common.AbstractHasLogger;
+import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 import com.operativus.senacrs.audit.model.form.Form;
 import com.operativus.senacrs.audit.model.form.Identification;
 import com.operativus.senacrs.audit.model.form.SkillSet;
@@ -19,10 +20,7 @@ public final class TextOuptut
 		return instance;
 	}
 
-	private final TextOutputIdentification idTextOut = TextOutputIdentification.getInstance();
 	private final TextOutputSkillSet skillTextOut = TextOutputSkillSet.getInstance();
-	private final TextOutputCollectionEvaluationActivity activitiesTextOut = TextOutputCollectionEvaluationActivity
-			.getInstance();
 
 	private final TextOutputCollectionStudentEvaluation evalsTextOut = TextOutputCollectionStudentEvaluation
 			.getInstance();
@@ -37,15 +35,15 @@ public final class TextOuptut
 		Identification id = null;
 
 		id = input.getId();
-		this.idTextOut.buildCourse(builder, id);
+		TextOutputIdentification.buildCourse(builder, id);
 		builder.append(NL);
-		this.idTextOut.buildUnit(builder, id);
+		TextOutputIdentification.buildUnit(builder, id);
 		builder.append(NL);
-		this.idTextOut.buildAcademic(builder, id);
+		TextOutputIdentification.buildAcademic(builder, id);
 		builder.append(NL);
-		this.idTextOut.buildClass(builder, id);
+		TextOutputIdentification.buildClass(builder, id);
 		builder.append(NL);
-		this.idTextOut.buildSemester(builder, id);
+		TextOutputIdentification.buildSemester(builder, id);
 	}
 
 	private void buildNotes(final StringBuilder builder, final Form input) {
@@ -82,15 +80,15 @@ public final class TextOuptut
 		builder.append(NL);
 		this.skillTextOut.buildResultEvidences(builder, skillSet);
 		builder.append(NL);
-		this.activitiesTextOut.buildActivities(builder, input.getActivities());
+		TextOutputCollectionEvaluationActivity.buildActivities(builder, input.getActivities());
 		builder.append(NL);
 		this.evalsTextOut.buildStudents(builder, input.getEvaluations());
 		builder.append(NL);
 		this.buildNotes(builder, input);
 		builder.append(NL);
-		this.idTextOut.buildLastDay(builder, id);
+		TextOutputIdentification.buildLastDay(builder, id);
 		builder.append(NL);
-		this.idTextOut.buildAcademic(builder, id);
+		TextOutputIdentification.buildAcademic(builder, id);
 	}
 
 	@Override
@@ -100,7 +98,7 @@ public final class TextOuptut
 		String output = null;
 
 		if (input == null) {
-			throw new IllegalArgumentException();
+			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("input");
 		}
 		builder = this.buildOutput(input);
 		output = builder.toString();

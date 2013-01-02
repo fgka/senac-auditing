@@ -375,9 +375,21 @@ public class TextOuptutTest {
 		obj = TextOuptut.getInstance();
 		try {
 			obj.print(null);
-			fail("null accepted");
+			fail();
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
 		}
+	}
+
+	@Test
+	public void testPrint() throws IOException, ParseException {
+
+		TextOuptut obj = null;
+		Form form = null;
+
+		obj = TextOuptut.getInstance();
+		form = this.readForm(INPUT_FILE);
+		obj.print(form);
+		Assert.assertTrue(true);
 	}
 }

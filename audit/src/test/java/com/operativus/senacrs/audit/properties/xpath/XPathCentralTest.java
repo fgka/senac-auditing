@@ -79,6 +79,27 @@ public class XPathCentralTest {
 	}
 
 	@Test
+	public void testGetXPathByPrefixNullContent() throws Exception {
+		
+		XPathKeyPrefix key = null;
+
+		key = new XPathKeyPrefix() {
+			
+			@Override
+			public String getKeyPrefix() {
+			
+				return null;
+			}
+		};
+		try {
+			XPathCentral.getXPathByPrefix(key);
+			Assert.fail();
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+	}
+
+	@Test
 	public void testGetXPathByPrefixInexistent() throws Exception {
 
 		String[] result = null;

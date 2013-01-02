@@ -3,6 +3,8 @@ package com.operativus.senacrs.audit.model.form;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
+
 public class SkillSet {
 
 	private final EssentialSkill essential;
@@ -17,7 +19,7 @@ public class SkillSet {
 	public void addRelatedSkill(final RelatedSkill skill) {
 
 		if (skill == null) {
-			throw new IllegalArgumentException();
+			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("skill");
 		}
 		this.skills.add(skill);
 	}

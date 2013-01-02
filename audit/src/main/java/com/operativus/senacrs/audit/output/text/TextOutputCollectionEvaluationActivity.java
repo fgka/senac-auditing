@@ -10,34 +10,28 @@ public final class TextOutputCollectionEvaluationActivity {
 	private static final String DESCRIPTION_SUFFIX_SEP_PARENS = ")";
 	private static final String DESCRIPTION_PREFIX_SEP_PARENS = "(";
 	private static final String FIELD_SEP_COMMA_SPACE = ", ";
-	private static final TextOutputCollectionEvaluationActivity instance = new TextOutputCollectionEvaluationActivity();
-
-	public static TextOutputCollectionEvaluationActivity getInstance() {
-
-		return instance;
-	}
 
 	private TextOutputCollectionEvaluationActivity() {
 
 		super();
 	}
 
-	public void buildActivities(final StringBuilder builder, final Collection<EvaluationActivity> input) {
+	public static void buildActivities(final StringBuilder builder, final Collection<EvaluationActivity> input) {
 
 		Iterator<EvaluationActivity> iter = null;
 
-		this.checkArguments(builder, input);
+		checkArguments(builder, input);
 		iter = input.iterator();
 		if (iter.hasNext()) {
-			this.buildActivity(builder, iter.next());
+			buildActivity(builder, iter.next());
 			while (iter.hasNext()) {
 				builder.append(FIELD_SEP_COMMA_SPACE);
-				this.buildActivity(builder, iter.next());
+				buildActivity(builder, iter.next());
 			}
 		}
 	}
 
-	private void buildActivity(final StringBuilder builder, final EvaluationActivity activity) {
+	private static void buildActivity(final StringBuilder builder, final EvaluationActivity activity) {
 
 		builder.append(activity.getName());
 		builder.append(DESCRIPTION_PREFIX_SEP_PARENS);
@@ -45,7 +39,7 @@ public final class TextOutputCollectionEvaluationActivity {
 		builder.append(DESCRIPTION_SUFFIX_SEP_PARENS);
 	}
 
-	private void checkArguments(final StringBuilder builder, final Collection<EvaluationActivity> input) {
+	protected static void checkArguments(final StringBuilder builder, final Collection<EvaluationActivity> input) {
 
 		if (builder == null) {
 			throw new IllegalArgumentException();

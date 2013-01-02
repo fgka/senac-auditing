@@ -18,14 +18,13 @@ public final class XPathCentral {
 	private static class ModifiablePropertyKey
 			implements PropertyKey {
 
-		public String key = null;
+		private String key = null;
 
 		@Override
 		public String getKey() {
 
 			return this.key;
 		}
-
 	}
 
 	static {

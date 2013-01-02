@@ -1,5 +1,7 @@
 package com.operativus.senacrs.audit.model.form;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -157,5 +159,23 @@ public class StudentEvaluationTest {
 		result = obj.putGrade(activity, grade);
 		Assert.assertEquals(expected, result);
 		Assert.assertNotEquals(grade, result);
+	}
+
+	@Test
+	public void testCreateAscendingGradesList() {
+
+		StudentEvaluation obj = null;
+		EvaluationActivity activity = null;
+		EvaluationGrade expected = null;
+		List<EvaluationGrade> result = null;
+
+		obj = this.getBaseline();
+		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
+		expected = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
+		obj.putGrade(activity, expected);
+		result = obj.createAscendingGradesList();
+		Assert.assertNotNull(result);
+		Assert.assertEquals(1, result.size());
+		Assert.assertTrue(result.contains(expected));
 	}
 }
