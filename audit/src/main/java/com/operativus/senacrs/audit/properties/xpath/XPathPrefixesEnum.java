@@ -9,8 +9,7 @@ public enum XPathPrefixesEnum implements XPathKeyPrefix {
 	CLASS("xpath.class", 0),
 	GRADES("xpath.grades", 0),
 	PLAN("xpath.plan", 0),
-	YEAR("param.xpath.portal.year.classes", 1),
-	;
+	YEAR("param.xpath.portal.year.classes", 1), ;
 
 	private final String keyPrefix;
 	private final int paramAmount;
@@ -26,10 +25,10 @@ public enum XPathPrefixesEnum implements XPathKeyPrefix {
 
 		return this.keyPrefix;
 	}
-	
+
 	@Override
 	public int paramAmount() {
 
-		return paramAmount;
+		return this.paramAmount;
 	}
 }
