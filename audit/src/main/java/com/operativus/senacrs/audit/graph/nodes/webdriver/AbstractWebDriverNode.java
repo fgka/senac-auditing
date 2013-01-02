@@ -38,4 +38,10 @@ public abstract class AbstractWebDriverNode
 
 		return this.type;
 	}
+	
+	@Override
+	public String toString() {
+	
+		return this.type.toString();
+	}
 }
