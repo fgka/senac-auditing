@@ -13,7 +13,7 @@ public enum WebDriverNodeTypeEnum implements WebDriverNodeType {
 	ABOUT(XPathPrefixesEnum.ABOUT),
 	LOGIN(XPathPrefixesEnum.LOGIN),
 	PORTAL(XPathPrefixesEnum.PORTAL),
-	YEAR(XPathPrefixesEnum.YEAR),
+	YEAR(null),
 	CLASS(XPathPrefixesEnum.CLASS),
 	GRADES(XPathPrefixesEnum.GRADES),
 	PLAN(XPathPrefixesEnum.PLAN),
