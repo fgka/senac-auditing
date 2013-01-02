@@ -9,7 +9,7 @@ import com.operativus.senacrs.audit.properties.messages.MessagesCentral;
 public class ExceptionMessagesEnumTest {
 
 	@Test
-	public void testGetKey() {
+	public void testExists() {
 		
 		for (ExceptionMessagesEnum e : ExceptionMessagesEnum.values()) {
 			Assert.assertTrue(MessagesCentral.hasKey(e));			
