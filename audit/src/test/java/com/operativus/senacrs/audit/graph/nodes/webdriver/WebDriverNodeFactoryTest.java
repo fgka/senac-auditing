@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.operativus.senacrs.audit.graph.nodes.Node;
+import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class WebDriverNodeFactoryTest {
 
@@ -75,18 +76,37 @@ public class WebDriverNodeFactoryTest {
 
 	private void testCheckerBasedNodeCreation(WebDriverNodeTypeEnum t) {
 
-		WebDriverNode node = null;
+		WebDriverNode result = null;
 		String msg = null;
 
 		msg = t.name();
 		try {
-			node = WebDriverNodeFactory.createNode(t);
-			Assert.assertNotNull(msg, node);
-			Assert.assertTrue(msg, node instanceof WebDriverNodeCheckerBased);
+			result = WebDriverNodeFactory.createNode(t);
+			Assert.assertNotNull(msg, result);
+			Assert.assertTrue(msg, result instanceof WebDriverNodeCheckerBased);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			Assert.fail(msg + ":" + e.getLocalizedMessage());
 		}
 	}
 
+	@Test
+	public void testCreateNodeYearNoParams() {
+
+		try {
+			WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.YEAR);
+			Assert.fail();
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);			
+		}
+	}
+
+	@Test
+	public void testCreateNodeYear() {
+		
+		WebDriverNode result = null;
+
+		result = WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.YEAR, TestBoilerplateUtils.randomInt(3000));
+		Assert.assertNotNull(result);
+	}
 }
