@@ -10,9 +10,9 @@ public class DefaultWebDriverNode extends AbstractWebDriverNode {
 	
 	private final WebDriverElementPresenceChecker checker;
 	
-	public DefaultWebDriverNode(WebDriverElementPresenceChecker checker) {
+	public DefaultWebDriverNode(WebDriverNodeType type, WebDriverElementPresenceChecker checker) {
 
-		super();
+		super(type);
 
 		if (checker == null) {
 			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("checker");
@@ -25,5 +25,4 @@ public class DefaultWebDriverNode extends AbstractWebDriverNode {
 
 		return this.checker.hasAll(driver);
 	}
-
 }

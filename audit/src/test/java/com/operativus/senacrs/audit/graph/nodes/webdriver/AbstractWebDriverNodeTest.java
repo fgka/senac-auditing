@@ -8,13 +8,13 @@ import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 
 public class AbstractWebDriverNodeTest {
-	
+
 	AbstractWebDriverNode node = null;
 	WebDriver driver = null;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		
+
 		node = Mockito.mock(AbstractWebDriverNode.class);
 		driver = Mockito.mock(WebDriver.class);
 	}
@@ -27,14 +27,33 @@ public class AbstractWebDriverNodeTest {
 	}
 
 	@Test
+	public void testAbstractWebDriverNodeNull() {
+
+		try {
+			new AbstractWebDriverNode(null) {
+
+				@Override
+				protected boolean verifyStateConditions(WebDriver driver) {
+
+					return false;
+				}
+			};
+			Assert.fail();
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+	}
+
+	@Test
 	public void testVerifyState() {
 
 		AbstractWebDriverNode obj = null;
 
-		obj = new AbstractWebDriverNode() {
+		obj = new AbstractWebDriverNode(WebDriverNodeType.NONE) {
+
 			@Override
 			protected boolean verifyStateConditions(WebDriver driver) {
-			
+
 				return node.verifyStateConditions(driver);
 			}
 		};
@@ -47,10 +66,11 @@ public class AbstractWebDriverNodeTest {
 
 		AbstractWebDriverNode obj = null;
 
-		obj = new AbstractWebDriverNode() {
+		obj = new AbstractWebDriverNode(WebDriverNodeType.NONE) {
+
 			@Override
 			protected boolean verifyStateConditions(WebDriver driver) {
-			
+
 				return node.verifyStateConditions(driver);
 			}
 		};

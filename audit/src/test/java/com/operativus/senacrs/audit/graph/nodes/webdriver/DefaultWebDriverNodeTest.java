@@ -33,7 +33,7 @@ public class DefaultWebDriverNodeTest {
 	public void testDefaultWebDriverNodeNull() {
 
 		try {
-			new DefaultWebDriverNode(null);
+			new DefaultWebDriverNode(WebDriverNodeType.NONE, null);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
@@ -46,7 +46,7 @@ public class DefaultWebDriverNodeTest {
 
 		DefaultWebDriverNode obj = null;
 		
-		obj = new DefaultWebDriverNode(checker);
+		obj = new DefaultWebDriverNode(WebDriverNodeType.NONE, checker);
 		obj.verifyStateConditions(driver);
 		
 		Mockito.verify(checker).hasAll(driver);
