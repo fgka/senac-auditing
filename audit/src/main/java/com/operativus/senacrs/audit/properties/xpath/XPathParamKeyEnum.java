@@ -4,7 +4,7 @@ public enum XPathParamKeyEnum implements XPathParamKey {
 
 	PORTAL_YEAR_SELECT("param.xpath.portal.year.select", 1),
 	PORTAL_YEAR_LIST("param.xpath.portal.year.list", 1),
-	PORTAL_YEAR_CLASSES("param.xpath.portal.year.classes", 1), ;
+	PORTAL_YEAR_IN_CLASSES("param.xpath.portal.year.in_classes", 1), ;
 
 	private final String key;
 	private final int paramAmount;
