@@ -6,11 +6,11 @@ import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElementPresenceChecker;
 
 
-public class DefaultWebDriverNode extends AbstractWebDriverNode {
+public class WebDriverNodeCheckerBased extends AbstractWebDriverNode {
 	
 	private final WebDriverElementPresenceChecker checker;
 	
-	public DefaultWebDriverNode(WebDriverNodeType type, WebDriverElementPresenceChecker checker) {
+	public WebDriverNodeCheckerBased(WebDriverNodeType type, WebDriverElementPresenceChecker checker) {
 
 		super(type);
 

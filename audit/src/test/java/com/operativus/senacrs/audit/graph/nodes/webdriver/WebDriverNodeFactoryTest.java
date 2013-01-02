@@ -1,13 +1,11 @@
 package com.operativus.senacrs.audit.graph.nodes.webdriver;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.operativus.senacrs.audit.properties.xpath.XPathPrefixesEnum;
 
 public class WebDriverNodeFactoryTest {
 
@@ -41,7 +39,7 @@ public class WebDriverNodeFactoryTest {
 			if (t.getPrefixKey() != null) {
 				node = WebDriverNodeFactory.createNode(t);
 				Assert.assertNotNull(node);
-				Assert.assertTrue(node instanceof DefaultWebDriverNode);
+				Assert.assertTrue(node instanceof WebDriverNodeCheckerBased);
 			}
 		}
 	}
