@@ -49,7 +49,7 @@ public class AbstractWebDriverNodeTest {
 
 		AbstractWebDriverNode obj = null;
 
-		obj = new AbstractWebDriverNode(WebDriverNodeType.NONE) {
+		obj = new AbstractWebDriverNode(WebDriverNodeTypeEnum.NONE) {
 
 			@Override
 			protected boolean verifyStateConditions(WebDriver driver) {
@@ -66,7 +66,7 @@ public class AbstractWebDriverNodeTest {
 
 		AbstractWebDriverNode obj = null;
 
-		obj = new AbstractWebDriverNode(WebDriverNodeType.NONE) {
+		obj = new AbstractWebDriverNode(WebDriverNodeTypeEnum.NONE) {
 
 			@Override
 			protected boolean verifyStateConditions(WebDriver driver) {
