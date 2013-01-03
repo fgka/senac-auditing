@@ -11,20 +11,20 @@ import com.operativus.senacrs.audit.properties.messages.MessagesCentral;
 public class IllegalSourceNodeException
 		extends IllegalArgumentException {
 
-	private static String getMessage(final Node source, final Node... valid) {
-
-		String result = null;
-		PropertyKey key = null;
-
-		key = ExceptionMessagesKeyEnum.ILLEGAL_START_NODE;
-		result = MessagesCentral.getMessage(key, source, Arrays.toString(valid));
-
-		return result;
-	}
-
 	public IllegalSourceNodeException(final Node source, final Node... valid) {
 
 		super(getMessage(source, valid));
+	}
+
+	private static String getMessage(final Node source, final Node... valid) {
+	
+		String result = null;
+		PropertyKey key = null;
+	
+		key = ExceptionMessagesKeyEnum.ILLEGAL_START_NODE;
+		result = MessagesCentral.getMessage(key, source, Arrays.toString(valid));
+	
+		return result;
 	}
 
 	public IllegalSourceNodeException(final Throwable cause, final Node source, final Node... valid) {

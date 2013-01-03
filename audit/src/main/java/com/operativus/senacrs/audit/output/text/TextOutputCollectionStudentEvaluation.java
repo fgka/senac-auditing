@@ -19,34 +19,6 @@ public final class TextOutputCollectionStudentEvaluation {
 		super();
 	}
 
-	private static void buidEvaluation(final StringBuilder builder, final StudentEvaluation eval) {
-
-		builder.append(eval.getName());
-		builder.append(GRADES_PREFIX_SEP_PARENS);
-		buildGrades(builder, eval.createAscendingGradesList());
-		builder.append(GRADES_SUFFIX_SEP_PARENS_EQUALS);
-		builder.append(eval.getFinalGrade().toString());
-	}
-
-	private static void buildGrade(final StringBuilder builder, final EvaluationGrade grade) {
-
-		builder.append(grade.toString());
-	}
-
-	private static void buildGrades(final StringBuilder builder, final List<EvaluationGrade> grades) {
-
-		Iterator<EvaluationGrade> iter = null;
-
-		iter = grades.iterator();
-		if (iter.hasNext()) {
-			buildGrade(builder, iter.next());
-			while (iter.hasNext()) {
-				builder.append(FIELD_SEP_COMMA);
-				buildGrade(builder, iter.next());
-			}
-		}
-	}
-
 	public static void buildStudents(final StringBuilder builder, final Collection<StudentEvaluation> input) {
 
 		Iterator<StudentEvaluation> iter = null;
@@ -73,5 +45,33 @@ public final class TextOutputCollectionStudentEvaluation {
 		if (input == null) {
 			throw new IllegalArgumentException();
 		}
+	}
+
+	private static void buidEvaluation(final StringBuilder builder, final StudentEvaluation eval) {
+
+		builder.append(eval.getName());
+		builder.append(GRADES_PREFIX_SEP_PARENS);
+		buildGrades(builder, eval.createAscendingGradesList());
+		builder.append(GRADES_SUFFIX_SEP_PARENS_EQUALS);
+		builder.append(eval.getFinalGrade().toString());
+	}
+
+	private static void buildGrades(final StringBuilder builder, final List<EvaluationGrade> grades) {
+
+		Iterator<EvaluationGrade> iter = null;
+
+		iter = grades.iterator();
+		if (iter.hasNext()) {
+			buildGrade(builder, iter.next());
+			while (iter.hasNext()) {
+				builder.append(FIELD_SEP_COMMA);
+				buildGrade(builder, iter.next());
+			}
+		}
+	}
+
+	private static void buildGrade(final StringBuilder builder, final EvaluationGrade grade) {
+
+		builder.append(grade.toString());
 	}
 }

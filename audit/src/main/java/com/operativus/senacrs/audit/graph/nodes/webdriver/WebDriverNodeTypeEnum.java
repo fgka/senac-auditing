@@ -3,9 +3,8 @@ package com.operativus.senacrs.audit.graph.nodes.webdriver;
 import com.operativus.senacrs.audit.properties.xpath.XPathKeyPrefix;
 import com.operativus.senacrs.audit.properties.xpath.XPathPrefixesEnum;
 
-
 public enum WebDriverNodeTypeEnum implements WebDriverNodeType {
-	
+
 	NONE(null),
 	START(null),
 	END(null),
@@ -16,18 +15,18 @@ public enum WebDriverNodeTypeEnum implements WebDriverNodeType {
 	YEAR(null),
 	CLASS(XPathPrefixesEnum.CLASS),
 	GRADES(XPathPrefixesEnum.GRADES),
-	PLAN(XPathPrefixesEnum.PLAN),
-	;
-	
+	PLAN(XPathPrefixesEnum.PLAN), ;
+
 	private final XPathKeyPrefix prefixKey;
-	
-	private WebDriverNodeTypeEnum(XPathKeyPrefix prefixKey) {
-		
+
+	private WebDriverNodeTypeEnum(final XPathKeyPrefix prefixKey) {
+
 		this.prefixKey = prefixKey;
 	}
-		
+
+	@Override
 	public XPathKeyPrefix getPrefixKey() {
 
-		return prefixKey;
+		return this.prefixKey;
 	}
 }

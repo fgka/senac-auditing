@@ -18,9 +18,8 @@ public final class ConfigurationFactory {
 		BASE_URL("base_url"),
 		VERSION("version"),
 		USERNAME("username"),
-		PASSWORD("password"), 
-		LOG_FILE("log_file"), 
-		;
+		PASSWORD("password"),
+		LOG_FILE("log_file"), ;
 
 		private String key;
 
@@ -34,23 +33,16 @@ public final class ConfigurationFactory {
 			return this.key;
 		}
 	}
+
 	private static final String PWD = System.getProperty("user.dir");
 	private static final String DEFAULT_CONFIGURATION_FILENAME = PWD
 			+ File.separator + "configuration.properties";
 
 	private static final Logger logger = LogManager.getLogger(ConfigurationFactory.class.getClass());
 
-	private static void checkMinimalNonNullValues(final String filename, final Configuration result) {
+	private ConfigurationFactory() {
 
-		if (!isValueOk(result.getBaseUrl())) {
-			throw new MissingMinimalConfigurationEntryException(filename, ConfigKey.BASE_URL.getKey());
-		}
-		if (!isValueOk(result.getUsername())) {
-			throw new MissingMinimalConfigurationEntryException(filename, ConfigKey.USERNAME.getKey());
-		}
-		if (!isValueOk(result.getVersion())) {
-			throw new MissingMinimalConfigurationEntryException(filename, ConfigKey.VERSION.getKey());
-		}
+		super();
 	}
 
 	public static Configuration createConfiguration() throws IOException {
@@ -62,7 +54,7 @@ public final class ConfigurationFactory {
 
 		Configuration result = null;
 		Properties props = null;
-		
+
 		logger.info(MessagesCentral.getMessage(ConfigMessagesEnum.LOG_CONFIG_BEGIN, filename));
 		props = getProperties(filename);
 		result = read(props);
@@ -82,11 +74,6 @@ public final class ConfigurationFactory {
 		result.load(in);
 
 		return result;
-	}
-
-	private static boolean isValueOk(final String value) {
-
-		return (value != null) && !value.isEmpty();
 	}
 
 	private static Configuration read(final Properties props) {
@@ -127,8 +114,21 @@ public final class ConfigurationFactory {
 		}
 	}
 
-	private ConfigurationFactory() {
+	private static void checkMinimalNonNullValues(final String filename, final Configuration result) {
 
-		super();
+		if (!isValueOk(result.getBaseUrl())) {
+			throw new MissingMinimalConfigurationEntryException(filename, ConfigKey.BASE_URL.getKey());
+		}
+		if (!isValueOk(result.getUsername())) {
+			throw new MissingMinimalConfigurationEntryException(filename, ConfigKey.USERNAME.getKey());
+		}
+		if (!isValueOk(result.getVersion())) {
+			throw new MissingMinimalConfigurationEntryException(filename, ConfigKey.VERSION.getKey());
+		}
+	}
+
+	private static boolean isValueOk(final String value) {
+
+		return (value != null) && !value.isEmpty();
 	}
 }

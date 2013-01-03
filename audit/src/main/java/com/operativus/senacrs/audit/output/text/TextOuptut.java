@@ -15,15 +15,37 @@ public final class TextOuptut
 
 	private static final String NL = System.getProperty("line.separator");
 
-	public static TextOuptut getInstance() {
-
-		return instance;
-	}
-
-
 	private TextOuptut() {
 
 		super();
+	}
+
+	@Override
+	public void print(final Form input) {
+
+		StringBuilder builder = null;
+		String output = null;
+
+		if (input == null) {
+			throw RuntimeExceptionFactory.getNullArgumentException("input");
+		}
+		builder = this.buildOutput(input);
+		output = builder.toString();
+		this.getLogger().debug(output);
+	}
+
+	protected StringBuilder buildOutput(final Form input) {
+
+		StringBuilder result = null;
+
+		result = new StringBuilder();
+		this.buildFirstBlock(result, input);
+		result.append(NL);
+		result.append(NL);
+		this.buildSecondBlock(result, input);
+		result.append(NL);
+
+		return result;
 	}
 
 	private void buildFirstBlock(final StringBuilder builder, final Form input) {
@@ -40,25 +62,6 @@ public final class TextOuptut
 		TextOutputIdentification.buildClass(builder, id);
 		builder.append(NL);
 		TextOutputIdentification.buildSemester(builder, id);
-	}
-
-	private void buildNotes(final StringBuilder builder, final Form input) {
-
-		builder.append(input.getNotes());
-	}
-
-	protected StringBuilder buildOutput(final Form input) {
-
-		StringBuilder result = null;
-
-		result = new StringBuilder();
-		this.buildFirstBlock(result, input);
-		result.append(NL);
-		result.append(NL);
-		this.buildSecondBlock(result, input);
-		result.append(NL);
-
-		return result;
 	}
 
 	private void buildSecondBlock(final StringBuilder builder, final Form input) {
@@ -87,17 +90,13 @@ public final class TextOuptut
 		TextOutputIdentification.buildAcademic(builder, id);
 	}
 
-	@Override
-	public void print(final Form input) {
+	private void buildNotes(final StringBuilder builder, final Form input) {
 
-		StringBuilder builder = null;
-		String output = null;
+		builder.append(input.getNotes());
+	}
 
-		if (input == null) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("input");
-		}
-		builder = this.buildOutput(input);
-		output = builder.toString();
-		this.getLogger().debug(output);
+	public static TextOuptut getInstance() {
+
+		return instance;
 	}
 }

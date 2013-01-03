@@ -7,6 +7,7 @@ public class EssentialSkill {
 	public EssentialSkill(final String description) {
 
 		super();
+
 		this.description = description;
 	}
 

@@ -7,15 +7,13 @@ import com.operativus.senacrs.audit.model.form.EssentialSkill;
 import com.operativus.senacrs.audit.model.form.SkillSet;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
-
 public class TextOutputSkillSetTest {
-
 
 	@Test
 	public void testCheckArgumentsNullBuilder() {
 
 		try {
-			TextOutputSkillSet.checkArguments(null, creatSkillSet());
+			TextOutputSkillSet.checkArguments(null, this.creatSkillSet());
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);

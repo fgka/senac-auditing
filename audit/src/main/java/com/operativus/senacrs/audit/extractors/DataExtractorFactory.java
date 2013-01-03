@@ -7,11 +7,6 @@ public final class DataExtractorFactory {
 
 	private static final DataExtractorFactory instance = new DataExtractorFactory();
 
-	public static DataExtractorFactory getInstance() {
-
-		return instance;
-	}
-
 	private DataExtractorFactory() {
 
 		super();
@@ -33,5 +28,10 @@ public final class DataExtractorFactory {
 		// TODO
 
 		return result;
+	}
+
+	public static DataExtractorFactory getInstance() {
+	
+		return instance;
 	}
 }

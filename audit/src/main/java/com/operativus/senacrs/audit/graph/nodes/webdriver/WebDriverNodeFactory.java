@@ -25,7 +25,7 @@ public final class WebDriverNodeFactory {
 		WebDriverNode result = null;
 
 		if (type == null) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("type");
+			throw RuntimeExceptionFactory.getNullArgumentException("type");
 		}
 		result = internCreateNode(type, args);
 

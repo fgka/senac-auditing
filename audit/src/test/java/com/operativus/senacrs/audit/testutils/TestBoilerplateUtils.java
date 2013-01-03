@@ -25,6 +25,7 @@ public class TestBoilerplateUtils {
 			return this.msg;
 		}
 	}
+
 	public static final String PWD = System.getProperty("user.dir");
 
 	public static final String TST_RESOURCES = PWD + File.separator
@@ -62,11 +63,6 @@ public class TestBoilerplateUtils {
 		return String.format("Returned: %s and expected %s 0", String.valueOf(value), String.valueOf(what));
 	}
 
-	private static int getAmount() {
-
-		return MIN_RAND + RAND.nextInt(MAX_RAND - MIN_RAND);
-	}
-
 	public static String randomAlphanumericString() {
 
 		String result = null;
@@ -76,9 +72,9 @@ public class TestBoilerplateUtils {
 		return result;
 	}
 
-	public static int randomInt(final int max) {
+	private static int getAmount() {
 
-		return RAND.nextInt(max);
+		return MIN_RAND + RAND.nextInt(MAX_RAND - MIN_RAND);
 	}
 
 	public static String randomString() {
@@ -88,5 +84,10 @@ public class TestBoilerplateUtils {
 		result = RandomStringUtils.random(getAmount());
 
 		return result;
+	}
+
+	public static int randomInt(final int max) {
+
+		return RAND.nextInt(max);
 	}
 }

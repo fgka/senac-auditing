@@ -31,6 +31,11 @@ public final class XPathCentral {
 		central.populateCentral(LIST_FILES);
 	}
 
+	private XPathCentral() {
+
+		super();
+	}
+
 	public static void addXPathFile(final String filename) throws IOException {
 
 		central.populateCentral(filename);
@@ -47,7 +52,7 @@ public final class XPathCentral {
 		List<String> keyList = null;
 
 		if ((prefix == null) || (prefix.getKeyPrefix() == null)) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("prefix");
+			throw RuntimeExceptionFactory.getNullArgumentException("prefix");
 		}
 		keyList = getAllKeysWithPrefix(prefix.getKeyPrefix().trim());
 		result = getValuesForKeys(keyList);
@@ -90,10 +95,5 @@ public final class XPathCentral {
 	public static boolean hasKey(final PropertyKey key) {
 
 		return central.hasKey(key);
-	}
-
-	private XPathCentral() {
-
-		super();
 	}
 }

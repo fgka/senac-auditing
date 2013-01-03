@@ -9,6 +9,25 @@ import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class StudentEvaluationTest {
 
+	@Test
+	public void testPutGradeInvalidActivity() {
+
+		StudentEvaluation obj = null;
+		EvaluationActivity activity = null;
+		EvaluationGrade grade = null;
+
+		obj = this.getBaseline();
+		activity = this.getEvalActivity(EvaluationType.INVALID);
+		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
+		try {
+			obj.putGrade(activity, grade);
+			Assert.fail();
+		} catch (InvalidEvaluationTypeException e) {
+			Assert.assertTrue(true);
+		}
+
+	}
+
 	private StudentEvaluation getBaseline() {
 
 		return new StudentEvaluation(TestBoilerplateUtils.randomInt(100), TestBoilerplateUtils.randomString());
@@ -34,40 +53,6 @@ public class StudentEvaluationTest {
 				return type;
 			}
 		};
-	}
-
-	@Test
-	public void testPutGrade() {
-
-		StudentEvaluation obj = null;
-		EvaluationActivity activity = null;
-		EvaluationGrade grade = null;
-		EvaluationGrade result = null;
-
-		obj = this.getBaseline();
-		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
-		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
-		result = obj.putGrade(activity, grade);
-		Assert.assertNull(result);
-	}
-
-	@Test
-	public void testPutGradeInvalidActivity() {
-
-		StudentEvaluation obj = null;
-		EvaluationActivity activity = null;
-		EvaluationGrade grade = null;
-
-		obj = this.getBaseline();
-		activity = this.getEvalActivity(EvaluationType.INVALID);
-		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
-		try {
-			obj.putGrade(activity, grade);
-			Assert.fail();
-		} catch (InvalidEvaluationTypeException e) {
-			Assert.assertTrue(true);
-		}
-
 	}
 
 	@Test
@@ -143,6 +128,21 @@ public class StudentEvaluationTest {
 	}
 
 	@Test
+	public void testPutGrade() {
+
+		StudentEvaluation obj = null;
+		EvaluationActivity activity = null;
+		EvaluationGrade grade = null;
+		EvaluationGrade result = null;
+
+		obj = this.getBaseline();
+		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
+		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
+		result = obj.putGrade(activity, grade);
+		Assert.assertNull(result);
+	}
+
+	@Test
 	public void testPutGradeSameActivity() {
 
 		StudentEvaluation obj = null;
@@ -176,7 +176,7 @@ public class StudentEvaluationTest {
 		result = obj.createAscendingGradesList();
 		Assert.assertNotNull(result);
 		Assert.assertEquals(1, result.size());
-		Assert.assertTrue(result.contains(expected));		
+		Assert.assertTrue(result.contains(expected));
 	}
 
 	@Test
@@ -194,7 +194,7 @@ public class StudentEvaluationTest {
 		obj.putGrade(activity, grade);
 		result = obj.toString();
 		Assert.assertNotNull(result);
-		Assert.assertTrue(result.contains(activity.getName()));		
-		Assert.assertTrue(result.contains(grade.toString()));		
+		Assert.assertTrue(result.contains(activity.getName()));
+		Assert.assertTrue(result.contains(grade.toString()));
 	}
 }

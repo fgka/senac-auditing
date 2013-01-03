@@ -5,23 +5,23 @@ import org.openqa.selenium.WebDriver;
 import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElementPresenceChecker;
 
+public class WebDriverNodeCheckerBased
+		extends AbstractWebDriverNode {
 
-public class WebDriverNodeCheckerBased extends AbstractWebDriverNode {
-	
 	private final WebDriverElementPresenceChecker checker;
-	
-	public WebDriverNodeCheckerBased(WebDriverNodeType type, WebDriverElementPresenceChecker checker) {
+
+	public WebDriverNodeCheckerBased(final WebDriverNodeType type, final WebDriverElementPresenceChecker checker) {
 
 		super(type);
 
 		if (checker == null) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("checker");
+			throw RuntimeExceptionFactory.getNullArgumentException("checker");
 		}
 		this.checker = checker;
 	}
 
 	@Override
-	protected boolean verifyStateConditions(WebDriver driver) {
+	protected boolean verifyStateConditions(final WebDriver driver) {
 
 		return this.checker.hasAll(driver);
 	}

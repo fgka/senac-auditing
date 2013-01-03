@@ -5,8 +5,7 @@ import com.operativus.senacrs.audit.properties.PropertyKey;
 public enum ConfigMessagesEnum implements PropertyKey {
 
 	LOG_CONFIG_BEGIN("log.config.begin"),
-	LOG_CONFIG_END("log.config.end"),
-	;
+	LOG_CONFIG_END("log.config.end"), ;
 
 	private final String key;
 

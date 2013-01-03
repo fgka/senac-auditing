@@ -32,16 +32,16 @@ public class ResourceCentral {
 	public void populateCentral(final String... resources) {
 
 		if (resources == null) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("resources");
+			throw RuntimeExceptionFactory.getNullArgumentException("resources");
 		}
 		this.logger.debug(ADDING_RESOURCES_IN + Arrays.toString(resources));
-		this.internPopulateCentral(resources);
+		internPopulateCentral(resources);
 	}
 
 	private void internPopulateCentral(final String... resources) {
 
 		for (String r : resources) {
-			this.addResource(r);
+			addResource(r);
 		}
 	}
 
@@ -50,13 +50,13 @@ public class ResourceCentral {
 		try {
 			this.central.addPropertiesFile(ResourceCentral.class.getResourceAsStream("/" + resource));
 		} catch (IOException e) {
-			this.logException(resource, e);
+			logException(resource, e);
 		} catch (IllegalArgumentException e) {
-			this.logException(resource, e);
+			logException(resource, e);
 		}
 	}
 
-	// protected for test
+	// protected for tests
 	protected void logException(final String resource, final Throwable exception) {
 
 		this.logger.error(FAILED_TO_READ_RESOURCE_FILE + resource, exception);

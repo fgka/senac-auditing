@@ -4,19 +4,12 @@ import com.operativus.senacrs.audit.properties.messages.MessagesCentral;
 
 public final class RuntimeExceptionFactory {
 
-	private static final RuntimeExceptionFactory instance = new RuntimeExceptionFactory();
-
-	public static RuntimeExceptionFactory getInstance() {
-
-		return instance;
-	}
-
 	private RuntimeExceptionFactory() {
-
+	
 		super();
 	}
 
-	public IllegalArgumentException getNullArgumentException(final String argumentName) {
+	public static IllegalArgumentException getNullArgumentException(final String argumentName) {
 
 		IllegalArgumentException result = null;
 		String msg = null;
@@ -28,5 +21,5 @@ public final class RuntimeExceptionFactory {
 		result = new IllegalArgumentException(msg);
 
 		return result;
-	};
+	}
 }

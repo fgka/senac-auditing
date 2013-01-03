@@ -14,6 +14,68 @@ public class Configuration {
 		super();
 	}
 
+	public String getBaseUrl() {
+
+		return this.baseUrl;
+	}
+
+	public void setBaseUrl(final String baseUrl) {
+
+		this.baseUrl = baseUrl;
+	}
+
+	public String getVersion() {
+
+		return this.version;
+	}
+
+	public void setVersion(final String version) {
+
+		this.version = version;
+	}
+
+	public String getUsername() {
+
+		return this.username;
+	}
+
+	public void setUsername(final String username) {
+
+		this.username = username;
+	}
+
+	public String getPassword() {
+
+		return this.password;
+	}
+
+	public void setPassword(final String password) {
+
+		this.password = password;
+	}
+
+	public String getLogFile() {
+
+		return this.logFile;
+	}
+
+	public void setLogFile(final String logFile) {
+
+		this.logFile = logFile;
+	}
+
+	@Override
+	public int hashCode() {
+
+		final int prime = 31;
+		int result = 1;
+		result = (prime * result) + ((this.baseUrl == null) ? 0 : this.baseUrl.hashCode());
+		result = (prime * result) + ((this.password == null) ? 0 : this.password.hashCode());
+		result = (prime * result) + ((this.username == null) ? 0 : this.username.hashCode());
+		result = (prime * result) + ((this.version == null) ? 0 : this.version.hashCode());
+		return result;
+	}
+
 	@Override
 	public boolean equals(final Object obj) {
 
@@ -56,70 +118,6 @@ public class Configuration {
 			return false;
 		}
 		return true;
-	}
-
-	public String getBaseUrl() {
-
-		return this.baseUrl;
-	}
-
-	public String getLogFile() {
-	
-		return logFile;
-	}
-
-	public String getPassword() {
-
-		return this.password;
-	}
-
-	public String getUsername() {
-
-		return this.username;
-	}
-
-	public String getVersion() {
-
-		return this.version;
-	}
-
-	@Override
-	public int hashCode() {
-
-		final int prime = 31;
-		int result = 1;
-		result = (prime * result) + ((this.baseUrl == null) ? 0 : this.baseUrl.hashCode());
-		result = (prime * result) + ((this.password == null) ? 0 : this.password.hashCode());
-		result = (prime * result) + ((this.username == null) ? 0 : this.username.hashCode());
-		result = (prime * result) + ((this.version == null) ? 0 : this.version.hashCode());
-		return result;
-	}
-
-	public void setBaseUrl(final String baseUrl) {
-
-		this.baseUrl = baseUrl;
-	}
-	
-	
-	public void setLogFile(String logFile) {
-	
-		this.logFile = logFile;
-	}
-
-	
-	public void setPassword(final String password) {
-
-		this.password = password;
-	}
-
-	public void setUsername(final String username) {
-
-		this.username = username;
-	}
-
-	public void setVersion(final String version) {
-
-		this.version = version;
 	}
 
 	@Override

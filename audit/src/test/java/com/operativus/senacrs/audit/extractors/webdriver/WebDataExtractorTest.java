@@ -11,29 +11,17 @@ import com.operativus.senacrs.audit.model.form.Form;
 public class WebDataExtractorTest {
 
 	private Configuration config = null;
-	
+
 	@Before
 	public void setUp() throws Exception {
 
-		config = new Configuration();
+		this.config = new Configuration();
 	}
 
 	@After
 	public void tearDown() throws Exception {
 
-		config = null;
-	}
-
-	@Test
-	public void testExtract() {
-
-		WebDataExtractor obj = null;
-		Form result = null;
-		
-		obj = new WebDataExtractor(this.config);
-		result = obj.extract();
-		Assert.assertNotNull(result);
-		//TODO
+		this.config = null;
 	}
 
 	@Test
@@ -45,6 +33,18 @@ public class WebDataExtractorTest {
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
 		}
+	}
+
+	@Test
+	public void testExtract() {
+
+		WebDataExtractor obj = null;
+		Form result = null;
+
+		obj = new WebDataExtractor(this.config);
+		result = obj.extract();
+		Assert.assertNotNull(result);
+		// TODO
 	}
 
 }

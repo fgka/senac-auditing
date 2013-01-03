@@ -79,15 +79,25 @@ public class XPathCentralTest {
 	}
 
 	@Test
+	public void testGetXPathByPrefixInexistent() throws Exception {
+
+		String[] result = null;
+
+		result = XPathCentral.getXPathByPrefix(TestXPathPrefixEnum.NONE);
+		Assert.assertNotNull(result);
+		Assert.assertEquals(0, result.length);
+	}
+
+	@Test
 	public void testGetXPathByPrefixNullContent() throws Exception {
-		
+
 		XPathKeyPrefix key = null;
 
 		key = new XPathKeyPrefix() {
-			
+
 			@Override
 			public String getKeyPrefix() {
-			
+
 				return null;
 			}
 		};
@@ -97,16 +107,6 @@ public class XPathCentralTest {
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
 		}
-	}
-
-	@Test
-	public void testGetXPathByPrefixInexistent() throws Exception {
-
-		String[] result = null;
-
-		result = XPathCentral.getXPathByPrefix(TestXPathPrefixEnum.NONE);
-		Assert.assertNotNull(result);
-		Assert.assertEquals(0, result.length);
 	}
 
 	@Test

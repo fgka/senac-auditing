@@ -15,15 +15,15 @@ public class AbstractWebDriverNodeTest {
 	@Before
 	public void setUp() throws Exception {
 
-		node = Mockito.mock(AbstractWebDriverNode.class);
-		driver = Mockito.mock(WebDriver.class);
+		this.node = Mockito.mock(AbstractWebDriverNode.class);
+		this.driver = Mockito.mock(WebDriver.class);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 
-		node = null;
-		driver = null;
+		this.node = null;
+		this.driver = null;
 	}
 
 	@Test
@@ -33,11 +33,32 @@ public class AbstractWebDriverNodeTest {
 			new AbstractWebDriverNode(null) {
 
 				@Override
-				protected boolean verifyStateConditions(WebDriver driver) {
+				protected boolean verifyStateConditions(final WebDriver driver) {
 
 					return false;
 				}
 			};
+			Assert.fail();
+		} catch (IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+	}
+
+	@Test
+	public void testVerifyStateNull() {
+
+		AbstractWebDriverNode obj = null;
+
+		obj = new AbstractWebDriverNode(WebDriverNodeTypeEnum.NONE) {
+
+			@Override
+			protected boolean verifyStateConditions(final WebDriver driver) {
+
+				return AbstractWebDriverNodeTest.this.node.verifyStateConditions(driver);
+			}
+		};
+		try {
+			obj.verifyState(null);
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
@@ -52,33 +73,12 @@ public class AbstractWebDriverNodeTest {
 		obj = new AbstractWebDriverNode(WebDriverNodeTypeEnum.NONE) {
 
 			@Override
-			protected boolean verifyStateConditions(WebDriver driver) {
+			protected boolean verifyStateConditions(final WebDriver driver) {
 
-				return node.verifyStateConditions(driver);
+				return AbstractWebDriverNodeTest.this.node.verifyStateConditions(driver);
 			}
 		};
-		obj.verifyState(driver);
-		Mockito.verify(node).verifyStateConditions(driver);
-	}
-
-	@Test
-	public void testVerifyStateNull() {
-
-		AbstractWebDriverNode obj = null;
-
-		obj = new AbstractWebDriverNode(WebDriverNodeTypeEnum.NONE) {
-
-			@Override
-			protected boolean verifyStateConditions(WebDriver driver) {
-
-				return node.verifyStateConditions(driver);
-			}
-		};
-		try {
-			obj.verifyState(null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		obj.verifyState(this.driver);
+		Mockito.verify(this.node).verifyStateConditions(this.driver);
 	}
 }

@@ -3,25 +3,12 @@ package com.operativus.senacrs.audit.output.text;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.operativus.senacrs.audit.model.form.StudentEvaluation;
 
-
 public class TextOutputCollectionStudentEvaluationTest {
-
-	@Before
-	public void setUp() throws Exception {
-
-	}
-
-	@After
-	public void tearDown() throws Exception {
-
-	}
 
 	@Test
 	public void testCheckArgumentsNullBuilder() {
@@ -36,7 +23,6 @@ public class TextOutputCollectionStudentEvaluationTest {
 			Assert.assertTrue(true);
 		}
 	}
-
 
 	@Test
 	public void testCheckArgumentsNullCollection() {

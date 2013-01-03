@@ -22,9 +22,9 @@ public class EvaluationActivity
 		return this.getName();
 	}
 
-	public String getDescription() {
+	public EvaluationType getType() {
 
-		return this.description;
+		return this.type;
 	}
 
 	public String getName() {
@@ -32,19 +32,19 @@ public class EvaluationActivity
 		return this.name;
 	}
 
-	public EvaluationType getType() {
+	public void setName(final String name) {
 
-		return this.type;
+		this.name = name;
+	}
+
+	public String getDescription() {
+
+		return this.description;
 	}
 
 	public void setDescription(final String description) {
 
 		this.description = description;
-	}
-
-	public void setName(final String name) {
-
-		this.name = name;
 	}
 
 	@Override

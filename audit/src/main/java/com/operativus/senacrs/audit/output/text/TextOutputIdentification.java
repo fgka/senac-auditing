@@ -17,12 +17,12 @@ public final class TextOutputIdentification {
 	}
 
 	protected static void checkArguments(final StringBuilder builder, final Identification input) {
-	
+
 		if (builder == null) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("builder");
+			throw RuntimeExceptionFactory.getNullArgumentException("builder");
 		}
 		if (input == null) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("input");
+			throw RuntimeExceptionFactory.getNullArgumentException("input");
 		}
 	}
 

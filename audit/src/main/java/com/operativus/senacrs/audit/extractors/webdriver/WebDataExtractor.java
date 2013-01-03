@@ -16,7 +16,7 @@ public class WebDataExtractor
 		super();
 		
 		if (config == null) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("config");
+			throw RuntimeExceptionFactory.getNullArgumentException("config");
 		}
 		this.config = config;
 	}
@@ -29,6 +29,12 @@ public class WebDataExtractor
 		result = new Form();
 
 		return result;
+	}
+	
+	@Override
+	public String toString() {
+	
+		return this.config.toString();
 	}
 
 }

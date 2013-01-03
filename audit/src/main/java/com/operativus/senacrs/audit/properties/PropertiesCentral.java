@@ -24,6 +24,7 @@ public class PropertiesCentral
 	public PropertiesCentral() {
 
 		super();
+
 		this.properties = new Properties();
 	}
 
@@ -33,7 +34,7 @@ public class PropertiesCentral
 		InputStream in = null;
 
 		if (filename == null) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("filename");
+			throw RuntimeExceptionFactory.getNullArgumentException("filename");
 		}
 		file = new File(filename);
 		this.checkFile(file);
@@ -65,7 +66,7 @@ public class PropertiesCentral
 	public void addPropertiesFile(final InputStream in) throws IOException {
 
 		if (in == null) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("in");
+			throw RuntimeExceptionFactory.getNullArgumentException("in");
 		}
 		this.properties.load(in);
 	}

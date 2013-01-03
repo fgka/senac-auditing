@@ -7,15 +7,6 @@ import org.junit.Assert;
 
 public class CompareTextUtils {
 
-	private static void compareLines(final String[] lines, final int lineNumber)
-			throws IOException {
-
-		String msg = null;
-
-		msg = "Reading line " + String.valueOf(lineNumber);
-		Assert.assertEquals(msg, lines[0], lines[1]);
-	}
-
 	public static void compareReaders(final BufferedReader expected, final BufferedReader actual) throws IOException {
 
 		if (expected == actual) {
@@ -53,5 +44,14 @@ public class CompareTextUtils {
 		lines[1] = actual.readLine();
 
 		return lines;
+	}
+
+	private static void compareLines(final String[] lines, final int lineNumber)
+			throws IOException {
+
+		String msg = null;
+
+		msg = "Reading line " + String.valueOf(lineNumber);
+		Assert.assertEquals(msg, lines[0], lines[1]);
 	}
 }

@@ -5,15 +5,15 @@ import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
-
 public class AbstractHasLoggerTest {
-	
-	public class MyHasLogger extends AbstractHasLogger {
-				
+
+	public class MyHasLogger
+			extends AbstractHasLogger {
+
 		public MyHasLogger() {
 
 			super();
-		}		
+		}
 	}
 
 	@Test
@@ -21,8 +21,9 @@ public class AbstractHasLoggerTest {
 
 		HasLogger obj = null;
 		Logger result = null;
-		
-		obj = new AbstractHasLogger(){};
+
+		obj = new AbstractHasLogger() {
+		};
 		result = obj.getLogger();
 		Assert.assertEquals(obj.getClass().getName(), result.getName());
 	}
@@ -32,7 +33,7 @@ public class AbstractHasLoggerTest {
 
 		HasLogger obj = null;
 		Logger result = null;
-		
+
 		obj = new MyHasLogger();
 		result = obj.getLogger();
 		Assert.assertEquals(MyHasLogger.class.getName(), result.getName());
@@ -43,9 +44,10 @@ public class AbstractHasLoggerTest {
 
 		HasLogger obj = null;
 		Logger result = null;
-		
+
 		LogManager.getLogger(this.getClass());
-		obj = new AbstractHasLogger(){};
+		obj = new AbstractHasLogger() {
+		};
 		result = obj.getLogger();
 		Assert.assertNotNull(result);
 	}

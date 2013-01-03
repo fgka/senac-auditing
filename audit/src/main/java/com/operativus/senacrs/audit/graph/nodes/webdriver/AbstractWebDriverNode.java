@@ -11,24 +11,24 @@ public abstract class AbstractWebDriverNode
 
 	private final WebDriverNodeType type;
 
-	protected AbstractWebDriverNode(WebDriverNodeType type) {
+	protected AbstractWebDriverNode(final WebDriverNodeType type) {
 
 		super();
 
 		if (type == null) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("type");
+			throw RuntimeExceptionFactory.getNullArgumentException("type");
 		}
 		this.type = type;
 	}
 
 	@Override
-	public boolean verifyState(WebDriver driver) {
+	public boolean verifyState(final WebDriver driver) {
 
 		if (driver == null) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("driver");
+			throw RuntimeExceptionFactory.getNullArgumentException("driver");
 		}
 
-		return verifyStateConditions(driver);
+		return this.verifyStateConditions(driver);
 	}
 
 	protected abstract boolean verifyStateConditions(WebDriver driver);
@@ -38,10 +38,10 @@ public abstract class AbstractWebDriverNode
 
 		return this.type;
 	}
-	
+
 	@Override
 	public String toString() {
-	
+
 		return this.type.toString();
 	}
 }

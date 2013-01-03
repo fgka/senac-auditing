@@ -13,6 +13,7 @@ public final class TextOutputSkillSet {
 		REQUIRED_ATTITUDE,
 		RESULTS_EVIDENCE, ;
 	}
+
 	private static final String FIELD_SEP_COMMA_SPACE = ", ";
 
 	private TextOutputSkillSet() {
@@ -24,6 +25,40 @@ public final class TextOutputSkillSet {
 
 		checkArguments(builder, input);
 		builder.append(input.getEssential().getDescription());
+	}
+
+	protected static void checkArguments(final StringBuilder builder, final SkillSet input) {
+
+		if (builder == null) {
+			throw new IllegalArgumentException();
+		}
+		if (input == null) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	public static void buildRelatedSkills(final StringBuilder builder, final SkillSet input) {
+
+		checkArguments(builder, input);
+		buildRelatedSkills(builder, input.getSkills(), RelatedSkillField.DESCRIPTION);
+	}
+
+	private static void buildRelatedSkills(final StringBuilder builder, final List<RelatedSkill> skills,
+			final RelatedSkillField field) {
+
+		Iterator<RelatedSkill> iter = null;
+		RelatedSkill skill = null;
+
+		iter = skills.iterator();
+		if (iter.hasNext()) {
+			skill = iter.next();
+			buildRelatedSkill(builder, skill, field);
+			while (iter.hasNext()) {
+				builder.append(FIELD_SEP_COMMA_SPACE);
+				skill = iter.next();
+				buildRelatedSkill(builder, skill, field);
+			}
+		}
 	}
 
 	private static void buildRelatedSkill(final StringBuilder builder, final RelatedSkill skill,
@@ -47,30 +82,6 @@ public final class TextOutputSkillSet {
 		builder.append(value);
 	}
 
-	private static void buildRelatedSkills(final StringBuilder builder, final List<RelatedSkill> skills,
-			final RelatedSkillField field) {
-
-		Iterator<RelatedSkill> iter = null;
-		RelatedSkill skill = null;
-
-		iter = skills.iterator();
-		if (iter.hasNext()) {
-			skill = iter.next();
-			buildRelatedSkill(builder, skill, field);
-			while (iter.hasNext()) {
-				builder.append(FIELD_SEP_COMMA_SPACE);
-				skill = iter.next();
-				buildRelatedSkill(builder, skill, field);
-			}
-		}
-	}
-
-	public static void buildRelatedSkills(final StringBuilder builder, final SkillSet input) {
-
-		checkArguments(builder, input);
-		buildRelatedSkills(builder, input.getSkills(), RelatedSkillField.DESCRIPTION);
-	}
-
 	public static void buildRequiredAttitudes(final StringBuilder builder, final SkillSet input) {
 
 		checkArguments(builder, input);
@@ -81,15 +92,5 @@ public final class TextOutputSkillSet {
 
 		checkArguments(builder, input);
 		buildRelatedSkills(builder, input.getSkills(), RelatedSkillField.RESULTS_EVIDENCE);
-	}
-
-	protected static void checkArguments(final StringBuilder builder, final SkillSet input) {
-
-		if (builder == null) {
-			throw new IllegalArgumentException();
-		}
-		if (input == null) {
-			throw new IllegalArgumentException();
-		}
 	}
 }

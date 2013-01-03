@@ -7,14 +7,26 @@ import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class AbstractSequenceStringFieldComparableTest {
 
+	@Test
+	public void testCompareToNull() {
+
+		AbstractSequenceStringFieldComparable o1 = null;
+		int result = 0;
+		boolean expected = false;
+		TestBoilerplateUtils.NumericComparisonToZero what = null;
+		String msg = null;
+
+		o1 = this.getBaselineObject();
+		result = o1.compareTo(null);
+		what = TestBoilerplateUtils.NumericComparisonToZero.HIGHER;
+		expected = TestBoilerplateUtils.compare(result, what);
+		msg = TestBoilerplateUtils.errorNumericComparisonToZeroMsg(result, what);
+		Assert.assertTrue(msg, expected);
+	}
+
 	private AbstractSequenceStringFieldComparable getBaselineObject() {
 
 		return this.getBaselineObject(TestBoilerplateUtils.randomInt(100), TestBoilerplateUtils.randomString());
-	}
-
-	private AbstractSequenceStringFieldComparable getBaselineObject(final int sequence) {
-
-		return this.getBaselineObject(sequence, TestBoilerplateUtils.randomString());
 	}
 
 	private AbstractSequenceStringFieldComparable getBaselineObject(final int sequence, final String strValue) {
@@ -48,6 +60,11 @@ public class AbstractSequenceStringFieldComparableTest {
 		Assert.assertTrue(msg, expected);
 	}
 
+	private AbstractSequenceStringFieldComparable getBaselineObject(final int sequence) {
+
+		return this.getBaselineObject(sequence, TestBoilerplateUtils.randomString());
+	}
+
 	@Test
 	public void testCompareToLowerSeq() {
 
@@ -68,34 +85,17 @@ public class AbstractSequenceStringFieldComparableTest {
 	}
 
 	@Test
-	public void testCompareToNull() {
-
-		AbstractSequenceStringFieldComparable o1 = null;
-		int result = 0;
-		boolean expected = false;
-		TestBoilerplateUtils.NumericComparisonToZero what = null;
-		String msg = null;
-
-		o1 = this.getBaselineObject();
-		result = o1.compareTo(null);
-		what = TestBoilerplateUtils.NumericComparisonToZero.HIGHER;
-		expected = TestBoilerplateUtils.compare(result, what);
-		msg = TestBoilerplateUtils.errorNumericComparisonToZeroMsg(result, what);
-		Assert.assertTrue(msg, expected);
-	}
-
-	@Test
-	public void testCompareToSameSeqDiffStrValues() {
+	public void testCompareToSameSeqThisNullStrValue() {
 
 		AbstractSequenceStringFieldComparable o1 = null;
 		AbstractSequenceStringFieldComparable o2 = null;
 		int result = 0;
 		int expected = 0;
 
-		o1 = this.getBaselineObject(0);
+		o1 = this.getBaselineObject(0, null);
 		o2 = this.getBaselineObject(0);
 		result = o1.compareTo(o2);
-		expected = o1.getComparisonStringField().compareTo(o2.getComparisonStringField());
+		expected = -1;
 		Assert.assertEquals(expected, result);
 	}
 
@@ -115,17 +115,17 @@ public class AbstractSequenceStringFieldComparableTest {
 	}
 
 	@Test
-	public void testCompareToSameSeqThisNullStrValue() {
+	public void testCompareToSameSeqDiffStrValues() {
 
 		AbstractSequenceStringFieldComparable o1 = null;
 		AbstractSequenceStringFieldComparable o2 = null;
 		int result = 0;
 		int expected = 0;
 
-		o1 = this.getBaselineObject(0, null);
+		o1 = this.getBaselineObject(0);
 		o2 = this.getBaselineObject(0);
 		result = o1.compareTo(o2);
-		expected = -1;
+		expected = o1.getComparisonStringField().compareTo(o2.getComparisonStringField());
 		Assert.assertEquals(expected, result);
 	}
 

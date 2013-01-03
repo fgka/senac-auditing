@@ -12,9 +12,9 @@ public final class WebDriverElementPresenceCheckerFactory {
 	}
 
 	public static WebDriverElementPresenceChecker createChecker(final XPathKeyPrefix prefix) {
-		
+
 		if (prefix == null) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("prefix");
+			throw RuntimeExceptionFactory.getNullArgumentException("prefix");
 		}
 
 		return internCreateChecker(prefix);

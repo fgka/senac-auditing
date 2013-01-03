@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-
 public class StudentEvaluation
 		extends
 		AbstractSequenceStringFieldComparable {
@@ -20,22 +19,15 @@ public class StudentEvaluation
 		this.name = name;
 	}
 
-	public List<EvaluationGrade> createAscendingGradesList() {
-
-		List<EvaluationGrade> result = null;
-
-		result = new LinkedList<EvaluationGrade>();
-		for (Map.Entry<EvaluationActivity, EvaluationGrade> e : this.grades.entrySet()) {
-			result.add(e.getValue());
-		}
-
-		return result;
-	}
-
 	@Override
 	protected String getComparisonStringField() {
 
 		return this.getName();
+	}
+
+	public String getName() {
+
+		return this.name;
 	}
 
 	public EvaluationGrade getFinalGrade() {
@@ -43,9 +35,9 @@ public class StudentEvaluation
 		return this.finalGrade;
 	}
 
-	public String getName() {
+	public void setFinalGrade(final EvaluationGrade finalGrade) {
 
-		return this.name;
+		this.finalGrade = finalGrade;
 	}
 
 	public EvaluationGrade putGrade(final EvaluationActivity activity, final EvaluationGrade grade) {
@@ -69,9 +61,16 @@ public class StudentEvaluation
 		return this.grades.put(activity, grade);
 	}
 
-	public void setFinalGrade(final EvaluationGrade finalGrade) {
+	public List<EvaluationGrade> createAscendingGradesList() {
 
-		this.finalGrade = finalGrade;
+		List<EvaluationGrade> result = null;
+
+		result = new LinkedList<EvaluationGrade>();
+		for (Map.Entry<EvaluationActivity, EvaluationGrade> e : this.grades.entrySet()) {
+			result.add(e.getValue());
+		}
+
+		return result;
 	}
 
 	@Override

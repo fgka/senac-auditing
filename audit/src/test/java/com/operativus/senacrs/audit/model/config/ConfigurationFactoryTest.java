@@ -17,13 +17,34 @@ public class ConfigurationFactoryTest {
 
 	private File tempFile = null;
 
-	private boolean containsFileAndField(final MissingMinimalConfigurationEntryException e, final ConfigKey key) {
+	@Before
+	public void setUp() throws Exception {
 
-		String msg = null;
+		this.tempFile = File.createTempFile("config", null);
+	}
 
-		msg = e.getLocalizedMessage();
+	@After
+	public void tearDown() throws Exception {
 
-		return msg.contains(key.getKey()) && msg.contains(this.tempFile.getName());
+		this.tempFile = null;
+	}
+
+	@Test
+	public void testCreateConfigurationNoBaseUrl() throws IOException {
+
+		Configuration template = null;
+		boolean check = false;
+
+		template = this.createRandomConfiguration();
+		template.setBaseUrl(null);
+		this.putToFile(template);
+		try {
+			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
+			Assert.fail();
+		} catch (MissingMinimalConfigurationEntryException e) {
+			check = this.containsFileAndField(e, ConfigKey.BASE_URL);
+			Assert.assertTrue(check);
+		}
 	}
 
 	private Configuration createRandomConfiguration() {
@@ -38,6 +59,18 @@ public class ConfigurationFactoryTest {
 		result.setLogFile(TestBoilerplateUtils.randomAlphanumericString());
 
 		return result;
+	}
+
+	private void putToFile(final Configuration obj) throws IOException {
+
+		BufferedWriter writer = null;
+
+		writer = new BufferedWriter(new FileWriter(this.tempFile));
+		for (ConfigurationFactory.ConfigKey k : ConfigurationFactory.ConfigKey.values()) {
+			this.putLine(writer, k, obj);
+		}
+		writer.flush();
+		writer.close();
 	}
 
 	private void putLine(final BufferedWriter writer, final ConfigurationFactory.ConfigKey key, final Configuration obj)
@@ -76,46 +109,13 @@ public class ConfigurationFactoryTest {
 		}
 	}
 
-	private void putToFile(final Configuration obj) throws IOException {
+	private boolean containsFileAndField(final MissingMinimalConfigurationEntryException e, final ConfigKey key) {
 
-		BufferedWriter writer = null;
+		String msg = null;
 
-		writer = new BufferedWriter(new FileWriter(this.tempFile));
-		for (ConfigurationFactory.ConfigKey k : ConfigurationFactory.ConfigKey.values()) {
-			this.putLine(writer, k, obj);
-		}
-		writer.flush();
-		writer.close();
-	}
+		msg = e.getLocalizedMessage();
 
-	@Before
-	public void setUp() throws Exception {
-
-		this.tempFile = File.createTempFile("config", null);
-	}
-
-	@After
-	public void tearDown() throws Exception {
-
-		this.tempFile = null;
-	}
-
-	@Test
-	public void testCreateConfigurationNoBaseUrl() throws IOException {
-
-		Configuration template = null;
-		boolean check = false;
-
-		template = this.createRandomConfiguration();
-		template.setBaseUrl(null);
-		this.putToFile(template);
-		try {
-			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
-			Assert.fail();
-		} catch (MissingMinimalConfigurationEntryException e) {
-			check = this.containsFileAndField(e, ConfigKey.BASE_URL);
-			Assert.assertTrue(check);
-		}
+		return msg.contains(key.getKey()) && msg.contains(this.tempFile.getName());
 	}
 
 	@Test

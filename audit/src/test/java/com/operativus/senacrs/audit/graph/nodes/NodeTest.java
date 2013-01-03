@@ -3,7 +3,6 @@ package com.operativus.senacrs.audit.graph.nodes;
 import org.junit.Assert;
 import org.junit.Test;
 
-
 public class NodeTest {
 
 	@Test

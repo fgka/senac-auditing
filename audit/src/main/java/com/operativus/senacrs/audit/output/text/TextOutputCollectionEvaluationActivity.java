@@ -31,14 +31,6 @@ public final class TextOutputCollectionEvaluationActivity {
 		}
 	}
 
-	private static void buildActivity(final StringBuilder builder, final EvaluationActivity activity) {
-
-		builder.append(activity.getName());
-		builder.append(DESCRIPTION_PREFIX_SEP_PARENS);
-		builder.append(activity.getDescription());
-		builder.append(DESCRIPTION_SUFFIX_SEP_PARENS);
-	}
-
 	protected static void checkArguments(final StringBuilder builder, final Collection<EvaluationActivity> input) {
 
 		if (builder == null) {
@@ -47,5 +39,13 @@ public final class TextOutputCollectionEvaluationActivity {
 		if (input == null) {
 			throw new IllegalArgumentException();
 		}
+	}
+
+	private static void buildActivity(final StringBuilder builder, final EvaluationActivity activity) {
+
+		builder.append(activity.getName());
+		builder.append(DESCRIPTION_PREFIX_SEP_PARENS);
+		builder.append(activity.getDescription());
+		builder.append(DESCRIPTION_SUFFIX_SEP_PARENS);
 	}
 }

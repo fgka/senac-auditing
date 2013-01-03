@@ -3,7 +3,6 @@ package com.operativus.senacrs.audit.graph.nodes.webdriver;
 import org.junit.Assert;
 import org.junit.Test;
 
-
 public class WebDriverNodeTypeEnumTest {
 
 	@Test
@@ -13,5 +12,4 @@ public class WebDriverNodeTypeEnumTest {
 			Assert.assertEquals(e.name(), e.toString());
 		}
 	}
-
 }

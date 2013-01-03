@@ -16,14 +16,6 @@ public class SkillSet {
 		this.essential = essential;
 	}
 
-	public void addRelatedSkill(final RelatedSkill skill) {
-
-		if (skill == null) {
-			throw RuntimeExceptionFactory.getInstance().getNullArgumentException("skill");
-		}
-		this.skills.add(skill);
-	}
-
 	public EssentialSkill getEssential() {
 
 		return this.essential;
@@ -32,6 +24,14 @@ public class SkillSet {
 	public List<RelatedSkill> getSkills() {
 
 		return this.skills;
+	}
+
+	public void addRelatedSkill(final RelatedSkill skill) {
+
+		if (skill == null) {
+			throw RuntimeExceptionFactory.getNullArgumentException("skill");
+		}
+		this.skills.add(skill);
 	}
 
 	@Override

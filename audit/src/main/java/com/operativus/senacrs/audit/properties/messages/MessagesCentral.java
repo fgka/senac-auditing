@@ -14,8 +14,13 @@ public final class MessagesCentral {
 	};
 
 	static {
-		
+
 		central.populateCentral(LIST_FILES);
+	}
+
+	private MessagesCentral() {
+
+		super();
 	}
 
 	public static void addMessagesFile(final String filename) throws IOException {
@@ -31,10 +36,5 @@ public final class MessagesCentral {
 	public static boolean hasKey(final PropertyKey key) {
 
 		return central.hasKey(key);
-	}
-
-	private MessagesCentral() {
-
-		super();
 	}
 }

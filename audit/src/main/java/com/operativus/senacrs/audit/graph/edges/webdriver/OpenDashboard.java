@@ -11,11 +11,6 @@ public final class OpenDashboard
 
 	private static final OpenDashboard instance = new OpenDashboard();
 
-	public static OpenDashboard getInstance() {
-
-		return instance;
-	}
-	
 	private OpenDashboard() {
 		
 		super();
@@ -27,5 +22,10 @@ public final class OpenDashboard
 		if (!Node.START.equals(source)) {
 			throw new IllegalSourceNodeException(source, Node.START);
 		}		
+	}
+
+	public static OpenDashboard getInstance() {
+	
+		return instance;
 	}
 }

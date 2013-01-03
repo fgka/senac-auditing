@@ -12,29 +12,29 @@ public class Form {
 	private final Collection<StudentEvaluation> evaluations = new TreeSet<StudentEvaluation>();
 	private String notes;
 
-	public Collection<EvaluationActivity> getActivities() {
-
-		return this.activities;
-	}
-
-	public Collection<StudentEvaluation> getEvaluations() {
-
-		return this.evaluations;
-	}
-
 	public Identification getId() {
 
 		return this.id;
 	}
 
-	public String getNotes() {
+	public void setId(final Identification id) {
 
-		return this.notes;
+		this.id = id;
 	}
 
 	public SkillSet getSkillSet() {
 
 		return this.skillSet;
+	}
+
+	public void setSkillSet(final SkillSet skillSet) {
+
+		this.skillSet = skillSet;
+	}
+
+	public Collection<EvaluationActivity> getActivities() {
+
+		return this.activities;
 	}
 
 	public void setActivities(final List<EvaluationActivity> activities) {
@@ -43,25 +43,25 @@ public class Form {
 		this.activities.addAll(activities);
 	}
 
+	public Collection<StudentEvaluation> getEvaluations() {
+
+		return this.evaluations;
+	}
+
 	public void setEvaluations(final List<StudentEvaluation> evaluations) {
 
 		this.evaluations.clear();
 		this.evaluations.addAll(evaluations);
 	}
 
-	public void setId(final Identification id) {
+	public String getNotes() {
 
-		this.id = id;
+		return this.notes;
 	}
 
 	public void setNotes(final String notes) {
 
 		this.notes = notes;
-	}
-
-	public void setSkillSet(final SkillSet skillSet) {
-
-		this.skillSet = skillSet;
 	}
 
 	@Override

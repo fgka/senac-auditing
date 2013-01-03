@@ -13,20 +13,19 @@ public class DefaultWebDriverNodeTest {
 
 	WebDriver driver = null;
 	WebDriverElementPresenceChecker checker = null;
-	
-	
+
 	@Before
 	public void setUp() throws Exception {
 
-		driver = Mockito.mock(WebDriver.class);
-		checker = Mockito.mock(WebDriverElementPresenceChecker.class);
+		this.driver = Mockito.mock(WebDriver.class);
+		this.checker = Mockito.mock(WebDriverElementPresenceChecker.class);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 
-		driver = null;
-		checker = null;
+		this.driver = null;
+		this.checker = null;
 	}
 
 	@Test
@@ -45,11 +44,11 @@ public class DefaultWebDriverNodeTest {
 	public void testVerifyStateConditions() {
 
 		WebDriverNodeCheckerBased obj = null;
-		
-		obj = new WebDriverNodeCheckerBased(WebDriverNodeTypeEnum.NONE, checker);
-		obj.verifyStateConditions(driver);
-		
-		Mockito.verify(checker).hasAll(driver);
+
+		obj = new WebDriverNodeCheckerBased(WebDriverNodeTypeEnum.NONE, this.checker);
+		obj.verifyStateConditions(this.driver);
+
+		Mockito.verify(this.checker).hasAll(this.driver);
 	}
 
 }

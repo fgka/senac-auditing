@@ -12,7 +12,7 @@ public class TextOutputIdentificationTest {
 	public void testCheckArgumentsNullBuilder() {
 
 		try {
-			TextOutputIdentification.checkArguments(null, createIdentification());
+			TextOutputIdentification.checkArguments(null, this.createIdentification());
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 			Assert.assertTrue(true);
