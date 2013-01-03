@@ -70,6 +70,7 @@ public class Configuration {
 		final int prime = 31;
 		int result = 1;
 		result = (prime * result) + ((this.baseUrl == null) ? 0 : this.baseUrl.hashCode());
+		result = (prime * result) + ((this.logFile == null) ? 0 : this.logFile.hashCode());
 		result = (prime * result) + ((this.password == null) ? 0 : this.password.hashCode());
 		result = (prime * result) + ((this.username == null) ? 0 : this.username.hashCode());
 		result = (prime * result) + ((this.version == null) ? 0 : this.version.hashCode());
@@ -94,6 +95,13 @@ public class Configuration {
 				return false;
 			}
 		} else if (!this.baseUrl.equals(other.baseUrl)) {
+			return false;
+		}
+		if (this.logFile == null) {
+			if (other.logFile != null) {
+				return false;
+			}
+		} else if (!this.logFile.equals(other.logFile)) {
 			return false;
 		}
 		if (this.password == null) {
