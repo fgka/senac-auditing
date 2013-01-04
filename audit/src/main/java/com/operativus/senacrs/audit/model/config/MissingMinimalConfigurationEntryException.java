@@ -13,7 +13,7 @@ public class MissingMinimalConfigurationEntryException
 		String result = null;
 		PropertyKey key = null;
 
-		key = ExceptionMessagesKeyEnum.EVAL_TYPE_MISMATCH;
+		key = ExceptionMessagesKeyEnum.MISSING_MINIMAL_CONFIG_ENTRY;
 		result = MessagesCentral.getMessage(key, file, entry);
 
 		return result;
