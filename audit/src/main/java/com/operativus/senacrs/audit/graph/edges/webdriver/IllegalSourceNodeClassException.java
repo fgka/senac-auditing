@@ -1,6 +1,7 @@
 package com.operativus.senacrs.audit.graph.edges.webdriver;
 
 import com.operativus.senacrs.audit.exceptions.ExceptionMessagesKeyEnum;
+import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 import com.operativus.senacrs.audit.graph.nodes.Node;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNode;
 import com.operativus.senacrs.audit.properties.PropertyKey;
@@ -20,6 +21,9 @@ public class IllegalSourceNodeClassException
 		String result = null;
 		PropertyKey key = null;
 
+		if (source == null) {
+			throw RuntimeExceptionFactory.getNullArgumentException("source");
+		}
 		key = ExceptionMessagesKeyEnum.ILLEGAL_NODE_CLASS;
 		result = MessagesCentral.getMessage(key, source.getClass(), WebDriverNode.class);
 
