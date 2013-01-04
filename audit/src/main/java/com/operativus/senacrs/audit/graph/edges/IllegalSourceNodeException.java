@@ -21,7 +21,7 @@ public class IllegalSourceNodeException
 		String result = null;
 		PropertyKey key = null;
 	
-		key = ExceptionMessagesKeyEnum.ILLEGAL_START_NODE;
+		key = ExceptionMessagesKeyEnum.ILLEGAL_NODE_START;
 		result = MessagesCentral.getMessage(key, source, Arrays.toString(valid));
 	
 		return result;
