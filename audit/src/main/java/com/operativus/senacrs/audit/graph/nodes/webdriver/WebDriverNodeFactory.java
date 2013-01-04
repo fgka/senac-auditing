@@ -1,14 +1,11 @@
 package com.operativus.senacrs.audit.graph.nodes.webdriver;
 
-import java.util.Arrays;
-
 import org.openqa.selenium.WebDriver;
 
-import com.operativus.senacrs.audit.exceptions.ExceptionMessagesKeyEnum;
+import com.operativus.senacrs.audit.exceptions.IllegalVarargsAmountException;
 import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElementPresenceChecker;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElementPresenceCheckerFactory;
-import com.operativus.senacrs.audit.properties.messages.MessagesCentral;
 import com.operativus.senacrs.audit.properties.xpath.XPathCentral;
 import com.operativus.senacrs.audit.properties.xpath.XPathKeyPrefix;
 import com.operativus.senacrs.audit.properties.xpath.XPathParamKeyEnum;
@@ -70,12 +67,10 @@ public final class WebDriverNodeFactory {
 	private static WebDriverNode internCreateNodeYear(final Object[] args) {
 
 		WebDriverNode result = null;
-		String msg = null;
 		int year = 0;
 
 		if ((args == null) || (args.length < 1)) {
-			msg = MessagesCentral.getMessage(ExceptionMessagesKeyEnum.ILLEGAL_VARARGS_AMOUNT, 1, Arrays.toString(args));
-			throw new IllegalArgumentException(msg);
+			throw new IllegalVarargsAmountException(1, args);
 		}
 		year = ((Integer) args[0]).intValue();
 		result = internCreateNodeYear(year);
