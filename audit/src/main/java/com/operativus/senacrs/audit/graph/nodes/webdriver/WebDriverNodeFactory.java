@@ -35,7 +35,6 @@ public final class WebDriverNodeFactory {
 	private static WebDriverNode internCreateNode(final WebDriverNodeTypeEnum type, final Object[] args) {
 
 		WebDriverNode result = null;
-		String msg = null;
 
 		if (type.getPrefixKey() != null) {
 			result = internCreateNodeCheckerBased(type);
@@ -46,8 +45,7 @@ public final class WebDriverNodeFactory {
 		} else if (WebDriverNodeTypeEnum.YEAR.equals(type)) {
 			result = internCreateNodeYear(args);
 		} else if (WebDriverNodeTypeEnum.NONE.equals(type)) {
-			msg = MessagesCentral.getMessage(ExceptionMessagesKeyEnum.ILLEGAL_NODE_TYPE, type);
-			throw new IllegalArgumentException(msg);
+			throw new IllegalNodeTypeException(type);
 		}
 
 		return result;
