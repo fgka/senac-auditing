@@ -4,20 +4,20 @@ import com.operativus.senacrs.audit.properties.PropertyKey;
 
 public enum ExceptionMessagesKeyEnum implements PropertyKey {
 
-	//Runtime
+	// Runtime
 	NULL_ARGUMENT("exception.null.argument"),
-	//Form
+	// Form
 	EVAL_TYPE_MISMATCH("exception.eval.type.mismatch"),
-	//Config
+	// Config
 	MISSING_MINIMAL_CONFIG_ENTRY("exception.missing.config.entry"),
-	//Graph
-	ILLEGAL_START_NODE("exception.illegal.start.node"),
+	// Graph
+	ILLEGAL_NODE_START("exception.illegal.node.start"),
 	ILLEGAL_NODE_TYPE("exception.illegal.node.type"),
-	//WebDriver
+	// WebDriver
+	ILLEGAL_NODE_CLASS("exception.illegal.node.class"),
 	ILLEGAL_XPATH_PARAM_AMOUNT("exception.illegal.xpath.param.amount"),
-	//Variarg
-	ILLEGAL_VARARGS_AMOUNT("exception.illegal.varargs.amount"),
-	;
+	// Variarg
+	ILLEGAL_VARARGS_AMOUNT("exception.illegal.varargs.amount"), ;
 
 	private final String key;
 
