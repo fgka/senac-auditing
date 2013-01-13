@@ -15,6 +15,7 @@ public enum ExceptionMessagesKeyEnum implements PropertyKey {
 	ILLEGAL_NODE_TYPE("exception.illegal.node.type"),
 	// WebDriver
 	ILLEGAL_NODE_CLASS("exception.illegal.node.class"),
+	ILLEGAL_NODE_START_TYPE("exception.illegal.node.start.type"),
 	ILLEGAL_XPATH_PARAM_AMOUNT("exception.illegal.xpath.param.amount"),
 	// Variarg
 	ILLEGAL_VARARGS_AMOUNT("exception.illegal.varargs.amount"), ;
