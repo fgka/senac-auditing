@@ -8,9 +8,13 @@ import com.operativus.senacrs.audit.graph.nodes.Node;
 import com.operativus.senacrs.audit.properties.PropertyKey;
 import com.operativus.senacrs.audit.properties.messages.MessagesCentral;
 
-@SuppressWarnings("serial")
 public class IllegalSourceNodeException
 		extends IllegalArgumentException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1104628218505690319L;
 
 	public IllegalSourceNodeException(final Node source, final Node... valid) {
 
