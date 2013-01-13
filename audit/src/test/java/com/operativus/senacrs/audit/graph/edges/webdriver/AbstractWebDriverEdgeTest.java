@@ -1,17 +1,22 @@
 package com.operativus.senacrs.audit.graph.edges.webdriver;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 
 import com.operativus.senacrs.audit.graph.nodes.Node;
+import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNode;
 
 public class AbstractWebDriverEdgeTest {
 
 	private WebDriver driver = null;
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Before
 	public void setUp() throws Exception {
@@ -28,12 +33,14 @@ public class AbstractWebDriverEdgeTest {
 	@Test
 	public void testAbstractWebDriverEdgeNull() {
 
-		try {
-			new AbstractWebDriverEdge(null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		thrown.expect(IllegalArgumentException.class);
+		new AbstractWebDriverEdge(null) {
+
+			@Override
+			protected void internTraverse(WebDriverNode source) {
+				// do nothing
+			}
+		};
 	}
 
 	@Test
@@ -42,17 +49,18 @@ public class AbstractWebDriverEdgeTest {
 		AbstractWebDriverEdge obj = null;
 
 		obj = getBaseline();
-		try {
-			obj.traverse(null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		thrown.expect(IllegalArgumentException.class);
+		obj.traverse(null);
 	}
 
 	private AbstractWebDriverEdge getBaseline() {
 
-		return new AbstractWebDriverEdge(this.driver);
+		return new AbstractWebDriverEdge(this.driver) {
+
+			@Override
+			protected void internTraverse(WebDriverNode source) {
+				// do nothing				
+			}};
 	}
 
 	@Test
@@ -61,13 +69,8 @@ public class AbstractWebDriverEdgeTest {
 		AbstractWebDriverEdge obj = null;
 
 		obj = getBaseline();
-		try {
-			obj.traverse(new Node() {
-			});
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		thrown.expect(IllegalSourceNodeClassException.class);
+		obj.traverse(Node.START);
 	}
 
 }

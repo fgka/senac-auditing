@@ -6,12 +6,12 @@ import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 import com.operativus.senacrs.audit.graph.nodes.Node;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNode;
 
-public class AbstractWebDriverEdge
+public abstract class AbstractWebDriverEdge
 		implements WebDriverEdge {
 
 	private final WebDriver driver;
 
-	public AbstractWebDriverEdge(final WebDriver driver) {
+	protected AbstractWebDriverEdge(final WebDriver driver) {
 
 		super();
 
@@ -42,9 +42,5 @@ public class AbstractWebDriverEdge
 		internTraverse(castedNode);
 	}
 
-	private void internTraverse(final WebDriverNode source) {
-
-		// TODO Auto-generated method stub
-
-	}
+	protected abstract void internTraverse(final WebDriverNode source);
 }
