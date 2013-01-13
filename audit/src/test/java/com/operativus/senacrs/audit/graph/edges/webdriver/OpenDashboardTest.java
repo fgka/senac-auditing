@@ -44,7 +44,7 @@ public class OpenDashboardTest {
 
 		WebDriverNode node = null;
 
-		this.thrown.expect(IllegalSourceNodeClassException.class);
+		this.thrown.expect(IllegalSourceNodeTypeException.class);
 		this.thrown.expectMessage(WebDriverNodeTypeEnum.START.toString());
 		node = WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.ABOUT);
 		this.edge.traverse(node);
