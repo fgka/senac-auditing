@@ -1,31 +1,20 @@
 package com.operativus.senacrs.audit.graph.edges.webdriver;
 
-import com.operativus.senacrs.audit.common.AbstractHasLogger;
-import com.operativus.senacrs.audit.graph.edges.Edge;
-import com.operativus.senacrs.audit.graph.edges.IllegalSourceNodeException;
-import com.operativus.senacrs.audit.graph.nodes.Node;
+import org.openqa.selenium.WebDriver;
+
+import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNode;
 
 public final class OpenDashboard
-		extends AbstractHasLogger
-		implements Edge {
+		extends AbstractWebDriverEdge {
 
-	private static final OpenDashboard instance = new OpenDashboard();
-
-	private OpenDashboard() {
+	public OpenDashboard(WebDriver driver) {
 		
-		super();
+		super(driver);
 	}
 	
 	@Override
-	public void traverse(Node source) {
-
-		if (!Node.START.equals(source)) {
-			throw new IllegalSourceNodeException(source, Node.START);
-		}		
-	}
-
-	public static OpenDashboard getInstance() {
-	
-		return instance;
+	protected void internTraverse(WebDriverNode source) {
+		// TODO Auto-generated method stub
+		
 	}
 }

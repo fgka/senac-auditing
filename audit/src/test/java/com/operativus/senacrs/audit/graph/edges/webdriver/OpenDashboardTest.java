@@ -5,15 +5,16 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.Mockito;
+import org.openqa.selenium.WebDriver;
 
-import com.operativus.senacrs.audit.graph.edges.IllegalSourceNodeException;
-import com.operativus.senacrs.audit.graph.nodes.Node;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNode;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNodeFactory;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNodeTypeEnum;
 
 public class OpenDashboardTest {
 
+	private WebDriver driver = null;
 	private OpenDashboard edge = null;
 
 	@Rule
@@ -22,31 +23,15 @@ public class OpenDashboardTest {
 	@Before
 	public void setUp() throws Exception {
 
-		this.edge = OpenDashboard.getInstance();
+		this.driver = Mockito.mock(WebDriver.class);
+		this.edge = new OpenDashboard(driver);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 
 		this.edge = null;
-	}
-
-	@Test
-	public void testTraverseNullStartSource() {
-
-		thrown.expect(IllegalArgumentException.class);
-		this.edge.traverse(null);
-	}
-
-	@Test
-	public void testTraverseNonStartSource() {
-
-		WebDriverNode node = null;
-		
-		node = WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.END);
-		thrown.expect(IllegalSourceNodeException.class);
-		thrown.expectMessage(Node.START.toString());
-		this.edge.traverse(node);
+		this.driver = null;
 	}
 
 	@Test
