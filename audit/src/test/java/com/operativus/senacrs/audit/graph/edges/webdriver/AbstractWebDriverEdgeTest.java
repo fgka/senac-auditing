@@ -9,7 +9,6 @@ import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 
 import com.operativus.senacrs.audit.graph.nodes.Node;
-import com.operativus.senacrs.audit.graph.nodes.webdriver.IllegalNodeTypeException;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNode;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNodeFactory;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNodeType;
@@ -95,7 +94,7 @@ public class AbstractWebDriverEdgeTest {
 
 		obj = new MyAbstractWebDriverEdge();
 		node = WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.START);
-		this.thrown.expect(IllegalNodeTypeException.class);
+		this.thrown.expect(IllegalSourceNodeTypeException.class);
 		obj.traverse(node);
 	}
 
