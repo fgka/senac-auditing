@@ -1,16 +1,23 @@
 package com.operativus.senacrs.audit.graph.edges.webdriver;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.operativus.senacrs.audit.graph.edges.IllegalSourceNodeException;
 import com.operativus.senacrs.audit.graph.nodes.Node;
+import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNode;
+import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNodeFactory;
+import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNodeTypeEnum;
 
 public class OpenDashboardTest {
 
 	private OpenDashboard edge = null;
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Before
 	public void setUp() throws Exception {
@@ -25,18 +32,29 @@ public class OpenDashboardTest {
 	}
 
 	@Test
+	public void testTraverseNullStartSource() {
+
+		thrown.expect(IllegalArgumentException.class);
+		this.edge.traverse(null);
+	}
+
+	@Test
 	public void testTraverseNonStartSource() {
 
-		String msg = null;
-		boolean condition = false;
+		WebDriverNode node = null;
+		
+		node = WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.END);
+		thrown.expect(IllegalSourceNodeException.class);
+		thrown.expectMessage(Node.START.toString());
+		this.edge.traverse(node);
+	}
 
-		try {
-			this.edge.traverse(null);
-			Assert.fail();
-		} catch (IllegalSourceNodeException e) {
-			msg = e.getLocalizedMessage();
-			condition = msg.contains(Node.START.toString());
-			Assert.assertTrue(condition);
-		}
+	@Test
+	public void testTraverseStartSource() {
+				
+		WebDriverNode node = null;
+		
+		node = WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.START);
+		this.edge.traverse(node);
 	}
 }
