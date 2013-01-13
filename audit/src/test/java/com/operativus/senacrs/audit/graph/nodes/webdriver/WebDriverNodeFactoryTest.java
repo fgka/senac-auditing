@@ -1,35 +1,30 @@
 package com.operativus.senacrs.audit.graph.nodes.webdriver;
 
-import static org.junit.Assert.fail;
-
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.operativus.senacrs.audit.graph.nodes.Node;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class WebDriverNodeFactoryTest {
 
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+
 	@Test
 	public void testCreateNodeNull() {
 
-		try {
-			WebDriverNodeFactory.createNode(null);
-			fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		WebDriverNodeFactory.createNode(null);
 	}
 
 	@Test
 	public void testCreateNodeNone() {
 
-		try {
-			WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.NONE);
-			fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.NONE);
 	}
 
 	@Test
@@ -81,12 +76,8 @@ public class WebDriverNodeFactoryTest {
 	@Test
 	public void testCreateNodeYearNoParams() {
 
-		try {
-			WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.YEAR);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.YEAR);
 	}
 
 	@Test

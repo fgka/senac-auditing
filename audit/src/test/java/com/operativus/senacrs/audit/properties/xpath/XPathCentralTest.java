@@ -3,7 +3,9 @@ package com.operativus.senacrs.audit.properties.xpath;
 import java.util.Arrays;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.operativus.senacrs.audit.properties.PropertyKey;
 
@@ -56,6 +58,9 @@ public class XPathCentralTest {
 			"//xpath/path2",
 	};
 
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+
 	@Test
 	public void testGetMessagePreLoaded() {
 
@@ -70,12 +75,8 @@ public class XPathCentralTest {
 	@Test
 	public void testGetXPathByPrefixNull() throws Exception {
 
-		try {
-			XPathCentral.getXPathByPrefix(null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		XPathCentral.getXPathByPrefix(null);
 	}
 
 	@Test
@@ -101,12 +102,8 @@ public class XPathCentralTest {
 				return null;
 			}
 		};
-		try {
-			XPathCentral.getXPathByPrefix(key);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		XPathCentral.getXPathByPrefix(key);
 	}
 
 	@Test

@@ -1,19 +1,19 @@
 package com.operativus.senacrs.audit.graph.edges;
 
-import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class IllegalSourceNodeExceptionTest {
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void testIllegalSourceNodeExceptionNodeNodeArrayNullSource() {
 
-		try {
-			new IllegalSourceNodeException(null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		new IllegalSourceNodeException(null);
 	}
 
 }

@@ -4,11 +4,16 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.operativus.senacrs.audit.model.form.StudentEvaluation;
 
 public class TextOutputCollectionStudentEvaluationTest {
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void testCheckArgumentsNullBuilder() {
@@ -16,23 +21,15 @@ public class TextOutputCollectionStudentEvaluationTest {
 		Collection<StudentEvaluation> arg = null;
 
 		arg = new LinkedList<StudentEvaluation>();
-		try {
-			TextOutputCollectionStudentEvaluation.checkArguments(null, arg);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		TextOutputCollectionStudentEvaluation.checkArguments(null, arg);
 	}
 
 	@Test
 	public void testCheckArgumentsNullCollection() {
 
-		try {
-			TextOutputCollectionStudentEvaluation.checkArguments(new StringBuilder(), null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		TextOutputCollectionStudentEvaluation.checkArguments(new StringBuilder(), null);
 	}
 
 	@Test

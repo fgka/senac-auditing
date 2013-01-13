@@ -1,21 +1,22 @@
 package com.operativus.senacrs.audit.exceptions;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class RuntimeExceptionFactoryTest {
 
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+
 	@Test
 	public void testGetNullArgumentExceptionNull() {
 
-		try {
-			RuntimeExceptionFactory.getNullArgumentException(null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		RuntimeExceptionFactory.getNullArgumentException(null);
 	}
 
 	@Test

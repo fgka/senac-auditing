@@ -10,7 +10,9 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
@@ -42,6 +44,9 @@ public class PropertiesCentralTest {
 
 	private PropertiesCentral central = null;
 
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+
 	@Before
 	public void setUp() throws Exception {
 
@@ -55,59 +60,37 @@ public class PropertiesCentralTest {
 	}
 
 	@Test
-	public void testAddPropertiesFileNullString() {
+	public void testAddPropertiesFileNullString() throws IOException {
 
-		try {
-			this.central.addPropertiesFile((String) null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		} catch (IOException e) {
-			Assert.fail();
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		this.central.addPropertiesFile((String) null);
 	}
 
 	@Test
-	public void testAddPropertiesFileNullIn() {
+	public void testAddPropertiesFileNullIn() throws IOException {
 
-		try {
-			this.central.addPropertiesFile((InputStream) null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		} catch (IOException e) {
-			Assert.fail();
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		this.central.addPropertiesFile((InputStream) null);
 	}
 
 	@Test
-	public void testAddPropertiesFileInvalid() {
+	public void testAddPropertiesFileInvalid() throws IOException {
 
 		String filename = null;
 
 		filename = TestBoilerplateUtils.randomAlphanumericString();
-		try {
-			this.central.addPropertiesFile(filename);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		} catch (IOException e) {
-			Assert.fail();
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		this.central.addPropertiesFile(filename);
 	}
 
 	@Test
-	public void testAddPropertiesFile() {
+	public void testAddPropertiesFile() throws IOException {
 
 		boolean result = false;
 
-		try {
-			this.central.addPropertiesFile(this.createPropFile());
-			result = this.central.hasKey(TestMessagesEnum.TEST_MESSAGE);
-			Assert.assertTrue(result);
-		} catch (IOException e) {
-			Assert.fail(e.getLocalizedMessage());
-		}
+		this.central.addPropertiesFile(this.createPropFile());
+		result = this.central.hasKey(TestMessagesEnum.TEST_MESSAGE);
+		Assert.assertTrue(result);
 	}
 
 	private String createPropFile() throws IOException {
@@ -121,22 +104,18 @@ public class PropertiesCentralTest {
 	}
 
 	@Test
-	public void testGetMessage() {
+	public void testGetMessage() throws IOException {
 
 		String result = null;
 		String arg = null;
 		boolean check = false;
 
-		try {
-			arg = TestBoilerplateUtils.randomString();
-			this.central.addPropertiesFile(this.createPropFile());
-			result = this.central.getMessage(TestMessagesEnum.TEST_MESSAGE, arg);
-			Assert.assertNotNull(result);
-			check = result.contains(arg);
-			Assert.assertTrue(check);
-		} catch (IOException e) {
-			Assert.fail(e.getLocalizedMessage());
-		}
+		arg = TestBoilerplateUtils.randomString();
+		this.central.addPropertiesFile(this.createPropFile());
+		result = this.central.getMessage(TestMessagesEnum.TEST_MESSAGE, arg);
+		Assert.assertNotNull(result);
+		check = result.contains(arg);
+		Assert.assertTrue(check);
 	}
 
 	@Test
@@ -144,29 +123,23 @@ public class PropertiesCentralTest {
 
 		PropertyKey key = null;
 
-		try {
-			key = new PropertyKey() {
+		key = new PropertyKey() {
 
-				@Override
-				public String getKey() {
+			@Override
+			public String getKey() {
 
-					return TestBoilerplateUtils.randomString();
-				}
-			};
-			this.central.getMessage(key);
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+				return TestBoilerplateUtils.randomString();
+			}
+		};
+		this.thrown.expect(IllegalArgumentException.class);
+		this.central.getMessage(key);
 	}
 
 	@Test
 	public void testHasKeyNull() {
 
-		try {
-			this.central.hasKey(null);
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		this.central.hasKey(null);
 	}
 
 	@Test
@@ -174,19 +147,16 @@ public class PropertiesCentralTest {
 
 		PropertyKey key = null;
 
-		try {
-			key = new PropertyKey() {
+		key = new PropertyKey() {
 
-				@Override
-				public String getKey() {
+			@Override
+			public String getKey() {
 
-					return null;
-				}
-			};
-			this.central.hasKey(key);
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+				return null;
+			}
+		};
+		this.thrown.expect(IllegalArgumentException.class);
+		this.central.hasKey(key);
 	}
 
 	private void writeContentToFile(final File result) throws IOException {
@@ -213,19 +183,15 @@ public class PropertiesCentralTest {
 	}
 
 	@Test
-	public void testGetAvailableKeys() {
+	public void testGetAvailableKeys() throws IOException {
 
 		List<String> result = null;
 
-		try {
-			this.central.addPropertiesFile(this.createPropFile());
-			result = this.central.getAvailableKeys();
-			Assert.assertNotNull(result);
-			for (TestMessagesEnum k : TestMessagesEnum.values()) {
-				Assert.assertTrue(result.contains(k.getKey()));
-			}
-		} catch (IOException e) {
-			Assert.fail(e.getLocalizedMessage());
+		this.central.addPropertiesFile(this.createPropFile());
+		result = this.central.getAvailableKeys();
+		Assert.assertNotNull(result);
+		for (TestMessagesEnum k : TestMessagesEnum.values()) {
+			Assert.assertTrue(result.contains(k.getKey()));
 		}
 	}
 }

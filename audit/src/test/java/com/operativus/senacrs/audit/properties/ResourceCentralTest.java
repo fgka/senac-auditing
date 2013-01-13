@@ -1,13 +1,17 @@
 package com.operativus.senacrs.audit.properties;
 
 import org.apache.logging.log4j.Logger;
-import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class ResourceCentralTest {
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void testPopulateCentralNull() {
@@ -15,12 +19,8 @@ public class ResourceCentralTest {
 		ResourceCentral obj = null;
 
 		obj = new ResourceCentral();
-		try {
-			obj.populateCentral((String[]) null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		obj.populateCentral((String[]) null);
 	}
 
 	@Test

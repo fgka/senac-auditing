@@ -1,19 +1,19 @@
 package com.operativus.senacrs.audit.exceptions;
 
-import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class IllegalVarargsAmountExceptionTest {
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void testIllegalVarargsAmountExceptionNegativeAmount() {
 
-		try {
-			new IllegalVarargsAmountException(-1);
-			Assert.fail();
-		} catch (NegativeArraySizeException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(NegativeArraySizeException.class);
+		new IllegalVarargsAmountException(-1);
 
 	}
 }

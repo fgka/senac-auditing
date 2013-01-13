@@ -1,9 +1,10 @@
 package com.operativus.senacrs.audit.graph.nodes.webdriver;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 
@@ -11,8 +12,11 @@ import com.operativus.senacrs.audit.graph.nodes.webdriver.checkers.WebDriverElem
 
 public class DefaultWebDriverNodeTest {
 
-	WebDriver driver = null;
-	WebDriverElementPresenceChecker checker = null;
+	private WebDriver driver = null;
+	private WebDriverElementPresenceChecker checker = null;
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Before
 	public void setUp() throws Exception {
@@ -31,13 +35,8 @@ public class DefaultWebDriverNodeTest {
 	@Test
 	public void testDefaultWebDriverNodeNull() {
 
-		try {
-			new WebDriverNodeCheckerBased(WebDriverNodeTypeEnum.NONE, null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
-
+		this.thrown.expect(IllegalArgumentException.class);
+		new WebDriverNodeCheckerBased(WebDriverNodeTypeEnum.NONE, null);
 	}
 
 	@Test

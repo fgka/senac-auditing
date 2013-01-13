@@ -1,22 +1,22 @@
 package com.operativus.senacrs.audit.output.text;
 
-import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.operativus.senacrs.audit.model.form.Identification;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class TextOutputIdentificationTest {
 
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+
 	@Test
 	public void testCheckArgumentsNullBuilder() {
 
-		try {
-			TextOutputIdentification.checkArguments(null, this.createIdentification());
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		TextOutputIdentification.checkArguments(null, this.createIdentification());
 	}
 
 	private Identification createIdentification() {
@@ -32,11 +32,7 @@ public class TextOutputIdentificationTest {
 	@Test
 	public void testCheckArgumentsNullId() {
 
-		try {
-			TextOutputIdentification.checkArguments(new StringBuilder(), null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		TextOutputIdentification.checkArguments(new StringBuilder(), null);
 	}
 }

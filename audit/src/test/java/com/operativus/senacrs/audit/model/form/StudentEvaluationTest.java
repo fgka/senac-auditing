@@ -3,11 +3,16 @@ package com.operativus.senacrs.audit.model.form;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class StudentEvaluationTest {
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void testPutGradeInvalidActivity() {
@@ -19,12 +24,8 @@ public class StudentEvaluationTest {
 		obj = this.getBaseline();
 		activity = this.getEvalActivity(EvaluationType.INVALID);
 		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
-		try {
-			obj.putGrade(activity, grade);
-			Assert.fail();
-		} catch (InvalidEvaluationTypeException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(InvalidEvaluationTypeException.class);
+		obj.putGrade(activity, grade);
 
 	}
 
@@ -65,12 +66,8 @@ public class StudentEvaluationTest {
 		obj = this.getBaseline();
 		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
 		grade = this.getEvalGrade(EvaluationType.INVALID);
-		try {
-			obj.putGrade(activity, grade);
-			Assert.fail();
-		} catch (InvalidEvaluationTypeException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(InvalidEvaluationTypeException.class);
+		obj.putGrade(activity, grade);
 
 	}
 
@@ -84,12 +81,8 @@ public class StudentEvaluationTest {
 		obj = this.getBaseline();
 		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
 		grade = this.getEvalGrade(EvaluationType.NUMERIC);
-		try {
-			obj.putGrade(activity, grade);
-			Assert.fail();
-		} catch (MismatchingEvaluationTypeException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(MismatchingEvaluationTypeException.class);
+		obj.putGrade(activity, grade);
 
 	}
 
@@ -101,12 +94,8 @@ public class StudentEvaluationTest {
 
 		obj = this.getBaseline();
 		grade = this.getEvalGrade(EvaluationType.SENAC_LEVEL);
-		try {
-			obj.putGrade(null, grade);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		obj.putGrade(null, grade);
 
 	}
 
@@ -118,12 +107,8 @@ public class StudentEvaluationTest {
 
 		obj = this.getBaseline();
 		activity = this.getEvalActivity(EvaluationType.SENAC_LEVEL);
-		try {
-			obj.putGrade(activity, null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		obj.putGrade(activity, null);
 
 	}
 

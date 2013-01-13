@@ -1,9 +1,10 @@
 package com.operativus.senacrs.audit.graph.nodes.webdriver.checkers;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +13,10 @@ import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class WebDriverElementPresenceCheckerTest {
 
-	WebDriver driver = null;
+	private WebDriver driver = null;
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Before
 	public void setUp() throws Exception {
@@ -34,12 +38,8 @@ public class WebDriverElementPresenceCheckerTest {
 
 		elements = this.getRandomStringArray();
 		obj = new WebDriverElementPresenceChecker(elements);
-		try {
-			obj.hasAll(null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		obj.hasAll(null);
 	}
 
 	private String[] getRandomStringArray() {
@@ -75,12 +75,8 @@ public class WebDriverElementPresenceCheckerTest {
 	@Test
 	public void testWebDriverElementPresenceCheckerNull() {
 
-		try {
-			new WebDriverElementPresenceChecker(null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		new WebDriverElementPresenceChecker(null);
 	}
 
 	@Test
@@ -90,12 +86,8 @@ public class WebDriverElementPresenceCheckerTest {
 
 		values = this.getRandomStringArray();
 		this.randomIndexToNull(values);
-		try {
-			new WebDriverElementPresenceChecker(values);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		new WebDriverElementPresenceChecker(values);
 	}
 
 	private void randomIndexToNull(final String[] values) {
