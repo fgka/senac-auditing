@@ -11,14 +11,12 @@ import org.openqa.selenium.WebDriver;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNode;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNodeFactory;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNodeTypeEnum;
-import com.operativus.senacrs.audit.model.config.Configuration;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class OpenDashboardTest {
 
 	private WebDriver driver = null;
 	private OpenDashboard edge = null;
-	private Configuration config = null;
 
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
@@ -27,8 +25,7 @@ public class OpenDashboardTest {
 	public void setUp() throws Exception {
 
 		this.driver = Mockito.mock(WebDriver.class);
-		this.edge = new OpenDashboard(this.driver);
-		this.config = Mockito.mock(Configuration.class);
+		this.edge = new OpenDashboard(this.driver, TestBoilerplateUtils.randomString());
 	}
 
 	@After
@@ -36,7 +33,20 @@ public class OpenDashboardTest {
 
 		this.edge = null;
 		this.driver = null;
-		this.config = null;
+	}
+
+	@Test
+	public void testNullBaseUrl() {
+
+		this.thrown.expect(IllegalArgumentException.class);
+		new OpenDashboard(this.driver, null);
+	}
+
+	@Test
+	public void testEmptyBaseUrl() {
+
+		this.thrown.expect(IllegalArgumentException.class);
+		new OpenDashboard(this.driver, "");
 	}
 
 	@Test
@@ -59,8 +69,6 @@ public class OpenDashboardTest {
 		baseUrl = TestBoilerplateUtils.randomString();
 		node = WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.START);
 		this.edge.traverse(node);
-		Mockito.when(this.config.getBaseUrl()).thenReturn(baseUrl);
-		Mockito.verify(this.config).getBaseUrl();
 		Mockito.verify(this.driver).get(baseUrl);
 	}
 }
