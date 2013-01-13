@@ -8,7 +8,9 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.operativus.senacrs.audit.model.config.ConfigurationFactory.ConfigKey;
 import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
@@ -16,6 +18,9 @@ import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 public class ConfigurationFactoryTest {
 
 	private File tempFile = null;
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Before
 	public void setUp() throws Exception {
@@ -33,18 +38,14 @@ public class ConfigurationFactoryTest {
 	public void testCreateConfigurationNoBaseUrl() throws IOException {
 
 		Configuration template = null;
-		boolean check = false;
 
 		template = this.createRandomConfiguration();
 		template.setBaseUrl(null);
 		this.putToFile(template);
-		try {
-			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
-			Assert.fail();
-		} catch (MissingMinimalConfigurationEntryException e) {
-			check = this.containsFileAndField(e, ConfigKey.BASE_URL);
-			Assert.assertTrue(check);
-		}
+		this.thrown.expect(MissingMinimalConfigurationEntryException.class);
+		this.thrown.expectMessage(this.tempFile.getName());
+		this.thrown.expectMessage(ConfigKey.BASE_URL.getKey());
+		ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
 	}
 
 	private Configuration createRandomConfiguration() {
@@ -109,15 +110,6 @@ public class ConfigurationFactoryTest {
 		}
 	}
 
-	private boolean containsFileAndField(final MissingMinimalConfigurationEntryException e, final ConfigKey key) {
-
-		String msg = null;
-
-		msg = e.getLocalizedMessage();
-
-		return msg.contains(key.getKey()) && msg.contains(this.tempFile.getName());
-	}
-
 	@Test
 	public void testCreateConfigurationNoLogFile() throws IOException {
 
@@ -150,36 +142,28 @@ public class ConfigurationFactoryTest {
 	public void testCreateConfigurationNoUsername() throws IOException {
 
 		Configuration template = null;
-		boolean check = false;
 
 		template = this.createRandomConfiguration();
 		template.setUsername(null);
 		this.putToFile(template);
-		try {
-			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
-			Assert.fail();
-		} catch (MissingMinimalConfigurationEntryException e) {
-			check = this.containsFileAndField(e, ConfigKey.USERNAME);
-			Assert.assertTrue(check);
-		}
+		this.thrown.expect(MissingMinimalConfigurationEntryException.class);
+		this.thrown.expectMessage(this.tempFile.getName());
+		this.thrown.expectMessage(ConfigKey.USERNAME.getKey());
+		ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
 	}
 
 	@Test
 	public void testCreateConfigurationNoVersion() throws IOException {
 
 		Configuration template = null;
-		boolean check = false;
 
 		template = this.createRandomConfiguration();
 		template.setVersion(null);
 		this.putToFile(template);
-		try {
-			ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
-			Assert.fail();
-		} catch (MissingMinimalConfigurationEntryException e) {
-			check = this.containsFileAndField(e, ConfigKey.VERSION);
-			Assert.assertTrue(check);
-		}
+		this.thrown.expect(MissingMinimalConfigurationEntryException.class);
+		this.thrown.expectMessage(this.tempFile.getName());
+		this.thrown.expectMessage(ConfigKey.VERSION.getKey());
+		ConfigurationFactory.createConfiguration(this.tempFile.getAbsolutePath());
 	}
 
 	@Test

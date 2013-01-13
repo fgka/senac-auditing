@@ -1,16 +1,20 @@
 package com.operativus.senacrs.audit.graph.nodes.webdriver;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 
 public class AbstractWebDriverNodeTest {
 
-	AbstractWebDriverNode node = null;
-	WebDriver driver = null;
+	private AbstractWebDriverNode node = null;
+	private WebDriver driver = null;
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Before
 	public void setUp() throws Exception {
@@ -29,19 +33,15 @@ public class AbstractWebDriverNodeTest {
 	@Test
 	public void testAbstractWebDriverNodeNull() {
 
-		try {
-			new AbstractWebDriverNode(null) {
+		this.thrown.expect(IllegalArgumentException.class);
+		new AbstractWebDriverNode(null) {
 
-				@Override
-				protected boolean verifyStateConditions(final WebDriver driver) {
+			@Override
+			protected boolean verifyStateConditions(final WebDriver driver) {
 
-					return false;
-				}
-			};
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+				return false;
+			}
+		};
 	}
 
 	@Test
@@ -54,15 +54,12 @@ public class AbstractWebDriverNodeTest {
 			@Override
 			protected boolean verifyStateConditions(final WebDriver driver) {
 
-				return AbstractWebDriverNodeTest.this.node.verifyStateConditions(driver);
+				return AbstractWebDriverNodeTest.this.node
+						.verifyStateConditions(driver);
 			}
 		};
-		try {
-			obj.verifyState(null);
-			Assert.fail();
-		} catch (IllegalArgumentException e) {
-			Assert.assertTrue(true);
-		}
+		this.thrown.expect(IllegalArgumentException.class);
+		obj.verifyState(null);
 	}
 
 	@Test
@@ -75,7 +72,8 @@ public class AbstractWebDriverNodeTest {
 			@Override
 			protected boolean verifyStateConditions(final WebDriver driver) {
 
-				return AbstractWebDriverNodeTest.this.node.verifyStateConditions(driver);
+				return AbstractWebDriverNodeTest.this.node
+						.verifyStateConditions(driver);
 			}
 		};
 		obj.verifyState(this.driver);
