@@ -9,12 +9,12 @@ import com.operativus.senacrs.audit.properties.messages.MessagesCentral;
 public class IllegalNodeTypeException
 		extends IllegalArgumentException {
 
-	public IllegalNodeTypeException(final WebDriverNodeTypeEnum type) {
+	public IllegalNodeTypeException(final WebDriverNodeType type) {
 
 		super(getMessage(type));
 	}
 
-	private static String getMessage(final WebDriverNodeTypeEnum type) {
+	private static String getMessage(final WebDriverNodeType type) {
 
 		String result = null;
 		PropertyKey key = null;
