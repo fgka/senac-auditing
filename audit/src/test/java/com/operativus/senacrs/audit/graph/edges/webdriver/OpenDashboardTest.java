@@ -15,6 +15,7 @@ import com.operativus.senacrs.audit.testutils.TestBoilerplateUtils;
 
 public class OpenDashboardTest {
 
+	private String baseUrl = null;
 	private WebDriver driver = null;
 	private OpenDashboard edge = null;
 
@@ -24,8 +25,9 @@ public class OpenDashboardTest {
 	@Before
 	public void setUp() throws Exception {
 
+		this.baseUrl = TestBoilerplateUtils.randomAlphanumericString();
 		this.driver = Mockito.mock(WebDriver.class);
-		this.edge = new OpenDashboard(this.driver, TestBoilerplateUtils.randomString());
+		this.edge = new OpenDashboard(this.driver, this.baseUrl);
 	}
 
 	@After
@@ -33,6 +35,7 @@ public class OpenDashboardTest {
 
 		this.edge = null;
 		this.driver = null;
+		this.baseUrl = null;
 	}
 
 	@Test
@@ -64,11 +67,9 @@ public class OpenDashboardTest {
 	public void testTraverseStartSource() {
 
 		WebDriverNode node = null;
-		String baseUrl = null;
 
-		baseUrl = TestBoilerplateUtils.randomString();
 		node = WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.START);
 		this.edge.traverse(node);
-		Mockito.verify(this.driver).get(baseUrl);
+		Mockito.verify(this.driver).get(this.baseUrl);
 	}
 }
