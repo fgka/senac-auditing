@@ -24,14 +24,30 @@ public class RuntimeExceptionFactoryTest {
 
 		IllegalArgumentException result = null;
 		String arg = null;
-		String msg = null;
 
 		arg = TestBoilerplateUtils.randomString();
 		result = RuntimeExceptionFactory.getNullArgumentException(arg);
+		this.checkException(result, arg);
+	}
+
+	private void checkException(final IllegalArgumentException result, final String arg) {
+
+		String msg = null;
+
 		Assert.assertNotNull(result);
 		msg = result.getMessage();
 		Assert.assertNotNull(msg);
 		Assert.assertTrue(msg.contains(arg));
 	}
 
+	@Test
+	public void testGetEmpyStringArgumentException() {
+
+		IllegalArgumentException result = null;
+		String arg = null;
+
+		arg = TestBoilerplateUtils.randomString();
+		result = RuntimeExceptionFactory.getEmpyStringArgumentException(arg);
+		this.checkException(result, arg);
+	}
 }
