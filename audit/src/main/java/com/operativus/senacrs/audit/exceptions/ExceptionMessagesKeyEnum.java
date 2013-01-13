@@ -6,6 +6,7 @@ public enum ExceptionMessagesKeyEnum implements PropertyKey {
 
 	// Runtime
 	NULL_ARGUMENT("exception.null.argument"),
+	EMPTY_STRING_ARGUMENT("exception.empty.string.argument"),
 	// Form
 	EVAL_TYPE_MISMATCH("exception.eval.type.mismatch"),
 	// Config
