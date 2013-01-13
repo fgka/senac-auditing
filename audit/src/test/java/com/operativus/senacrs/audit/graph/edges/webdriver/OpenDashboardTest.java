@@ -40,6 +40,17 @@ public class OpenDashboardTest {
 	}
 
 	@Test
+	public void testTraverseNonStartSource() {
+
+		WebDriverNode node = null;
+
+		this.thrown.expect(IllegalSourceNodeClassException.class);
+		this.thrown.expectMessage(WebDriverNodeTypeEnum.START.toString());
+		node = WebDriverNodeFactory.createNode(WebDriverNodeTypeEnum.ABOUT);
+		this.edge.traverse(node);
+	}
+
+	@Test
 	public void testTraverseStartSource() {
 
 		WebDriverNode node = null;
@@ -51,6 +62,5 @@ public class OpenDashboardTest {
 		Mockito.when(this.config.getBaseUrl()).thenReturn(baseUrl);
 		Mockito.verify(this.config).getBaseUrl();
 		Mockito.verify(this.driver).get(baseUrl);
-
 	}
 }
