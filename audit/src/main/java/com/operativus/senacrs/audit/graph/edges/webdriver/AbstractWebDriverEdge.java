@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.operativus.senacrs.audit.exceptions.RuntimeExceptionFactory;
 import com.operativus.senacrs.audit.graph.nodes.Node;
-import com.operativus.senacrs.audit.graph.nodes.webdriver.IllegalNodeTypeException;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNode;
 import com.operativus.senacrs.audit.graph.nodes.webdriver.WebDriverNodeType;
 
@@ -66,7 +65,7 @@ public abstract class AbstractWebDriverEdge
 			}
 		}
 		if (!found) {
-			throw new IllegalNodeTypeException(type);
+			throw new IllegalSourceNodeTypeException(type, this.acceptedSources);
 		}
 	}
 
